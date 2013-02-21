@@ -39,4 +39,3 @@ publish
 .idea
 
 # include your own DB config
-include/config.inc.php
