@@ -34,6 +34,10 @@ class Database {
 		mysql_select_db($this->_db, $this->_con);
 	}
 	
+	function con()
+	{
+		return $this->_con;
+	}
 	function q($sql, $params=null) {
 		if ($params) {
 			$sql = vsprintf($sql, $params);
