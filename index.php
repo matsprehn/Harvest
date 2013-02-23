@@ -28,6 +28,7 @@ if (!$r->isValid())
 // global containing all this user's privileges
 $PRIV = $r->buildArray();
 $PRIV = array_key_exists(0, $PRIV) ? $PRIV[0] : null;
+var_dump($PRIV);
 
 if (!$PRIV)
 	die('<h1>Error 500</h1>An error occurred while checking your privileges. I cannot allow you to proceed.</p>');
@@ -107,6 +108,7 @@ if (!$PRIV)
 				<?php } if ($PRIV['view_donor']) { ?>
 				<input type="radio" id="get_donors" name="radio" /><label for="get_donors">Donors</label>
 				<?php } ?>
+				<input type="radio" id="get_totals" name="radio"/><label for="get_totals">Totals</label>
 			</div>
 		</form>
 	</header>
