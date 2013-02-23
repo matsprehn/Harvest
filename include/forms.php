@@ -346,6 +346,20 @@ $avgHeight = $r->buildArray();
 	</form>
 	<!-- Grower end -->
 	
+	<!-- New Tree Type form -->	
+	<form id="treeType" class="full_width hidden">
+		<h3>Tree Type</h3>
+		<table>	
+
+		<tr>
+			<td><label for="tree6"><b>Add New Tree Type</b></label></td>			
+		</tr>
+		<tr>				
+			<td><input type="text" name="newTreeType" id="tree6" /></td>
+		</tr>
+		</table>	
+	</form>	
+	<!-- New Tree Type end -->
 	
 	<!-- Tree form -->	
 	<form id="tree" class="full_width hidden">

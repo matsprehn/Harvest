@@ -89,6 +89,7 @@ if (!$PRIV)
 				<button id="del-button">Delete</button>
 				<button id="email-button">Email</button>
 				<button id="export-button" >Export</button>
+				<button id="add2-button" >Add2</button>
 			</span>
 		</div><!-- End toolbar -->
 
@@ -185,11 +186,11 @@ if (!$PRIV)
 				switch (currentTable)
 				{
 					case 0:
-						showAddDelEmailExport(0,0,0,0);
+						showAddDelEmailExport(0,0,0,0,0);
 					break;
 
 					case 1: // volunteers
-						showAddDelEmailExport(priv.edit_volunteer, priv.del_volunteer, priv.send_email, priv.exp_volunteer);
+						showAddDelEmailExport(priv.edit_volunteer, priv.del_volunteer, priv.send_email, priv.exp_volunteer, 0);
 						if(privilegeID == 1) {							
 							cmd = "get_pending_volunteers";
 							reloadTable(cmd);
@@ -204,7 +205,7 @@ if (!$PRIV)
 					break;
 
 					case 2: // growers
-						showAddDelEmailExport(priv.edit_grower, priv.del_grower, priv.send_email, priv.exp_grower);
+						showAddDelEmailExport(priv.edit_grower, priv.del_grower, priv.send_email, priv.exp_grower, 0);
 						if(saveGrowerDialog==1 && $('#grower1').val()==growerID){
 							switchForm("grower");
 							$('#edit-dialog').dialog('open');
@@ -222,7 +223,7 @@ if (!$PRIV)
 					break;
 
 					case 3: // Trees
-						showAddDelEmailExport(priv.edit_grower, priv.del_grower, 0, 0); // tree has no email, no export						
+						showAddDelEmailExport(priv.edit_grower, priv.del_grower, 0, 0, 1); // tree has no email, no export						
 						if(viewTreeClicked == 1 && $('#grower1').val()>=0){
 							viewTreeClicked = 0;
 							saveGrowerDialog = 1;
@@ -233,11 +234,11 @@ if (!$PRIV)
 					break;
 
 					case 4: // distribution sites
-						showAddDelEmailExport(priv.edit_distrib, priv.del_distrib, priv.send_email, priv.exp_distrib);
+						showAddDelEmailExport(priv.edit_distrib, priv.del_distrib, priv.send_email, priv.exp_distrib, 0);
 					break;
 
 					case 5: // events
-						showAddDelEmailExport(priv.edit_event, priv.del_event, 0, 0); // no email, no export
+						showAddDelEmailExport(priv.edit_event, priv.del_event, 0, 0, 0); // no email, no export
 						if(viewEventClicked == 1 && eventID > 0){
 							viewEventClicked = 0;
 							cmd = "get_an_event&eventID="+eventID;
@@ -251,7 +252,7 @@ if (!$PRIV)
 					break;
 
 					case 6: // donations
-						showAddDelEmailExport(priv.edit_donor, priv.del_donor, 0, priv.exp_donor); // no email
+						showAddDelEmailExport(priv.edit_donor, priv.del_donor, 0, priv.exp_donor, 0); // no email
 					break;
 
 				}
@@ -312,6 +313,7 @@ if (!$PRIV)
 		$('#email').addClass('hidden');
 		$('#event').addClass('hidden');
 		$('#donation').addClass('hidden');
+		$('#treeType').addClass('hidden');
 		
 		$('#'+id).removeClass('hidden'); // show form
 	}
@@ -325,6 +327,7 @@ if (!$PRIV)
 		$('#email').addClass('hidden');
 		$('#event').addClass('hidden');
 		$('#donation').addClass('hidden');
+		$('#treeType').addClass('hidden');
 
 		clearForm(id);
 		$('#'+id).removeClass('hidden'); // show form
@@ -379,7 +382,7 @@ if (!$PRIV)
 	}
 
 	// show or hide 4 buttons at the top right
-	function showAddDelEmailExport(add, del, eml, exp) {
+	function showAddDelEmailExport(add, del, eml, exp, add2) {
 		if(add)	$('#add-button').removeClass('hidden');
 		else	$('#add-button').addClass('hidden');
 
@@ -391,6 +394,9 @@ if (!$PRIV)
 
 		if(exp)	$('#export-button').removeClass('hidden');
 		else	$('#export-button').addClass('hidden');
+		
+		if(add2)$('#add2-button').removeClass('hidden');
+		else	$('#add2-button').addClass('hidden');
 	}
 
 	// GLOBAL VARIABLES
@@ -814,6 +820,7 @@ if (!$PRIV)
 
 			$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add Record' });
+			
 			$('#edit-dialog').dialog('open');
 			
 		});
@@ -1036,6 +1043,17 @@ if (!$PRIV)
 				break;
 			}			
 		});
+		
+		$('#add2-button').button({
+			label: 'Add New Tree Type',
+			icons: { primary: 'ui-icon-circle-plus' },
+			text: false
+		}).click(function() {
+			switchNClearForm('treeType');		
+			$('#edit-dialog').dialog("option", "buttons", [sendEmailButton, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Email Selected Users' });
+			$('#edit-dialog').dialog('open') // show dialog
+		}); // .click() end
 
 		$('#email-button').button({
 			label: 'Email Selected',
