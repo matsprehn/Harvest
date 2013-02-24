@@ -28,7 +28,6 @@ if (!$r->isValid())
 // global containing all this user's privileges
 $PRIV = $r->buildArray();
 $PRIV = array_key_exists(0, $PRIV) ? $PRIV[0] : null;
-var_dump($PRIV);
 
 if (!$PRIV)
 	die('<h1>Error 500</h1>An error occurred while checking your privileges. I cannot allow you to proceed.</p>');

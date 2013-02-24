@@ -442,6 +442,49 @@ function dateToStr($dateStr) {
 
 switch ($cmd)
 {
+	case 'get_totals':
+		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours
+				from
+				(
+				select sum(pound) as pounds
+				from harvests
+				)as a
+				join
+				(
+				select sum(hour)as hours
+				from volunteer_events
+				) as b
+
+				UNION
+
+				select h.city, h.totalpounds, g.totalhours from
+				(select growers.city, sum(pounds) as totalpounds
+				from (
+				SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
+				FROM harvests
+				JOIN EVENTS 
+				WHERE harvests.event_id = events.id
+				GROUP BY harvests.event_id
+				) as t join growers 
+				where growers.id = t.grower_id
+				group by growers.city
+				)as h
+				left join
+				(
+				select growers.city, sum(t.hours) as totalhours
+				from
+				(select events.grower_id, sum(volunteer_events.hour) as hours
+				from volunteer_events join events
+				where events.id = volunteer_events.event_id
+				group by events.id) as t join growers
+				where growers.id = t.grower_id
+				group by growers.city
+				)as g
+				on g.city = h.city';
+		getTable($sql);
+		break;
+		
+		
 	case 'get_notifications':
 		// no privs needed, just check user type
 		$data['id'] = 0;
