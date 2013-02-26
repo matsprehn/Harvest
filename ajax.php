@@ -462,7 +462,7 @@ switch ($cmd)
 				from (
 				SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
 				FROM harvests
-				JOIN EVENTS 
+				JOIN events 
 				WHERE harvests.event_id = events.id
 				GROUP BY harvests.event_id
 				) as t join growers 
