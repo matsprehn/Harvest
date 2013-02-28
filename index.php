@@ -718,6 +718,30 @@ if (!$PRIV)
 		}
 	};
 	
+	var addTreeTypeButton = {
+		text: 'Add New Tree Type',
+		click: function() {
+			var required = $('#treeType input[required="required"]');
+						if (required[0].value == '')
+							return alert(required[0].name + ' is required!');
+					
+					//Update DB
+					var para = $('#treeType').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_tree_type&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							reloadTable("get_trees");									
+						},
+						'error': ajaxError
+					});
+		}
+	};
+	
 	var sendEmailButton = {
 		text: 'Send Email',
 		click: function() {
@@ -1049,7 +1073,7 @@ if (!$PRIV)
 			text: false
 		}).click(function() {
 			switchNClearForm('treeType');		
-			$('#edit-dialog').dialog("option", "buttons", [sendEmailButton, cancelButton]);
+			$('#edit-dialog').dialog("option", "buttons", [addTreeTypeButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Email Selected Users' });
 			$('#edit-dialog').dialog('open') // show dialog
 		}); // .click() end

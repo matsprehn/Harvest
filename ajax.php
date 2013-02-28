@@ -224,6 +224,17 @@ function updateVolunteer($exists) {
 	}
 }
 
+function updateTreeType(){
+	global $db;
+	global $data;
+	$newTreeType = $_REQUEST['newTreeType'];
+	
+				$sql = "INSERT INTO tree_types(name)
+				VALUES ('$newTreeType')";				
+		$r = $db->q($sql);		
+		getError($r);
+}
+
 function updateTree($exist){
 	global $db;	
 	global $data;
@@ -1008,6 +1019,9 @@ switch ($cmd)
 			break;
 		}
 		updateVolunteer(false);
+		break;
+	case 'add_tree_type':
+		updateTreeType(true);
 		break;
 	case 'remove_volunteer':
 		if (!$PRIV['del_volunteer']) {

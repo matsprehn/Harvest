@@ -43,6 +43,29 @@ $avgHeight = $r->buildArray();
 <!-- all hidden forms go here -->
 <div id="edit-dialog" class="hidden">
 		
+	<!-- New Tree Type form -->	
+	<form id="treeType" class="full_width hidden">
+		<h3>Tree Type</h3>
+		<table>	
+
+		<!-- <tr>
+			<td><label for="addTree1"><b>Add New Tree Type</b></label></td>			
+		</tr>
+		<tr>				
+			<td><input type="text" name="newTreeType" id="addTree1" /></td>
+		</tr>  -->
+		
+		<tr>
+			<td><label for="treeType1"><b>Add New Tree Type</b></label></td>
+		</tr>
+		<tr>
+			<td><input id="treeType1" name="newTreeType" type="text" size="21" required="required"/></td>
+		</tr>
+		
+		</table>	
+	</form>	
+	<!-- New Tree Type end -->	
+		
 	<!-- Volunteer form -->	
 	<form id="volunteer" class="full_width hidden">
 		<h3>Volunteer</h3>
@@ -345,21 +368,6 @@ $avgHeight = $r->buildArray();
 		</div>		
 	</form>
 	<!-- Grower end -->
-	
-	<!-- New Tree Type form -->	
-	<form id="treeType" class="full_width hidden">
-		<h3>Tree Type</h3>
-		<table>	
-
-		<tr>
-			<td><label for="tree6"><b>Add New Tree Type</b></label></td>			
-		</tr>
-		<tr>				
-			<td><input type="text" name="newTreeType" id="tree6" /></td>
-		</tr>
-		</table>	
-	</form>	
-	<!-- New Tree Type end -->
 	
 	<!-- Tree form -->	
 	<form id="tree" class="full_width hidden">
