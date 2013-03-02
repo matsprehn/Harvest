@@ -717,6 +717,7 @@ if (!$PRIV)
 			}		
 		}
 	};
+			
 	
 	var addTreeTypeButton = {
 		text: 'Add New Tree Type',
