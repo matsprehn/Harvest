@@ -454,44 +454,68 @@ function dateToStr($dateStr) {
 switch ($cmd)
 {
 	case 'get_totals':
-		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours
+		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events
 				from
 				(
-				select sum(pound) as pounds
-				from harvests
+					select sum(pound) as pounds
+					from harvests
 				)as a
 				join
 				(
-				select sum(hour)as hours
-				from volunteer_events
+					select sum(hour)as hours
+					from volunteer_events
 				) as b
+				join
+				(
+					select count(*) as count
+					from harvests
+					where harvests.number is not null
+				)as c
 
 				UNION
 
-				select h.city, h.totalpounds, g.totalhours from
-				(select growers.city, sum(pounds) as totalpounds
-				from (
-				SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
-				FROM harvests
-				JOIN events 
-				WHERE harvests.event_id = events.id
-				GROUP BY harvests.event_id
-				) as t join growers 
-				where growers.id = t.grower_id
-				group by growers.city
-				)as h
+				select i.city, h.totalpounds, g.totalhours, i.count from
+					(	select y.city, z.count
+						from
+						(select growers.city
+						from growers
+						group by growers.city)as y
+						left join
+						(
+						select growers.city, count(growers.id) as count
+						from growers left join events on growers.id = events.grower_id
+						left join harvests on events.id = harvests.event_id
+						where harvests.pound is not null
+						GROUP BY growers.city
+						) as z
+						on y.city = z.city 
+					)as i
 				left join
-				(
-				select growers.city, sum(t.hours) as totalhours
-				from
-				(select events.grower_id, sum(volunteer_events.hour) as hours
-				from volunteer_events join events
-				where events.id = volunteer_events.event_id
-				group by events.id) as t join growers
-				where growers.id = t.grower_id
-				group by growers.city
-				)as g
-				on g.city = h.city';
+					(select growers.city, sum(pounds) as totalpounds
+					from 
+					(
+					SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
+					FROM harvests
+					JOIN events 
+					WHERE harvests.event_id = events.id
+					GROUP BY harvests.event_id
+					) as t join growers 
+					where growers.id = t.grower_id
+					group by growers.city
+					)as h
+				on i.city = h.city
+				left join
+					(
+					select growers.city, sum(t.hours) as totalhours
+					from
+					(select events.grower_id, sum(volunteer_events.hour) as hours
+					from volunteer_events join events
+					where events.id = volunteer_events.event_id
+					group by events.id) as t join growers
+					where growers.id = t.grower_id
+					group by growers.city
+					)as g
+				on i.city = g.city';
 		getTable($sql);
 		break;
 		
