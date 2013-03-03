@@ -207,7 +207,7 @@ $temp3 = array_shift($all);
 $temp4 = array_shift($all);
 
 if(!in_array($city, $all)){ 
-   echo "<form> <input type=\"radio\" name=\"sex\" value=\"male\">".$name." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
+   echo "<form> <input type=\"checkbox\" name=\"sex\" value=\"male\">".$name." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
    echo "</br>";
 $name=null;
 }
