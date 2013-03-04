@@ -160,14 +160,10 @@ if($results === FALSE) {
     die(mysql_error()); // TODO: better error handling
 }
 
-$checkcity=null;
-$checkdate=null;
-$checktime=null;
-$checkname=null;
-$visited = false;
-// Need to use a method from the Results class, can be found in Database.inc.php under Results
 $event = array();
 $all_Events = array();
+$type_Of_Fruit = null;
+$visted = false;
 while ($row = $results->getAssoc()) {
   $city = $row['city'];
   $name = $row['name'];
@@ -190,38 +186,68 @@ $all = $all_Events[$count-1];
 $x = 0;
 while(!empty($all))
 {
-  $city = $all[$x];
-  $x++;
-  $type = $all[$x];
-  $x++;
-  $date = $all[$x];
-  $x++;
-  $time = $all[$x];
-  $x++;
+$city = $all[$x];
+$x++;
+$type = $all[$x];
+$x++;
+$date = $all[$x];
+$x++;
+$time = $all[$x];
+$x++;
   
-  $x = 0;
+$x = 0;
   
 $temp1 = array_shift($all);
 $temp2 = array_shift($all);
 $temp3 = array_shift($all);
 $temp4 = array_shift($all);
 
-if(!in_array($city, $all)){ 
-   echo "<form> <input type=\"checkbox\" name=\"sex\" value=\"male\">".$name." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
-   echo "</br>";
-$name=null;
-}
 
-if(in_array($city, $all) && in_array($date, $all) && in_array($time, $all))
-{
-  //echo "there is a value that is equal";
-  $name = $name." and ".$all[$x+1];   // combines multiple trees if listed in the events
-  //echo "</br>";
+if(isset($all[0])){
+	if(!($all[0] == $city)){
+		if($visted){
+			$type = $type_Of_Fruit;
+		}else{
+	
+		}
+		$visted = false;
+	echo "<form> <input type=\"checkbox\" name=\"sex\" value=\"male\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
+	echo "</br>";
+	$type=null;
+	}
+}else {
+	if($visted){
+			$type = $type_Of_Fruit;
+		}else{
+	
+		}
+		$visted = false;
+	echo "<form> <input type=\"checkbox\" name=\"sex\" value=\"male\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
+	echo "</br>";
+	$type=null;
 }
-else{
-  //echo "This is the only event";
-  $name = $all[$x+1];   // gets the type of tree
-}
+if(isset( $all[0])){
+	if($all[0] == $city && $all[2] == $date && $all[3] == $time)
+	{
+		if($visted){
+			$type = $type_Of_Fruit;
+		}		
+		$type = $type." and ".$all[$x+1];   // combines multiple trees if listed in the events
+	  $type_Of_Fruit = $type;
+	  $visted = true;
+	}
+	else{
+	  //echo "This is the only event";
+	  if(isset($all[$x+1])){
+	  $type = $all[$x+1];   // gets the type of tree
+	  }
+	}
+  }
+  else{
+	  if(isset($all[$x+1])){
+	  $type = $all[$x+1];   // gets the type of tree
+	  }   
+  }
 }
 ?>
 </br>
