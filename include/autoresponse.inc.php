@@ -38,59 +38,114 @@ EOD;
 
 function invitationEmail($p) {
 return<<<EOD
-Hello Fellow Harvester!
+Hello Harvesters!
 
-Another Harvest Event is coming up in $p[city] on $p[date] at $p[time].
-We’ll be harvesting $p[fruit] on the property of $p[grower_f] $p[grower_l].
+Here are the upcoming Harvest Events with THC: 
 
-To volunteer for this Harvest, please respond to this email.
-If you are a new volunteer, please complete our liability waiver at http://www.theharvestclub.org
+$p[date] | $p[time] in $p[city]
+Harvesting $p[fruit] $p[fruit_list]. We need [# of volunteers] volunteers.
 
-We hope to see you there,
+Events last 1-2.5 hours. To RSVP, please reply to this email or send a note to volunteer@theharvestclub.org by Friday at 5pm, prior to the harvest event.
 
-$p[me_f] $p[me_l]
+If you are a new volunteer, please complete our liability waiver at: http://www.theharvestclub.org/join-us/.
 
+Hope to see you under the trees!
+
+Christina Hall
+Program Coordinator
+OC Food Access & The Harvest Club
 EOD;
 }
 
 function harvestDetailsEmail($p) {
 return<<<EOD
-Thank you for registering for our upcoming Harvest Event!
+Dear $p[me_f] $p[me_l],
 
-Below are the details for this event:
+Thank you for volunteering for the harvest at $p[time] this $p[date] in $p[city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_f] $p[captain_l], your Harvest Captain, on $p[date].   
 
-    Grower Name: $p[grower_f] $p[grower_l]
-    Grower Address: $p[street] $p[city] $p[state], $p[zip]
-    Date: $p[date]
-    Time: $p[time]
-    Harvesting: $p[fruit]
+If you cannot make the harvest for any reason, kindly let us know in advance so we can fill your spot! 
 
-Your Harvest Captain is $p[captain_f] $p[captain_l].  You can reach him/her at $p[captain_phone] if you run into any problems on the day of the event.
+HARVEST DETAILS 
+Date: $p[date]
+Time: $p[time]
+Grower: $p[grower_f] $p[grower_l]
+Address:  $p[street], $p[city] $p[zip]
+Harvesting:  $p[fruit]
 
-We advise all harvesters to wear long sleeves and close-toed shoes.  Please bring ladders, clippers, picker poles, and sturdy fruit boxes if you have them.  They will be put to good use!
+$p[captain_f] $p[captain_l] is your Harvest Captain.  If you are unable to make the harvest for any reason, or get lost on the way, please contact your captain directly at $p[captain_phone].  
 
-Thanks again and happy harvesting!
+Please bring harvesting tools such as clippers and picker poles and if you have them.  We recommend wearing long sleeves, long pants, eye protection such as sunglasses, and sunscreen.  Closed-toed shoes are a must!
 
-$p[me_f] $p[me_l]
+Please let me know if you have any questions.  
 
+Happy harvesting! 
+
+Christina Hall
+Program Coordinator
+OC Food Access & The Harvest Club
 EOD;
 }
 
 function reminderEmail($p) {
 return<<<EOD
-Hello Fellow Harvesters!
-
-You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club!  This is a reminder that the Harvest will take place at $p[time] on $p[date] in the City of $p[city].
+Dear $p[me_f] $p[me_l],
+You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club!  This is a reminder that the Harvest will take place at $p[time] on $p[date] in the City of $p[city]. 
 
 Your Harvest Captain is $p[captain_f] $p[captain_l].  You can reach him/her at $p[captain_phone] if you run into any problems on the day of the event.  
 
-Please bring sturdy fruit boxes and tools if available and don't forget to wear long sleeves and close-toed shoes.
+Please bring harvesting tools such as clippers and picker poles and if you have them.  We recommend wearing long sleeves, long pants, eye protection such as sunglasses, and sunscreen.  Closed-toed shoes are a must!
 
 We look forward to seeing you soon!
 
-$p[me_f] $p[me_l]
+Christina Hall
+Program Coordinator
+OC Food Access & The Harvest Club
 
 EOD;
 }
 
+function thankYouVolunteerEmail($p) {
+return<<<EOD
+Dear $p[me_f] $p[me_l],
+
+On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[date] in $p[city] Huntington Beach.  With your help The Harvest Club picked [No. of Pounds] 710 pounds of fruit, providing nutritious food to  [No. Lbs Harvested x 2.67] people in need in our community.  
+
+We hope you’ll join us again soon!
+
+Christina Hall
+Program Coordinator
+OC Food Access Coalition
+chall@ocfoodaccess.org
+EOD;
+}
+
+function thankYouGrowerEmail($p) {
+return<<<EOD
+Dear $p[grower_f] $p[grower_l],
+
+On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of [fruit type donated] oranges and lemons.  Your contribution is providing much needed nutrition to the underserved in Orange County.  
+
+On $p[date] February 9, 2013, The Harvest Club picked [No. of Pounds] [fruit type donated] (for each type of fruit type donated) 710 pounds of oranges and 450 pounds of tangerines from your property and delivered it to: 
+[Bulleted list of donation sites]
+•	Someone Cares Soup Kitchen
+•	The Friendly Center 
+
+
+Your donation will provide nutritious food to approximately [No. Lbs Harvested x 2.67] 3,097 people in our community!
+
+If you are happy with our services and know of another backyard grower that could benefit from The Harvest Club, please refer them to us!  They can register their trees at www.theharvestclub.org. 
+
+Once again, we thank you for your generosity and hope you will call us next harvest season!
+
+Sincerely,
+
+Christina Hall
+Program Coordinator
+OC Food Access Coalition
+chall@ocfoodaccess.org
+
+The Harvest Club is a program of the OC Food Access Coalition, a fiscally sponsored project of OneOC.     Tax ID 95-2021700  **Please speak with your tax advisor about the tax deductibility of your donation.
+
+EOD;
+}
 ?>

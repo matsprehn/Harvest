@@ -756,7 +756,9 @@ $avgHeight = $r->buildArray();
 				<option value="">&lt;&lt;None&gt;&gt;</option>
 				<option value="invitation">Harvest Invitation</option>
 				<option value="details">Harvest Details</option>
-				<!-- option value="reminder">Harvest Reminder</option -->
+				<option value="reminder">Harvest Reminder</option>
+				<option value="thankvolunteer">Harvest Event Thank You Template (Volunteer)</option>
+				<option value="thankgrower">Harvest Event Thank You Template (Grower)</option>
 			</select>
 		</div>
 		<br/>

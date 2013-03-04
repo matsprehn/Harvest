@@ -1110,13 +1110,21 @@ switch ($cmd)
 			AND h.event_id = e.id
 			AND h.tree_id=t.id
 			AND t.tree_type=tt.id
-			AND e.id ='$event_id'";				
+			AND e.id ='$event_id'";	
+
 		$r = $db->q($sql);
 		if (!$r->isValid() || !$r->hasRows()) {
 			$data['status'] = 432;
 			$data['message'] = "Could not create template. There is no event #$event_id!";
 			break;
 		}
+
+		//Multiple Fruit Records - Bug fix
+		$fruitList = "";
+		while($row = mysql_fetch_array($r)) {
+			fruitList.$row['fruit'].",";
+		}		
+		
 		$params = $r->getAssoc();
 		$params['me_f'] = $_SESSION['first_name'];
 		$params['me_l'] = $_SESSION['last_name'];
@@ -1133,7 +1141,13 @@ switch ($cmd)
 			case 'reminder':
 				$data['message'] = reminderEmail($params);
 				break;
-			default:
+			case 'thankvolunteer':
+				$data['message'] = thankYouVolunteerEmail($params);
+				break;
+ 			case 'thankgrower':
+				$data['message'] = thankYouGrowerEmail($params);
+				break;
+ 			default:
 				break;
 		}
 		break;
