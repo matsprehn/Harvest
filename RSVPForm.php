@@ -215,12 +215,12 @@ $name=null;
 if(in_array($city, $all) && in_array($date, $all) && in_array($time, $all))
 {
   //echo "there is a value that is equal";
-  $name = $name." and ".$all[$x+1];
+  $name = $name." and ".$all[$x+1];   // combines multiple trees if listed in the events
   //echo "</br>";
 }
 else{
   //echo "This is the only event";
-  $name = $all[$x+1];
+  $name = $all[$x+1];   // gets the type of tree
 }
 }
 ?>
