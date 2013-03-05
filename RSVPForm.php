@@ -269,7 +269,7 @@ if(isset( $all[0])){
 </div></div></div> <div class="errorbox-good">
 <div dir="ltr" class="ss-item  ss-section-header"><div class="ss-form-entry"><h2 class="ss-section-title">Waiver Form</h2>
 <div class="ss-section-description ss-no-ignore-whitespace">Please read the following waiver and sign electronically below:
-<a href="http://goo.gl/BmxHG">http://goo.gl/BmxHG</a>
+<a href="2012 THC Liability Form and Photo Release copy.pdf">http://goo.gl/BmxHG</a>
 
 </div>
 </div></div></div> <div class="errorbox-good">
