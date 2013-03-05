@@ -8,6 +8,8 @@
 <title>Harvest Event RSVP Form</title>
 
 <link href="./Harvest Event RSVP Form_files/3227177689-formview_ltr.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/addingGuests.js"></script>
 <style type="text/css">
 
 body {
@@ -251,25 +253,14 @@ if(isset( $all[0])){
 }
 ?>
 </br>
-</div></div></div> <div class="errorbox-good">
-<div dir="ltr" class="ss-item  ss-text"><div class="ss-form-entry"><label class="ss-q-item-label" for="entry_186780307"><div class="ss-q-title">First Name of Guest 1
+
+<div id="container">
+          </br>
+           <button type="button"> <p id="add_field"><span>&raquo; I'd like to bring a guests</span></p> </button>
 </div>
-<div class="ss-q-help ss-secondary-text" dir="ltr"></div></label>
-<input type="text" name="entry.186780307" value="" class="ss-q-short" id="entry_186780307" dir="auto">
-</div></div></div> <div class="errorbox-good">
-<div dir="ltr" class="ss-item  ss-text"><div class="ss-form-entry"><label class="ss-q-item-label" for="entry_182815174"><div class="ss-q-title">Last Name of Guest 1
-</div>
-<div class="ss-q-help ss-secondary-text" dir="ltr"></div></label>
-<input type="text" name="entry.182815174" value="" class="ss-q-short" id="entry_182815174" dir="auto">
-</div></div></div> <div class="errorbox-good">
-<div dir="ltr" class="ss-item  ss-text"><div class="ss-form-entry"><label class="ss-q-item-label" for="entry_236939303"><div class="ss-q-title">Email of Guest 1
-</div>
-<div class="ss-q-help ss-secondary-text" dir="ltr"></div></label>
-<input type="text" name="entry.236939303" value="" class="ss-q-short" id="entry_236939303" dir="auto">
-</div></div></div> <div class="errorbox-good">
 <div dir="ltr" class="ss-item  ss-section-header"><div class="ss-form-entry"><h2 class="ss-section-title">Waiver Form</h2>
 <div class="ss-section-description ss-no-ignore-whitespace">Please read the following waiver and sign electronically below:
-<a href="http://goo.gl/BmxHG">http://goo.gl/BmxHG</a>
+<a href="2012 THC Liability Form and Photo Release copy.pdf">http://goo.gl/BmxHG</a>
 
 </div>
 </div></div></div> <div class="errorbox-good">

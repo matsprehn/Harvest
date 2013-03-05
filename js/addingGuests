@@ -1,0 +1,7 @@
+var count = 0;
+$(function(){
+    $('p#add_field').click(function(){
+        count += 1;
+        $('#container').append('<strong>Link #' + count + '</strong>'+ '<input id="field_' + count + '" name="fields[]' + '" type="text" />' );
+    });
+});
