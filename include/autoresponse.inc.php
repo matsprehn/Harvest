@@ -121,7 +121,7 @@ EOD;
 
 function thankYouGrowerEmail($p) {
 return<<<EOD
-Dear $p[grower_f] $p[grower_l],
+Dear $p[grower_first] $p[grower_last],
 
 On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of [fruit type donated] oranges and lemons.  Your contribution is providing much needed nutrition to the underserved in Orange County.  
 
