@@ -1103,6 +1103,7 @@ switch ($cmd)
 			v.first_name AS captain_f,
 			v.last_name AS captain_l,
 			v.phone AS captain_phone,
+			h.pound AS lbs,
 			CONCAT(t.varietal,' ',tt.name) AS fruit
 			FROM events e, growers g, volunteers v, harvests h, grower_trees t, tree_types tt
 			WHERE e.grower_id=g.id
@@ -1116,19 +1117,48 @@ switch ($cmd)
 		if (!$r->isValid() || !$r->hasRows()) {
 			$data['status'] = 432;
 			$data['message'] = "Could not create template. There is no event #$event_id!";
+			exit();
 			break;
 		}
 
 		//Multiple Fruit Records - Bug fix
+		
 		$fruitList = "";
-		while($row = mysql_fetch_array($r)) {
-			fruitList.$row['fruit'].",";
-		}		
+		while($row = $r->getAssoc()) {
+			//Prints all fruits in the harvest event
+			$fruitList .= $row['fruit'].", ";
+			$totalPounds = $row['lbs'];
+			$growerFirstName = $row['grower_f'];
+			$growerLastName = $row['grower_l'];
+			$captainFirstName = $row['captain_f'];
+			$captainLastName = $row['captain_l'];
+			$captainPhone = $row['captain_phone'];
+			$harvestDate = $row['date'];
+			$harvestTime = $row['time'];
+			$harvestStreet = $row['street'];
+			$harvestCity = $row['city'];
+			$harvestZip = $row['zip'];
+			$harvestState = $row['state'];
+		}
+		
 		
 		$params = $r->getAssoc();
 		$params['me_f'] = $_SESSION['first_name'];
 		$params['me_l'] = $_SESSION['last_name'];
-		$params['date'] = dateToStr($params['date']);
+ 		$params['date'] = dateToStr($params['date']);
+ 		$params['fruit_list'] = $fruitList;
+ 		$params['grower_first'] = $growerFirstName;
+ 		$params['grower_last'] = $growerLastName;
+ 		$params['captain_first'] = $captainFirstName;
+ 		$params['captain_last'] = $captainLastName;
+ 		$params['captain_phone'] = $captainPhone;
+ 		$params['harvest_date'] = $harvestDate;
+ 		$params['harvest_time'] = $harvestTime;
+ 		$params['harvest_street'] = $harvestStreet;
+ 		$params['harvest_city'] = $harvestCity;
+ 		$params['harvest_zip'] = $harvestZip;
+ 		$params['harvest_state'] = $harvestState;
+ 		$params['total_lbs'] = $totalPounds;
 		// bug here: might have multiple fruit records
 
 		switch ($name) {

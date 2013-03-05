@@ -754,11 +754,11 @@ $avgHeight = $r->buildArray();
 			<b>Template</b>&nbsp;
 			<select name="template" onchange="changeTemplate(this);">
 				<option value="">&lt;&lt;None&gt;&gt;</option>
-				<option value="invitation">Harvest Invitation</option>
-				<option value="details">Harvest Details</option>
-				<option value="reminder">Harvest Reminder</option>
-				<option value="thankvolunteer">Harvest Event Thank You Template (Volunteer)</option>
-				<option value="thankgrower">Harvest Event Thank You Template (Grower)</option>
+				<option value="invitation">Invitation</option>
+				<option value="details">Details</option>
+				<option value="reminder">Reminder</option>
+				<option value="thankvolunteer">Thank You Volunteer</option>
+				<option value="thankgrower">Thank You Grower</option>
 			</select>
 		</div>
 		<br/>

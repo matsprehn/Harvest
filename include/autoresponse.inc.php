@@ -42,8 +42,8 @@ Hello Harvesters!
 
 Here are the upcoming Harvest Events with THC: 
 
-$p[date] | $p[time] in $p[city]
-Harvesting $p[fruit] $p[fruit_list]. We need [# of volunteers] volunteers.
+$p[harvest_date] | $p[harvest_time] in $p[harvest_city]
+Harvesting $p[fruit_list]. We need [# of volunteers] volunteers.
 
 Events last 1-2.5 hours. To RSVP, please reply to this email or send a note to volunteer@theharvestclub.org by Friday at 5pm, prior to the harvest event.
 
@@ -61,18 +61,18 @@ function harvestDetailsEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
 
-Thank you for volunteering for the harvest at $p[time] this $p[date] in $p[city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_f] $p[captain_l], your Harvest Captain, on $p[date].   
+Thank you for volunteering for the harvest at $p[harvest_time] this $p[harvest_date] in $p[harvest_city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_first] $p[captain_last], your Harvest Captain, on $p[date].   
 
 If you cannot make the harvest for any reason, kindly let us know in advance so we can fill your spot! 
 
 HARVEST DETAILS 
-Date: $p[date]
-Time: $p[time]
-Grower: $p[grower_f] $p[grower_l]
-Address:  $p[street], $p[city] $p[zip]
-Harvesting:  $p[fruit]
+Date: $p[harvest_date]
+Time: $p[harvest_time]
+Grower: $p[grower_first] $p[grower_last] 
+Address:  $p[harvest_street], $p[harvest_city] $p[harvest_zip]
+Harvesting: $p[fruit_list]
 
-$p[captain_f] $p[captain_l] is your Harvest Captain.  If you are unable to make the harvest for any reason, or get lost on the way, please contact your captain directly at $p[captain_phone].  
+$p[captain_first] $p[captain_last] is your Harvest Captain.  If you are unable to make the harvest for any reason, or get lost on the way, please contact your captain directly at $p[captain_phone].  
 
 Please bring harvesting tools such as clippers and picker poles and if you have them.  We recommend wearing long sleeves, long pants, eye protection such as sunglasses, and sunscreen.  Closed-toed shoes are a must!
 
@@ -89,7 +89,7 @@ EOD;
 function reminderEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
-You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club!  This is a reminder that the Harvest will take place at $p[time] on $p[date] in the City of $p[city]. 
+You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club!  This is a reminder that the Harvest will take place at $p[harvest_time] on $p[harvest_date] in the City of $p[harvest_city]. 
 
 Your Harvest Captain is $p[captain_f] $p[captain_l].  You can reach him/her at $p[captain_phone] if you run into any problems on the day of the event.  
 
@@ -108,7 +108,7 @@ function thankYouVolunteerEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
 
-On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[date] in $p[city] Huntington Beach.  With your help The Harvest Club picked [No. of Pounds] 710 pounds of fruit, providing nutritious food to  [No. Lbs Harvested x 2.67] people in need in our community.  
+On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach.  With your help The Harvest Club picked [No. of Pounds] 710 pounds of fruit, providing nutritious food to  [No. Lbs Harvested x 2.67] people in need in our community.  
 
 We hope you’ll join us again soon!
 
@@ -125,13 +125,13 @@ Dear $p[grower_f] $p[grower_l],
 
 On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of [fruit type donated] oranges and lemons.  Your contribution is providing much needed nutrition to the underserved in Orange County.  
 
-On $p[date] February 9, 2013, The Harvest Club picked [No. of Pounds] [fruit type donated] (for each type of fruit type donated) 710 pounds of oranges and 450 pounds of tangerines from your property and delivered it to: 
+On $p[harvest_date] February 9, 2013, The Harvest Club picked $p[lbs] pounds of$p[fruit] (for each type of fruit type donated) 710 pounds of oranges and 450 pounds of tangerines from your property and delivered it to: 
 [Bulleted list of donation sites]
 •	Someone Cares Soup Kitchen
 •	The Friendly Center 
 
 
-Your donation will provide nutritious food to approximately [No. Lbs Harvested x 2.67] 3,097 people in our community!
+Your donation will provide nutritious food to approximately $p[sum_lbs][No. Lbs Harvested x 2.67] 3,097 people in our community!
 
 If you are happy with our services and know of another backyard grower that could benefit from The Harvest Club, please refer them to us!  They can register their trees at www.theharvestclub.org. 
 
