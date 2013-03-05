@@ -454,7 +454,7 @@ function dateToStr($dateStr) {
 switch ($cmd)
 {
 	case 'get_totals':
-		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events
+		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events, d.delivered as Delivered
 				from
 				(
 					select sum(pound) as pounds
@@ -471,10 +471,15 @@ switch ($cmd)
 					from harvests
 					where harvests.number is not null
 				)as c
+				join
+				(
+					select sum(pound) as delivered
+					from drivings
+				)as d
 
 				UNION
 
-				select i.city, h.totalpounds, g.totalhours, i.count from
+				select i.city, h.totalpounds, g.totalhours, i.count, d.pounds_delivered as Pounds_Delivered from
 					(	select y.city, z.count
 						from
 						(select growers.city
@@ -515,7 +520,14 @@ switch ($cmd)
 					where growers.id = t.grower_id
 					group by growers.city
 					)as g
-				on i.city = g.city';
+				on i.city = g.city
+				left join
+				(SELECT distributions.city, sum(drivings.pound) as pounds_delivered
+				FROM `drivings` join `distributions` on drivings.distribution_id = distributions.id
+				GROUP BY distributions.city
+				)as d
+				on i.city = d.city';
+				
 		getTable($sql);
 		break;
 		
@@ -774,20 +786,22 @@ switch ($cmd)
 		}
 		$data['id'] = 4;
 		$data['title'] = 'Distributions';
-		$sql = "SELECT id,
-					   name as 'Agency Name',
-				       street as 'Street Address',
-					   city as City,
-					   zip as 'Zip Code',
-					   contact as 'Agency Contact',
-					   phone as Phone,
-					   email as email_tag,
-					   state as state_tag,
-					   contact2 as contact2_tag,
-					   phone2 as phone2_tag,
-					   daytime as 'Days/Hours',
-					   notes as Notes
-				FROM distributions dis;";
+		$sql = "SELECT dis.id,
+					   dis.name as 'Agency Name',
+				       dis.street as 'Street Address',
+					   dis.city as City,
+					   dis.zip as 'Zip Code',
+					   dis.contact as 'Agency Contact',
+					   dis.phone as Phone,
+					   dis.email as email_tag,
+					   dis.state as state_tag,
+					   dis.contact2 as contact2_tag,
+					   dis.phone2 as phone2_tag,
+					   dis.daytime as 'Days/Hours',
+					   sum(drivings.pound) as 'LBS_Delivered'
+				FROM distributions dis
+				left join drivings on dis.id = drivings.distribution_id
+				group by dis.id;";
 		getTable($sql);
 		break;
 	case 'get_distribution_times':
