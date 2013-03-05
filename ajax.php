@@ -1096,6 +1096,7 @@ switch ($cmd)
 		$name = $_REQUEST['name'];
 		$event_id = $_REQUEST['event_id'];
 		$sql="SELECT
+			DISTINCT dd.name AS distribution_name,
 			g.first_name AS grower_f,
 			g.last_name AS grower_l,
 			g.street, g.city, g.state, g.zip,
@@ -1105,13 +1106,17 @@ switch ($cmd)
 			v.phone AS captain_phone,
 			h.pound AS lbs,
 			CONCAT(t.varietal,' ',tt.name) AS fruit
-			FROM events e, growers g, volunteers v, harvests h, grower_trees t, tree_types tt
+			FROM events e, growers g, volunteers v, harvests h, grower_trees t, tree_types tt, drivings d, distributions dd
 			WHERE e.grower_id=g.id
 			AND e.captain_id=v.id
 			AND h.event_id = e.id
 			AND h.tree_id=t.id
 			AND t.tree_type=tt.id
+            AND h.event_id = d.event_id
+            AND d.distribution_id = dd.id
 			AND e.id ='$event_id'";	
+
+
 
 		$r = $db->q($sql);
 		if (!$r->isValid() || !$r->hasRows()) {
@@ -1121,46 +1126,52 @@ switch ($cmd)
 			break;
 		}
 
-		//Multiple Fruit Records - Bug fix
 		
-		$fruitList = "";
+		//Sets variables from the query to a local variable 
 		while($row = $r->getAssoc()) {
 			//Prints all fruits in the harvest event
-			$fruitList .= $row['fruit'].", ";
-			$totalPounds = $row['lbs'];
+			$fruitList .= $row['fruit']."s, ";
+			(float)$totalPounds += $row['lbs'];
+			$fruitListAndPounds .= $row['lbs']." pounds of".$row['fruit']."s, ";
 			$growerFirstName = $row['grower_f'];
 			$growerLastName = $row['grower_l'];
 			$captainFirstName = $row['captain_f'];
 			$captainLastName = $row['captain_l'];
 			$captainPhone = $row['captain_phone'];
-			$harvestDate = $row['date'];
+			$harvestDate = strtotime($row['date']);
 			$harvestTime = $row['time'];
 			$harvestStreet = $row['street'];
 			$harvestCity = $row['city'];
 			$harvestZip = $row['zip'];
 			$harvestState = $row['state'];
+			$distributionName = $row['distribution_name'];
 		}
+	
 		
-		
+		//Sets local values to be used in email templates
 		$params = $r->getAssoc();
 		$params['me_f'] = $_SESSION['first_name'];
 		$params['me_l'] = $_SESSION['last_name'];
  		$params['date'] = dateToStr($params['date']);
  		$params['fruit_list'] = $fruitList;
+ 		$params['fruit_list_lbs'] = $fruitListAndPounds;
  		$params['grower_first'] = $growerFirstName;
  		$params['grower_last'] = $growerLastName;
  		$params['captain_first'] = $captainFirstName;
  		$params['captain_last'] = $captainLastName;
  		$params['captain_phone'] = $captainPhone;
- 		$params['harvest_date'] = $harvestDate;
+ 		$params['harvest_date'] = date('l F jS Y', $harvestDate);
  		$params['harvest_time'] = $harvestTime;
  		$params['harvest_street'] = $harvestStreet;
  		$params['harvest_city'] = $harvestCity;
  		$params['harvest_zip'] = $harvestZip;
  		$params['harvest_state'] = $harvestState;
  		$params['total_lbs'] = $totalPounds;
-		// bug here: might have multiple fruit records
-
+ 		$params['distribution'] = $distributionName;
+ 		$params['total_lbs_people'] = ceil($totalPounds * 2.67);
+ 		
+		
+ 		//Case statement - Pulls template after user makes selection
 		switch ($name) {
 			case 'invitation':
 				$data['message'] = invitationEmail($params);

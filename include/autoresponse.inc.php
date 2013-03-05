@@ -43,7 +43,7 @@ Hello Harvesters!
 Here are the upcoming Harvest Events with THC: 
 
 $p[harvest_date] | $p[harvest_time] in $p[harvest_city]
-Harvesting $p[fruit_list]. We need [# of volunteers] volunteers.
+Harvesting$p[fruit_list] We need [# of volunteers] volunteers.
 
 Events last 1-2.5 hours. To RSVP, please reply to this email or send a note to volunteer@theharvestclub.org by Friday at 5pm, prior to the harvest event.
 
@@ -61,7 +61,7 @@ function harvestDetailsEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
 
-Thank you for volunteering for the harvest at $p[harvest_time] this $p[harvest_date] in $p[harvest_city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_first] $p[captain_last], your Harvest Captain, on $p[date].   
+Thank you for volunteering for the harvest at $p[harvest_time] this $p[harvest_date] in $p[harvest_city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_first] $p[captain_last], your Harvest Captain, on $p[harvest_date].   
 
 If you cannot make the harvest for any reason, kindly let us know in advance so we can fill your spot! 
 
@@ -108,7 +108,7 @@ function thankYouVolunteerEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
 
-On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach.  With your help The Harvest Club picked [No. of Pounds] 710 pounds of fruit, providing nutritious food to  [No. Lbs Harvested x 2.67] people in need in our community.  
+On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach.  With your help The Harvest Club picked $p[total_lbs] pounds of fruit, providing nutritious food to $p[total_lbs_people] people in need in our community.  
 
 We hope you’ll join us again soon!
 
@@ -123,15 +123,14 @@ function thankYouGrowerEmail($p) {
 return<<<EOD
 Dear $p[grower_first] $p[grower_last],
 
-On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of [fruit type donated] oranges and lemons.  Your contribution is providing much needed nutrition to the underserved in Orange County.  
+On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of $p[fruit_list] your contribution is providing much needed nutrition to the underserved in Orange County.  
 
-On $p[harvest_date] February 9, 2013, The Harvest Club picked $p[lbs] pounds of$p[fruit] (for each type of fruit type donated) 710 pounds of oranges and 450 pounds of tangerines from your property and delivered it to: 
-[Bulleted list of donation sites]
-•	Someone Cares Soup Kitchen
-•	The Friendly Center 
+On $p[harvest_date] February 9, 2013, The Harvest Club picked $p[fruit_list_lbs] from your property and delivered it to: 
+•	$p[distribution]
 
 
-Your donation will provide nutritious food to approximately $p[sum_lbs][No. Lbs Harvested x 2.67] 3,097 people in our community!
+
+Your donation will provide nutritious food to approximately $p[total_lbs_people] people in our community!
 
 If you are happy with our services and know of another backyard grower that could benefit from The Harvest Club, please refer them to us!  They can register their trees at www.theharvestclub.org. 
 
