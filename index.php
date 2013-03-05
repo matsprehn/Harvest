@@ -1804,6 +1804,34 @@ if (!$PRIV)
 		
 	}
 	
+	function addNewGrower(){
+		switchNClearForm('grower');	
+		var required = $('#grower input[required="required"]');
+						if (required[0].value == '')
+							return alert(required[0].name + ' is required!');
+				
+					//Update DB\
+					var para = $('#grower').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_grower&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							reloadTable("get_growers");									
+						},
+						'error': ajaxError
+					});
+					
+				
+
+	}
+	
+
+	
+	
 	function viewGrowerStats(){
 		
 		var grower_id = $('#grower1').val();
