@@ -479,7 +479,22 @@ switch ($cmd)
 
 				UNION
 
-				select i.city, h.totalpounds, g.totalhours, i.count, d.pounds_delivered as Pounds_Delivered from
+				(select cities.city, h.totalpounds, g.totalhours, i.count, d.pounds_delivered as Pounds_Delivered from
+					(
+					select * from
+						(SELECT city
+						from distributions
+						order by city) as dummy1
+						
+					union
+					
+					select * from
+					(select city
+					from growers
+					order by city) as dummy2
+					order by city
+					) as cities
+				left join
 					(	select y.city, z.count
 						from
 						(select growers.city
@@ -494,21 +509,22 @@ switch ($cmd)
 						GROUP BY growers.city
 						) as z
 						on y.city = z.city 
-					)as i
+					)as i 
+				on cities.city = i.city
 				left join
 					(select growers.city, sum(pounds) as totalpounds
 					from 
 					(
-					SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
-					FROM harvests
-					JOIN events 
-					WHERE harvests.event_id = events.id
-					GROUP BY harvests.event_id
-					) as t join growers 
+						SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
+						FROM harvests
+						JOIN events 
+						WHERE harvests.event_id = events.id
+						GROUP BY harvests.event_id
+						) as t join growers 
 					where growers.id = t.grower_id
 					group by growers.city
 					)as h
-				on i.city = h.city
+				on cities.city = h.city
 				left join
 					(
 					select growers.city, sum(t.hours) as totalhours
@@ -520,13 +536,15 @@ switch ($cmd)
 					where growers.id = t.grower_id
 					group by growers.city
 					)as g
-				on i.city = g.city
+				on cities.city = g.city
 				left join
-				(SELECT distributions.city, sum(drivings.pound) as pounds_delivered
-				FROM `drivings` join `distributions` on drivings.distribution_id = distributions.id
-				GROUP BY distributions.city
+				(
+					SELECT distributions.city, sum(drivings.pound) as pounds_delivered
+					FROM `drivings` join `distributions` on drivings.distribution_id = distributions.id
+					GROUP BY distributions.city
 				)as d
-				on i.city = d.city';
+				on cities.city = d.city
+				)';
 				
 		getTable($sql);
 		break;
