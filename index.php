@@ -1075,7 +1075,7 @@ if (!$PRIV)
 		}).click(function() {
 			switchNClearForm('treeType');		
 			$('#edit-dialog').dialog("option", "buttons", [addTreeTypeButton, cancelButton]);
-			$('#edit-dialog').dialog({ title: 'Email Selected Users' });
+			$('#edit-dialog').dialog({ title: 'Add New Tree Type' });
 			$('#edit-dialog').dialog('open') // show dialog
 		}); // .click() end
 

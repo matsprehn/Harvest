@@ -45,7 +45,7 @@ $avgHeight = $r->buildArray();
 		
 	<!-- New Tree Type form -->	
 	<form id="treeType" class="full_width hidden">
-		<h3>Tree Type</h3>
+		<h3>Tree Type Categories</h3>
 		<table>	
 
 		<!-- <tr>
