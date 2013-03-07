@@ -1833,28 +1833,10 @@ if (!$PRIV)
 	
 function addNewGrower2()
 {
-var required = $('#grower input[required="required"]');
-					for(var i=0; i<required.length; i++)
-					{
-						if (required[i].value == '')
-							return alert(required[i].name + ' is required!');
-					}
-					
-					var para = $('#grower').serialize();
-					$.ajax({							
-						'type': 'GET',
-						'url': 'ajax.php?cmd=add_grower&'+para,
-						'success': function (data) {
-							if (!validResponse(data))
-								return false;
-							setInfo('Information Added');
-							refreshContents();
-							switchNClearForm('event');
-						},
-						'error': ajaxError
-					});
-					// $('#edit-dialog').dialog('open') // show dialog
-					
+	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add Record' });
+			
+			$('#edit-dialog').dialog('open');
 }
 
 function refreshContents()
