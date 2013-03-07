@@ -603,7 +603,7 @@ $avgHeight = $r->buildArray();
 						-->
 						<tr>		
 							<td>
-							 <INPUT type="button" value="AddNewGrower" onclick="addNewGrower()" /> 
+							 <INPUT type="button" value="Add New Grower" onclick="addNewGrower()" /> 
 							</td>
 						</tr>
 						
@@ -699,6 +699,7 @@ $avgHeight = $r->buildArray();
 				<td >	
 					<INPUT type="button" value="Add" onclick="addVolunteerRow('eventVolunteer')" />
 					<INPUT type="button" value="Remove" onclick="deleteVolunteerRow('eventVolunteer')" />
+					<INPUT type="button" value="Add New Volunteer" onclick="addNewVolunteer()" /> 
 				</td>
 			</tr>
 			

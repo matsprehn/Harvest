@@ -1826,6 +1826,7 @@ if (!$PRIV)
 							$('#edit-dialog').dialog('close');
 							reloadTable("get_events");
 							switchNClearForm('event');
+							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
 							loadGrowerDropList(growerID);
 							$('#edit-dialog').dialog('open');
 							//dt.fnUpdate(row, aPos, 0);
@@ -1836,73 +1837,6 @@ if (!$PRIV)
 		}
 	};
 	
-function addNewGrower2()
-{
-var required = $('#grower input[required="required"]');
-					for(var i=0; i<required.length; i++)
-					{
-						if (required[i].value == '')
-							return alert(required[i].name + ' is required!');
-					}
-					
-					var para = $('#grower').serialize();
-					$.ajax({							
-						'type': 'GET',
-						'url': 'ajax.php?cmd=add_grower&'+para,
-						'success': function (data) {
-							if (!validResponse(data))
-								return false;
-							setInfo('Information Added');
-							refreshContents();
-							switchNClearForm('event');
-						},
-						'error': ajaxError
-					});
-					// $('#edit-dialog').dialog('open') // show dialog					
-}
-
-function refreshContents()
-{
-   var xmlHttp;
-   try
-   {
-      xmlHttp = new XMLHttpRequest();
-   }
-   catch(e)
-   {
-      try
-      {
-         xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-      }
-      catch(f)
-      {
-         try
-         {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-         }
-         catch(g)
-         {
-            alert("Browser not supports Ajax");
-            return false;
-         }
-      }
-	  $('#edit-dialog').dialog('close');
-					$('#edit-dialog').dialog('open') // show dialog
-   }
-
-
-   xmlHttp.onreadystatechange=function()
-   {
-      if (xmlHttp.readyState == 4)
-      {
-         document.getElementById(content).innerHTML = xmlHttp.responseText;
-         setTimeout('refreshContents()', seconds*1000);
-      }
-   }
-
-   xmlHttp.open("GET", url, true);
-   xmlHttp.send(null);
-}
 	
 	function addNewGrower(){
 	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton, cancelButton]);
@@ -1936,9 +1870,82 @@ function refreshContents()
 						},
 						'error': ajaxError
 					});
-					
-				
+	}
+	
+	function addNewVolunteer(){
+		$('#edit-dialog').dialog("option", "buttons", [addVolunteerButton, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add Record' });
+			
+			$('#edit-dialog').dialog('open');
+		switchNClearForm('volunteer');
+					$('#statsButton').hide();
+					$('#statsTable').hide();
+					$('#pending').hide();						
+					for (var i = 1; i < 19; i++)
+						$('#volunteer' + i).prop('disabled', false);
+					for ( var i=1; i< 6; i++ )
+						$('#volunteerRole'+i).prop('disabled', false);
+					for ( var i=1; i< 8; ++i )
+						$('#volunteerDay'+i).prop('disabled', false);		
 
+					$('#volunteer18').val(2); // set user type to volunteer
+					$('#volunteer9').val(1); // set active = yes
+					$('#volunteer8').not('.hasDatePicker').datepicker({dateFormat: 'yy-mm-dd'});
+					
+		var required = $('#volunteer input[required="required"]');
+					for(var i=0; i<required.length; i++)
+					{
+						if (required[i].value == '')
+							return alert(required[i].name + ' is required!');
+					}
+				
+					//Update DB
+					var para = $('#volunteer').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_volunteer&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							reloadTable("get_volunteers");									
+						},
+						'error': ajaxError
+					});
+	
+	}
+	
+	var addVolunteerButton = {
+		text: 'Add Volunteer',
+		click: function() {
+			var required = $('#volunteer input[required="required"]');
+					for(var i=0; i<required.length; i++)
+					{
+						if (required[i].value == '')
+							return alert(required[i].name + ' is required!');
+					}
+					
+					var para = $('#volunteer').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_volunteer&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							reloadTable("get_events");
+							switchNClearForm('event');
+							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
+							loadGrowerDropList(growerID);
+							$('#edit-dialog').dialog('open');
+							//dt.fnUpdate(row, aPos, 0);
+											
+						},
+						'error': ajaxError
+					});
+		}
 	}
 	
 
