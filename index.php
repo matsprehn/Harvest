@@ -735,8 +735,9 @@ if (!$PRIV)
 							if (!validResponse(data))
 								return false;
 							setInfo('Information Added');
+							refreshContents();
 							$('#edit-dialog').dialog('close');
-							reloadTable("get_trees");									
+							reloadTable("get_trees");			
 						},
 						'error': ajaxError
 					});
@@ -1805,6 +1806,50 @@ if (!$PRIV)
 		
 	}
 
+	function refreshContents()
+{
+   var xmlHttp;
+   try
+   {
+      xmlHttp = new XMLHttpRequest();
+   }
+   catch(e)
+   {
+      try
+      {
+         xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch(f)
+      {
+         try
+         {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         catch(g)
+         {
+            alert("Browser not supports Ajax");
+            return false;
+         }
+      }
+	  $('#edit-dialog').dialog('close');
+					$('#edit-dialog').dialog('open') // show dialog
+   }
+
+
+   xmlHttp.onreadystatechange=function()
+   {
+      if (xmlHttp.readyState == 4)
+      {
+         document.getElementById(content).innerHTML = xmlHttp.responseText;
+         setTimeout('refreshContents()', seconds*1000);
+      }
+   }
+
+   xmlHttp.open("GET", url, true);
+   xmlHttp.send(null);
+}
+
+	
 	var addNewGrowerButton = {
 		text: 'Add Grower',
 		click: function() {
@@ -1843,6 +1888,41 @@ if (!$PRIV)
 		}
 	};
 	
+	var addNewGrowerButton2= {		//For Trees Form (Not Events)
+		text: 'Add Grower',
+		click: function() {
+			var required = $('#grower input[required="required"]');
+					for(var i=0; i<required.length; i++)
+					{
+						if (required[i].value == '')
+							return alert(required[i].name + ' is required!');
+					}
+					
+					var para = $('#grower').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_grower&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+								
+							switchNClearForm('tree');
+					
+						$('#tree3').val(growerID); // last viewed grower
+						$('#view-grower').hide();
+						loadGrowerDropList(growerID);
+						$('#tree13').not('.hasDatePicker').datepicker({dateFormat: 'yy-mm-dd'});
+							setInfo('Information Added');
+							reloadTable("get_trees");
+							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
+							//dt.fnUpdate(row, aPos, 0);
+											
+						},
+						'error': ajaxError
+					});
+		}
+	};
+	
 	
 	function addNewGrower(){
 	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton, cancelButton]);
@@ -1858,24 +1938,26 @@ if (!$PRIV)
 
 					$('#view-trees').hide();
 					
-		var required = $('#grower input[required="required"]');
-						if (required[0].value == '')
-							 return alert(required[0].name + ' is required!');
 				
 					//Update DB\
-					var para = $('#grower').serialize();
-					$.ajax({							
-						'type': 'GET',
-						'url': 'ajax.php?cmd=add_grower&'+para,
-						'success': function (data) {
-							if (!validResponse(data))
-								return false;
-							setInfo('Information Added');
-							$('#edit-dialog').dialog('close');
-							reloadTable("get_growers");									
-						},
-						'error': ajaxError
-					});
+	}
+	
+	function addNewGrower2(){ //For Trees Form (Not Events)
+	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton2, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add Record' });
+			
+			$('#edit-dialog').dialog('open');
+		switchNClearForm('grower');
+					$('#statsButton2').hide();
+					$('#statsTable2').hide();
+					$('#pending2').hide();
+					for (var i = 1; i < 21; i++)
+							$('#grower' + i).prop('disabled', false);
+
+					$('#view-trees').hide();
+					
+				
+					//Update DB\
 	}
 	
 	function addNewVolunteer(){
@@ -1898,7 +1980,7 @@ if (!$PRIV)
 					$('#volunteer9').val(1); // set active = yes
 					$('#volunteer8').not('.hasDatePicker').datepicker({dateFormat: 'yy-mm-dd'});
 					
-		var required = $('#volunteer input[required="required"]');
+		/*var required = $('#volunteer input[required="required"]');
 					for(var i=0; i<required.length; i++)
 					{
 						if (required[i].value == '')
@@ -1918,7 +2000,7 @@ if (!$PRIV)
 							reloadTable("get_volunteers");									
 						},
 						'error': ajaxError
-					});
+					}); */
 	
 	}
 	
@@ -1939,6 +2021,15 @@ if (!$PRIV)
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
+								
+							event_id = 0;	
+							grower_id = 0;	
+							captain_id = 0;	
+							$('#event-id').text('');
+							$('#event4').val('');					
+							$('#event5').val('');					
+							$('#event6').val('');					
+							loadAllEventForm(0,0,0);	
 							setInfo('Information Added');
 							$('#edit-dialog').dialog('close');
 							reloadTable("get_events");

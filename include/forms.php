@@ -385,6 +385,7 @@ $avgHeight = $r->buildArray();
 		<tr>			
 			<td>
 				<label for="tree3"><b>Owner</b>
+					<INPUT type="button" value="Add New Grower" onclick="addNewGrower2()" /> 
 					<input id="view-grower" type="button" onclick="viewGrower();" value="View"/>
 				</label>
 			</td>
