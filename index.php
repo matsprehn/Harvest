@@ -329,7 +329,7 @@ if (!$PRIV)
 		$('#treeType').addClass('hidden');
 
 		clearForm(id);
-		$('#'+id).removeClass('hidden'); // show form
+		$('#'+id).removeClass('hidden'); // show formf
 	}
 
 	// clear form inputs
@@ -1073,7 +1073,7 @@ if (!$PRIV)
 			icons: { primary: 'ui-icon-circle-plus' },
 			text: false
 		}).click(function() {
-			switchNClearForm('treeType');		
+			switchNClearForm('treeType');	
 			$('#edit-dialog').dialog("option", "buttons", [addTreeTypeButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add New Tree Type' });
 			$('#edit-dialog').dialog('open') // show dialog
@@ -1803,6 +1803,77 @@ if (!$PRIV)
 		});
 		
 	}
+	
+function addNewGrower2()
+{
+var required = $('#grower input[required="required"]');
+					for(var i=0; i<required.length; i++)
+					{
+						if (required[i].value == '')
+							return alert(required[i].name + ' is required!');
+					}
+					
+					var para = $('#grower').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_grower&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							reloadTable("get_events");			
+							refreshContents();
+							switchNClearForm('event');
+							$('#edit-dialog').dialog('close');
+						},
+						'error': ajaxError
+					});
+					
+					
+}
+
+function refreshContents()
+{
+   var xmlHttp;
+   try
+   {
+      xmlHttp = new XMLHttpRequest();
+   }
+   catch(e)
+   {
+      try
+      {
+         xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch(f)
+      {
+         try
+         {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         catch(g)
+         {
+            alert("Browser not supports Ajax");
+            return false;
+         }
+      }
+	  $('#edit-dialog').dialog('close');
+					$('#edit-dialog').dialog('open') // show dialog
+   }
+
+
+   xmlHttp.onreadystatechange=function()
+   {
+      if (xmlHttp.readyState == 4)
+      {
+         document.getElementById(content).innerHTML = xmlHttp.responseText;
+         setTimeout('refreshContents()', seconds*1000);
+      }
+   }
+
+   xmlHttp.open("GET", url, true);
+   xmlHttp.send(null);
+}
 	
 	function addNewGrower(){
 		switchNClearForm('grower');	
