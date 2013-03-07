@@ -1824,12 +1824,13 @@ var required = $('#grower input[required="required"]');
 							setInfo('Information Added');
 							reloadTable("get_events");			
 							refreshContents();
-							switchNClearForm('event');
 							$('#edit-dialog').dialog('close');
+							$('#edit-dialog').dialog('open')
 						},
 						'error': ajaxError
 					});
-					
+					switchNClearForm('event');
+					// $('#edit-dialog').dialog('open') // show dialog
 					
 }
 
