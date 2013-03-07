@@ -814,6 +814,7 @@ if (!$PRIV)
 				
 				case 3: // tree
 					switchNClearForm('tree');
+					
 					$('#tree3').val(growerID); // last viewed grower
 					$('#view-grower').hide();
 					loadGrowerDropList(growerID);
@@ -1879,7 +1880,7 @@ function refreshContents()
 		switchNClearForm('grower');	
 		var required = $('#grower input[required="required"]');
 						if (required[0].value == '')
-							return alert(required[0].name + ' is required!');
+							 return alert(required[0].name + ' is required!');
 				
 					//Update DB\
 					var para = $('#grower').serialize();
