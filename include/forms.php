@@ -356,7 +356,7 @@ $avgHeight = $r->buildArray();
 		<div id="statsTable2">
 			<div class="toolbar1">
 			<span id="toolbar1" class="css_right ui-widget-header ui-corner-all">
-				<input id="modeButton" type="button" value="View Per Tree" onclick="switchMode()" />				
+				<input id="modeButton" type="button" value="View Per Tree" onclick="switchMode()" />
 			</span>
 			</div><!-- End toolbar -->
 			<table id="growerStats" cellpadding="0" cellspacing="0" border="0" class="display">

@@ -329,7 +329,7 @@ if (!$PRIV)
 		$('#treeType').addClass('hidden');
 
 		clearForm(id);
-		$('#'+id).removeClass('hidden'); // show form
+		$('#'+id).removeClass('hidden'); // show formf
 	}
 
 	// clear form inputs
@@ -814,6 +814,7 @@ if (!$PRIV)
 				
 				case 3: // tree
 					switchNClearForm('tree');
+					
 					$('#tree3').val(growerID); // last viewed grower
 					$('#view-grower').hide();
 					loadGrowerDropList(growerID);
@@ -1073,7 +1074,7 @@ if (!$PRIV)
 			icons: { primary: 'ui-icon-circle-plus' },
 			text: false
 		}).click(function() {
-			switchNClearForm('treeType');		
+			switchNClearForm('treeType');	
 			$('#edit-dialog').dialog("option", "buttons", [addTreeTypeButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add New Tree Type' });
 			$('#edit-dialog').dialog('open') // show dialog
@@ -1803,12 +1804,97 @@ if (!$PRIV)
 		});
 		
 	}
+
+	var addNewGrowerButton = {
+		text: 'Add Grower',
+		click: function() {
+			var required = $('#grower input[required="required"]');
+					for(var i=0; i<required.length; i++)
+					{
+						if (required[i].value == '')
+							return alert(required[i].name + ' is required!');
+					}
+					
+					var para = $('#grower').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_grower&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							reloadTable("get_growers");									
+						},
+						'error': ajaxError
+					});
+		}
+	};
+	
+function addNewGrower2()
+{
+	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add Record' });
+			
+			$('#edit-dialog').dialog('open');
+}
+
+function refreshContents()
+{
+   var xmlHttp;
+   try
+   {
+      xmlHttp = new XMLHttpRequest();
+   }
+   catch(e)
+   {
+      try
+      {
+         xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch(f)
+      {
+         try
+         {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         catch(g)
+         {
+            alert("Browser not supports Ajax");
+            return false;
+         }
+      }
+	  $('#edit-dialog').dialog('close');
+					$('#edit-dialog').dialog('open') // show dialog
+   }
+
+
+   xmlHttp.onreadystatechange=function()
+   {
+      if (xmlHttp.readyState == 4)
+      {
+         document.getElementById(content).innerHTML = xmlHttp.responseText;
+         setTimeout('refreshContents()', seconds*1000);
+      }
+   }
+
+   xmlHttp.open("GET", url, true);
+   xmlHttp.send(null);
+}
 	
 	function addNewGrower(){
-		switchNClearForm('grower');	
+		switchNClearForm('grower');
+					$('#statsButton2').hide();
+					$('#statsTable2').hide();
+					$('#pending2').hide();
+					for (var i = 1; i < 21; i++)
+							$('#grower' + i).prop('disabled', false);
+
+					$('#view-trees').hide();
+					
 		var required = $('#grower input[required="required"]');
 						if (required[0].value == '')
-							return alert(required[0].name + ' is required!');
+							 return alert(required[0].name + ' is required!');
 				
 					//Update DB\
 					var para = $('#grower').serialize();
