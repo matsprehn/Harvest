@@ -12,3 +12,12 @@ $(function(){
   
   });
 });
+
+
+$(document).ready(function() {
+   $('#waiver_box').click(function(){
+     $('.waiver').show();
+   });
+ });
+
+
