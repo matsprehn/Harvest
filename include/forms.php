@@ -757,6 +757,7 @@ $avgHeight = $r->buildArray();
 		<div><input name="subject" type="text" size="40" required="required" /></div>
 		<br/>
 		<div>
+			<!-- INF 117 Start -->
 			<!-- Template Options - added reminder, thank you volunteer and thank you grower -->
 			<b>Template</b>&nbsp;
 			<select name="template" onchange="changeTemplate(this);">
@@ -767,6 +768,7 @@ $avgHeight = $r->buildArray();
 				<option value="thankvolunteer">Thank You Volunteer</option>
 				<option value="thankgrower">Thank You Grower</option>
 			</select>
+			<!-- INF 117 End -->
 		</div>
 		<br/>
 		<div><b>Message</b></div>

@@ -1127,6 +1127,8 @@ switch ($cmd)
 		global $data;
 		$name = $_REQUEST['name'];
 		$event_id = $_REQUEST['event_id'];
+
+		// INF 117 Start
 		$sql="SELECT
 			DISTINCT dd.name AS distribution_name,
 			g.first_name AS grower_f,
@@ -1224,6 +1226,7 @@ switch ($cmd)
 				break;
 		}
 		break;
+		// INF 117 End
 	case 'send_email':
 		if (!$PRIV['send_email']) {
 			forbidden();

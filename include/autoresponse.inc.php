@@ -1,4 +1,5 @@
 <?php
+// INF 117 Start
 // Email Templates
 
 $defaultPhoneNumber = "(714) 564-9525";
@@ -147,4 +148,5 @@ The Harvest Club is a program of the OC Food Access Coalition, a fiscally sponso
 
 EOD;
 }
+// INF 117 End
 ?>
