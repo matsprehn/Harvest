@@ -11,7 +11,7 @@ input, select, textarea {
 a {
   color: #34798d;
 }
-div.ss-form-container {
+div.form-container {
   background: #fffbef;
   border: 1px solid #28642e;
   font-size: 14px;
@@ -21,19 +21,19 @@ div.ss-form-container {
   padding: 20px;
   width: 80%;
 }
-div.ss-form-heading {
+div.form-heading {
   margin: 0 0 20px;
 }
 h1, h2 {
   font-family: 'Josefin Sans Std Light';
   font-weight: normal;
 }
-h1.ss-form-title {
+h1.form-title {
   font-size: 36px;
   line-height: 40px;
   text-align: center;
 }
-.ss-required-asterisk {
+.required-asterisk {
   color: #bc3611;
 }
 div.errorbox-bad {
@@ -41,18 +41,18 @@ div.errorbox-bad {
   border: none; 
   padding: 0;
 }
-div.errorheader, div.errorbox-bad .ss-form-entry {
+div.errorheader, div.errorbox-bad .form-entry {
   background: none;
   border: 2px solid #bc3611;
   border-radius: 5px;
   color: #bc3611;
   padding: 5px;
 }
-div.ss-section-header, div.ss-page-break {
+div.section-header, div.page-break {
   margin: 15px 0;
   padding: 0;
 }
-h2.ss-section-title, h2.ss-page-title {
+h2.section-title, h2.page-title {
   background: none;
   border-bottom: 1px dashed #abc84d;
   font-size: 24px;
