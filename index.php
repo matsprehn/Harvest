@@ -1822,13 +1822,19 @@ if (!$PRIV)
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
+								
+							event_id = 0;	
+							grower_id = 0;	
+							captain_id = 0;	
+							$('#event-id').text('');
+							$('#event4').val('');					
+							$('#event5').val('');					
+							$('#event6').val('');					
+							loadAllEventForm(0,0,0);	
 							setInfo('Information Added');
-							$('#edit-dialog').dialog('close');
 							reloadTable("get_events");
 							switchNClearForm('event');
 							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
-							loadGrowerDropList(growerID);
-							$('#edit-dialog').dialog('open');
 							//dt.fnUpdate(row, aPos, 0);
 											
 						},
