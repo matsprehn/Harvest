@@ -377,10 +377,12 @@ if (!$PRIV)
 
 	// Generic Ajax Error
 	function ajaxError(e) {
-		alert('Ajax error (internet issue) occurred.\n' + e.responseText);
+		//alert('Ajax error (internet issue) occurred.\n' + e.responseText);
 	}
 
 	// show or hide 4 buttons at the top right
+	// INF117 Start
+	// Edited Function showAddDelEmailExport with "add2" button so that it will properly show the Add New Tree Type button when the Tree table is loaded
 	function showAddDelEmailExport(add, del, eml, exp, add2) {
 		if(add)	$('#add-button').removeClass('hidden');
 		else	$('#add-button').addClass('hidden');
@@ -397,6 +399,7 @@ if (!$PRIV)
 		if(add2)$('#add2-button').removeClass('hidden');
 		else	$('#add2-button').addClass('hidden');
 	}
+	// INF117 End
 
 	// GLOBAL VARIABLES
 
@@ -718,10 +721,12 @@ if (!$PRIV)
 		}
 	};
 			
-	
+	// INF117 Start
+	// Add button for treeType form.
 	var addTreeTypeButton = {
 		text: 'Add New Tree Type',
 		click: function() {
+			// Check to make sure that field is filled in, other wise alerts user
 			var required = $('#treeType input[required="required"]');
 						if (required[0].value == '')
 							return alert(required[0].name + ' is required!');
@@ -730,19 +735,24 @@ if (!$PRIV)
 					var para = $('#treeType').serialize();
 					$.ajax({							
 						'type': 'GET',
+						// Call add_tree_type from ajax.php where the paremeters are inserted into the database
 						'url': 'ajax.php?cmd=add_tree_type&'+para,
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
+						// Show confirmation dialog that the information was added
 							setInfo('Information Added');
-							refreshContents();
+						// Close the form
 							$('#edit-dialog').dialog('close');
-							reloadTable("get_trees");			
+						// Refresh the page
+							parent.window.location.reload();
+							reloadTable("get_trees");		
 						},
 						'error': ajaxError
 					});
 		}
 	};
+	// INF117 End
 	
 	var sendEmailButton = {
 		text: 'Send Email',
@@ -1069,18 +1079,22 @@ if (!$PRIV)
 				break;
 			}			
 		});
-		
+		// INF117 Start
+		// Created add2 button which allows users to add new Tree Types. This button brings up the Add New Tree Type form
 		$('#add2-button').button({
 			label: 'Add New Tree Type',
 			icons: { primary: 'ui-icon-circle-plus' },
 			text: false
 		}).click(function() {
-			switchNClearForm('treeType');	
+			// Switch form to treeType form
+			switchNClearForm('treeType');
+			// Change Add button to addTreeTypeButton in the frame
 			$('#edit-dialog').dialog("option", "buttons", [addTreeTypeButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add New Tree Type' });
 			$('#edit-dialog').dialog('open') // show dialog
 		}); // .click() end
-
+		// INF117 End
+		
 		$('#email-button').button({
 			label: 'Email Selected',
 			icons: { primary: 'ui-icon-mail-closed' },
@@ -1119,7 +1133,7 @@ if (!$PRIV)
 			$('#edit-dialog').dialog({ title: 'Email Selected Users' });
 			$('#edit-dialog').dialog('open') // show dialog
 		}); // .click() end
-		
+
 		$("#export-button").button({
 			label: "Export Selected",
 			icons: {
@@ -1805,51 +1819,9 @@ if (!$PRIV)
 		});
 		
 	}
+// INF117 Start
 
-	function refreshContents()
-{
-   var xmlHttp;
-   try
-   {
-      xmlHttp = new XMLHttpRequest();
-   }
-   catch(e)
-   {
-      try
-      {
-         xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-      }
-      catch(f)
-      {
-         try
-         {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-         }
-         catch(g)
-         {
-            alert("Browser not supports Ajax");
-            return false;
-         }
-      }
-	  $('#edit-dialog').dialog('close');
-					$('#edit-dialog').dialog('open') // show dialog
-   }
-
-
-   xmlHttp.onreadystatechange=function()
-   {
-      if (xmlHttp.readyState == 4)
-      {
-         document.getElementById(content).innerHTML = xmlHttp.responseText;
-         setTimeout('refreshContents()', seconds*1000);
-      }
-   }
-
-   xmlHttp.open("GET", url, true);
-   xmlHttp.send(null);
-}
-
-	
+	// Add button for Add New Grower Form (when it is opened from the EVENTS form)
 	var addNewGrowerButton = {
 		text: 'Add Grower',
 		click: function() {
@@ -1863,11 +1835,13 @@ if (!$PRIV)
 					var para = $('#grower').serialize();
 					$.ajax({							
 						'type': 'GET',
+						// Calls ajax command to add grower to Growers table
 						'url': 'ajax.php?cmd=add_grower&'+para,
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
 								
+							// Reload the events form (so the newly added grower can be selected)
 							event_id = 0;	
 							grower_id = 0;	
 							captain_id = 0;	
@@ -1876,9 +1850,13 @@ if (!$PRIV)
 							$('#event5').val('');					
 							$('#event6').val('');					
 							loadAllEventForm(0,0,0);	
+							// Show confirmation message that grower was added
 							setInfo('Information Added');
+							// Reset table to events
 							reloadTable("get_events");
+							// Switch back to events form
 							switchNClearForm('event');
+							// Reset addButton in dialog to default add button
 							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
 							//dt.fnUpdate(row, aPos, 0);
 											
@@ -1887,7 +1865,8 @@ if (!$PRIV)
 					});
 		}
 	};
-	
+
+	// Add button for Add New Grower Form (when it is opened from the TREES form)
 	var addNewGrowerButton2= {		//For Trees Form (Not Events)
 		text: 'Add Grower',
 		click: function() {
@@ -1901,18 +1880,21 @@ if (!$PRIV)
 					var para = $('#grower').serialize();
 					$.ajax({							
 						'type': 'GET',
+						//Calls ajax command to add grower to Growers table
 						'url': 'ajax.php?cmd=add_grower&'+para,
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
-								
+						//Switch back to Tree Form
 							switchNClearForm('tree');
-					
+						// Reload the events form (so the newly added grower can be selected)
 						$('#tree3').val(growerID); // last viewed grower
 						$('#view-grower').hide();
 						loadGrowerDropList(growerID);
 						$('#tree13').not('.hasDatePicker').datepicker({dateFormat: 'yy-mm-dd'});
+						/ Show confirmation message that grower was added
 							setInfo('Information Added');
+							// Reset table to trees
 							reloadTable("get_trees");
 							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
 							//dt.fnUpdate(row, aPos, 0);
@@ -1923,8 +1905,9 @@ if (!$PRIV)
 		}
 	};
 	
-	
+	// Function that provided functionality to Add New Grower buttons in the Events form
 	function addNewGrower(){
+	//Sets appropriate add button
 	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add Record' });
 			
@@ -1942,7 +1925,9 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
+	// Function that provided functionality to Add New Grower buttons in the Trees form
 	function addNewGrower2(){ //For Trees Form (Not Events)
+	//Sets appropriate add button
 	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton2, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add Record' });
 			
@@ -1960,7 +1945,9 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
+	// Function that provided functionality to Add New Volunteer buttons in the Events form
 	function addNewVolunteer(){
+	//Sets appropriate add button
 		$('#edit-dialog').dialog("option", "buttons", [addVolunteerButton, cancelButton]);
 			$('#edit-dialog').dialog({ title: 'Add Record' });
 			
@@ -2004,6 +1991,7 @@ if (!$PRIV)
 	
 	}
 	
+		// Add button for Add New Grower Form (when it is opened from the TREES form)
 	var addVolunteerButton = {
 		text: 'Add Volunteer',
 		click: function() {
@@ -2017,11 +2005,13 @@ if (!$PRIV)
 					var para = $('#volunteer').serialize();
 					$.ajax({							
 						'type': 'GET',
+						// Calls ajax command to add new Volunteer to Volunteers table
 						'url': 'ajax.php?cmd=add_volunteer&'+para,
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
 								
+							// Reload drop down menus in forms so that added entities are viewable
 							event_id = 0;	
 							grower_id = 0;	
 							captain_id = 0;	
@@ -2030,10 +2020,14 @@ if (!$PRIV)
 							$('#event5').val('');					
 							$('#event6').val('');					
 							loadAllEventForm(0,0,0);	
+							//Provide confirmation that information was added
 							setInfo('Information Added');
 							$('#edit-dialog').dialog('close');
+							// Reset table to events
 							reloadTable("get_events");
+							//Switch back to event form
 							switchNClearForm('event');
+							// Reset appropriate add button
 							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
 							loadGrowerDropList(growerID);
 							$('#edit-dialog').dialog('open');
@@ -2044,6 +2038,7 @@ if (!$PRIV)
 					});
 		}
 	}
+	// INF117 End
 	
 
 	

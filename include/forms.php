@@ -42,7 +42,8 @@ $avgHeight = $r->buildArray();
 ?>
 <!-- all hidden forms go here -->
 <div id="edit-dialog" class="hidden">
-		
+	<!-- INF117 Start-->
+	<!-- Created a new form so that database users can enter new tree types they would like added to "Tree Type"-->
 	<!-- New Tree Type form -->	
 	<form id="treeType" class="full_width hidden">
 		<h3>Tree Type Categories</h3>
@@ -64,7 +65,8 @@ $avgHeight = $r->buildArray();
 		
 		</table>	
 	</form>	
-	<!-- New Tree Type end -->	
+	<!-- New Tree Type end -->
+	<!-- INF117 End
 		
 	<!-- Volunteer form -->	
 	<form id="volunteer" class="full_width hidden">
@@ -385,7 +387,10 @@ $avgHeight = $r->buildArray();
 		<tr>			
 			<td>
 				<label for="tree3"><b>Owner</b>
+				<!--INF117 Start-->
+				<!--Inserts button to go to new form-->
 					<INPUT type="button" value="Add New Grower" onclick="addNewGrower2()" /> 
+				<!-- INF117 End-->
 					<input id="view-grower" type="button" onclick="viewGrower();" value="View"/>
 				</label>
 			</td>
@@ -604,7 +609,10 @@ $avgHeight = $r->buildArray();
 						-->
 						<tr>		
 							<td>
+							<!--INF117 Start-->
+							<!--Inserts button to go to new form-->
 							 <INPUT type="button" value="Add New Grower" onclick="addNewGrower()" /> 
+							 <!--INF117 End-->
 							</td>
 						</tr>
 						
