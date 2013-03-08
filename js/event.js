@@ -961,14 +961,14 @@ function loadGrowerToForm(grower_id)
 			
 			var set = {};
 			for(var k=3; k<table.rows.length; k++)
-				if(table.rows[k].cells[1].childNodes[0].value!="")				// INF117 Start				// Commented out user-created constraint to allow drivers to send shipments of the same type of fruit to multiple locations.
+				if(table.rows[k].cells[1].childNodes[0].value!="")				//INF 117 Start				// Commented out user-created constraint to allow drivers to send shipments of the same type of fruit to multiple locations.
 				{
 					/* if (table.rows[k].cells[1].childNodes[0].value in set)
 					{
 						alert("Volunteer "+(i+1)+" has duplicated Tree Type!");
 						return -1;
 					}
-					else   */				// INF117 End
+					else   */				//INF 117 End
 						set[""+table.rows[k].cells[1].childNodes[0].value] = true;
 				}
 			if (table.rows[1].cells[3].childNodes[0].checked) 

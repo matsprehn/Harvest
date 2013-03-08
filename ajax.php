@@ -224,7 +224,7 @@ function updateVolunteer($exists) {
 	}
 }
 
-// INF117 Start
+//INF 117 Start
 // Function to insert tree type into database
 function updateTreeType(){
 	global $db;
@@ -236,7 +236,7 @@ function updateTreeType(){
 		$r = $db->q($sql);		
 		getError($r);
 }
-// INF117 End
+//INF 117 End
 
 function updateTree($exist){
 	global $db;	
@@ -1079,12 +1079,12 @@ switch ($cmd)
 		}
 		updateVolunteer(false);
 		break;
-	// INF117 Start
+	//INF 117 Start
 	// Case to detect when updateTreeType is called
 	case 'add_tree_type':
 		updateTreeType(true);
 		break;
-	// INF117 End
+	//INF 117 End
 	case 'remove_volunteer':
 		if (!$PRIV['del_volunteer']) {
 			forbidden();

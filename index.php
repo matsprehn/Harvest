@@ -381,7 +381,7 @@ if (!$PRIV)
 	}
 
 	// show or hide 4 buttons at the top right
-	// INF117 Start
+	//INF 117 Start
 	// Edited Function showAddDelEmailExport with "add2" button so that it will properly show the Add New Tree Type button when the Tree table is loaded
 	function showAddDelEmailExport(add, del, eml, exp, add2) {
 		if(add)	$('#add-button').removeClass('hidden');
@@ -399,7 +399,7 @@ if (!$PRIV)
 		if(add2)$('#add2-button').removeClass('hidden');
 		else	$('#add2-button').addClass('hidden');
 	}
-	// INF117 End
+	//INF 117 End
 
 	// GLOBAL VARIABLES
 
@@ -721,7 +721,7 @@ if (!$PRIV)
 		}
 	};
 			
-	// INF117 Start
+	//INF 117 Start
 	// Add button for treeType form.
 	var addTreeTypeButton = {
 		text: 'Add New Tree Type',
@@ -752,7 +752,7 @@ if (!$PRIV)
 					});
 		}
 	};
-	// INF117 End
+	//INF 117 End
 	
 	var sendEmailButton = {
 		text: 'Send Email',
@@ -1079,7 +1079,7 @@ if (!$PRIV)
 				break;
 			}			
 		});
-		// INF117 Start
+		//INF 117 Start
 		// Created add2 button which allows users to add new Tree Types. This button brings up the Add New Tree Type form
 		$('#add2-button').button({
 			label: 'Add New Tree Type',
@@ -1093,7 +1093,7 @@ if (!$PRIV)
 			$('#edit-dialog').dialog({ title: 'Add New Tree Type' });
 			$('#edit-dialog').dialog('open') // show dialog
 		}); // .click() end
-		// INF117 End
+		//INF 117 End
 		
 		$('#email-button').button({
 			label: 'Email Selected',
@@ -1819,7 +1819,7 @@ if (!$PRIV)
 		});
 		
 	}
-// INF117 Start
+//INF 117 Start
 
 	// Add button for Add New Grower Form (when it is opened from the EVENTS form)
 	var addNewGrowerButton = {
@@ -2038,7 +2038,7 @@ if (!$PRIV)
 					});
 		}
 	}
-	// INF117 End
+	//INF 117 End
 	
 
 	
