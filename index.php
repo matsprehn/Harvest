@@ -1821,7 +1821,10 @@ if (!$PRIV)
 	}
 //INF 117 Start
 
-	// Add button for Add New Grower Form (when it is opened from the EVENTS form)
+	/* Purpose of this code is the Add button for Add New Grower Form (when it is opened from the EVENTS form).
+	It creates a new button on the events form called Add Button and when clicked adds the data entered into the
+	database. It also shows the confirmation of adding. It is called and used by the addNewGrower function
+	*/
 	var addNewGrowerButton = {
 		text: 'Add Grower',
 		click: function() {
@@ -1866,7 +1869,10 @@ if (!$PRIV)
 		}
 	};
 
-	// Add button for Add New Grower Form (when it is opened from the TREES form)
+	/* Purpose of this code is the Add button for Add New Grower Form (when it is opened from the TREES form).
+	It creates a new button on the tree form called Add Button and when clicked adds the data entered into the
+	database. It also shows the confirmation of adding. It is called and used by the Function addNewTreeType
+	*/
 	var addNewGrowerButton2= {		//For Trees Form (Not Events)
 		text: 'Add Grower',
 		click: function() {
@@ -1905,7 +1911,11 @@ if (!$PRIV)
 		}
 	};
 	
-	// Function that provided functionality to Add New Grower buttons in the Events form
+	/* The purpose of this function is that it provides functionality to Add New Grower buttons in the Events form. 
+	When this function is called it sets the appropriate add button first. Then it opens the Grower form calling
+	it from switchNClearForm which opens the grower form since the parameter 'grower'is passed in and it recognizes that
+	specific case and pops up the form. 
+	*/ 
 	function addNewGrower(){
 	//Sets appropriate add button
 	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton, cancelButton]);
@@ -1925,7 +1935,11 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
-	// Function that provided functionality to Add New Grower buttons in the Trees form
+	/* The purpose of this function is that it provides functionality to Add buttons in the Tree form. 
+	When this function is called it sets the appropriate add button first. Then it opens the Grower form calling
+	it from switchNClearForm which opens the grower form since the parameter 'grower'is passed in and it recognizes that
+	specific case and pops up the form. 
+	*/ 
 	function addNewGrower2(){ //For Trees Form (Not Events)
 	//Sets appropriate add button
 	$('#edit-dialog').dialog("option", "buttons", [addNewGrowerButton2, cancelButton]);
@@ -1945,7 +1959,11 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
-	// Function that provided functionality to Add New Volunteer buttons in the Events form
+	/* The purpose of this function is that it provides functionality to Add New Volunteer buttons in the Events form. 
+	When this function is called it sets the appropriate add button first. Then it opens the Volunteer form calling
+	it from switchNClearForm which opens the volunteer form since the parameter 'grower'is passed in and it recognizes that
+	specific case and pops up the form. 
+	*/ 
 	function addNewVolunteer(){
 	//Sets appropriate add button
 		$('#edit-dialog').dialog("option", "buttons", [addVolunteerButton, cancelButton]);
@@ -1991,7 +2009,11 @@ if (!$PRIV)
 	
 	}
 	
-		// Add button for Add New Grower Form (when it is opened from the TREES form)
+		
+	/* Purpose of this code is the Add button for Add New Volunteer Form (when it is opened from the Events form).
+	It creates a new button on the volunteer form called Add Volunteer Button and when clicked adds the data entered into the
+	database. It also shows the confirmation of adding and reloads the data. It is called and used by the function AddNewVolunteer
+	*/	
 	var addVolunteerButton = {
 		text: 'Add Volunteer',
 		click: function() {
