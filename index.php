@@ -1853,7 +1853,7 @@ if (!$PRIV)
 							$('#event5').val('');					
 							$('#event6').val('');					
 							loadAllEventForm(0,0,0);	
-							// Show confirmation message that grower was added
+							/* // Show confirmation message that grower was added*/
 							setInfo('Information Added');
 							// Reset table to events
 							reloadTable("get_events");
@@ -1869,7 +1869,7 @@ if (!$PRIV)
 		}
 	};
 
-	/* Purpose of this code is the Add button for Add New Grower Form (when it is opened from the TREES form).
+	/* asdfPurpose of this code is the Add button for Add New Grower Form (when it is opened from the TREES form).
 	It creates a new button on the tree form called Add Button and when clicked adds the data entered into the
 	database. It also shows the confirmation of adding. It is called and used by the Function addNewTreeType
 	*/
@@ -1898,7 +1898,7 @@ if (!$PRIV)
 						$('#view-grower').hide();
 						loadGrowerDropList(growerID);
 						$('#tree13').not('.hasDatePicker').datepicker({dateFormat: 'yy-mm-dd'});
-						/ Show confirmation message that grower was added
+						// Show confirmation message that grower was added
 							setInfo('Information Added');
 							// Reset table to trees
 							reloadTable("get_trees");

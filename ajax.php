@@ -456,6 +456,13 @@ function dateToStr($dateStr) {
 
 switch ($cmd)
 {
+//INF 117 Start
+/* 
+This is the part of the system that affects the totals view. It first gathers global total results (total events and pounds harvested/delivered ever)
+And then unions it with a sql statement that gathers the total results (events, pounds harvested/delivered) per city.
+This code is triggered when the user clicks on the "totals" tab, recieving the command from index.php. Once finished, it returns a table of information 
+back to index.php
+*/
 	case 'get_totals':
 		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events, d.delivered as Delivered
 				from
@@ -551,6 +558,7 @@ switch ($cmd)
 				
 		getTable($sql);
 		break;
+//INF 117 End
 		
 		
 	case 'get_notifications':
