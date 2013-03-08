@@ -1,3 +1,13 @@
+<!--
+
+INF 117 START
+
+Purpose of this code is that it creates an form that the client can use to help automate the process for registering for a harvest event. the code first starts by using the basic 
+html css elements to style and display the form. I then use php to dynamically pull all the future events that are going to happen. I'm just reading values from the database with the standard methods.
+ I also used the jquery in form to validate. It validates by making sure all the required fields have some value in them. I also used jquery to create a fuction in a javascript file that creates more guests fields if a button is pressed.
+This form then will post onto another page called "thankyou.php" when submit is clicked. 
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <!-- saved from url=(0085)https://docs.google.com/forms/d/1zvS8beJH6EeSxzlPGBR8R0xLPFRkkaCfou0DCPqxQ-o/viewform -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="shortcut icon" href="https://ssl.gstatic.com/docs/spreadsheets/forms/favicon_jfk2.png" type="image/x-icon">
@@ -109,6 +119,10 @@ if($results === FALSE) {
     die(mysql_error()); // TODO: better error handling
 }
 
+/*
+This section of the code finds all the future events from the database and enters them into an array that will be used in the next section. I'm just running through a basic
+while loop to get all the information. I only take the last index for the array because thats the only index that holds all the values.
+*/
 $event = array();
 $all_Events = array();
 $type_Of_Fruit = null;
@@ -130,7 +144,7 @@ $count1 = count($all_Events[$count-1]);
 //echo "count is ". $count1;
 $all_Events[$count-1];
 $all = $all_Events[$count-1];
-$future_events = array();
+$future_events = array(); // THIS method is going to be used to populate the future events
 
 $x = 0;
 while(!empty($all))
@@ -146,7 +160,7 @@ $x++;
   
 $x = 0;
   
-$temp1 = array_shift($all);
+$temp1 = array_shift($all);  // Deleting the entries in the array because that value will be called in the next few lines
 $temp2 = array_shift($all);
 $temp3 = array_shift($all);
 $temp4 = array_shift($all);
@@ -254,6 +268,6 @@ if(isset( $all[0])){
 </div></div>
 
 
-
+<!-- INF 117 END  ******************************************************************-->
 
 

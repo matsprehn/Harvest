@@ -1,3 +1,10 @@
+/*
+INF 117 START
+
+
+This css file is for the rsvp form. It contains all the style for the form
+*/
+
 body {
   background: #fffbef url('//themes.googleusercontent.com/image?id=1a0AeDLTHbl0veIcjLG7wyMEOtSe8L5jsDMsuV_d1_xFhDH5Ki5qyGKxBPm30vy7v3vIh');
   color: #28642e;
@@ -81,3 +88,7 @@ td.ss-scalenumbers, td.ss-scalerow, td.ss-leftlabel, td.ss-rightlabel, label.ss-
 display:none;
 
 }
+
+/*
+INF 117 END
+*/
