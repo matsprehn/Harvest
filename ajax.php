@@ -1132,9 +1132,21 @@ switch ($cmd)
 		global $db;
 		global $data;
 		$name = $_REQUEST['name'];
+
+		//Changing this line of code - asks for event_id
 		$event_id = $_REQUEST['event_id'];
 
+
 		// INF 117 Start
+
+		/*Purpose of this query is to get back data about the Havest to be used in the email template
+		This query consists of the distribution_name, the growers first and last name, the street, city, 
+		state and zipcode of the harvest location, the date and time of the harvest event, the captains
+		first name, last name, and phone number as well as the fruit harvested and how many pounds were harvested.
+		
+		It pulls data from the database and grabs information relevant to the harvest the user has chosen. 
+
+		This SQL query returns this data to be stored as variables.*/
 		$sql="SELECT
 			DISTINCT dd.name AS distribution_name,
 			g.first_name AS grower_f,
@@ -1166,7 +1178,9 @@ switch ($cmd)
 			break;
 		}
 
-		
+		/*Purpose of this while loop is to loop through the rows in the data retrived by the SQL
+		query and store them as variables local to this file.*/
+
 		//Sets variables from the query to a local variable 
 		while($row = $r->getAssoc()) {
 			//Prints all fruits in the harvest event
@@ -1187,7 +1201,9 @@ switch ($cmd)
 			$distributionName = $row['distribution_name'];
 		}
 	
-		
+		/*Purpose of these statements are setting the parameters to passed through to the email templates
+		in autoresponse.inc.php */
+
 		//Sets local values to be used in email templates
 		$params = $r->getAssoc();
 		$params['me_f'] = $_SESSION['first_name'];
@@ -1210,7 +1226,7 @@ switch ($cmd)
  		$params['distribution'] = $distributionName;
  		$params['total_lbs_people'] = ceil($totalPounds * 2.67);
  		
-		
+		/*Purpose of this code is to return the template selected by the user */
  		//Case statement - Pulls template after user makes selection
 		switch ($name) {
 			case 'invitation':
@@ -1233,6 +1249,7 @@ switch ($cmd)
 		}
 		break;
 		// INF 117 End
+		
 	case 'send_email':
 		if (!$PRIV['send_email']) {
 			forbidden();

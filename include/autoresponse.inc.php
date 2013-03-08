@@ -1,5 +1,6 @@
 <?php
 // INF 117 Start
+
 // Email Templates
 
 $defaultPhoneNumber = "(714) 564-9525";
@@ -37,6 +38,8 @@ Thank you again, and welcome to The Harvest Club!
 EOD;
 }
 
+
+/* Purpose of code is to create a email form with an invitation email response template to the user */
 function invitationEmail($p) {
 return<<<EOD
 Hello Harvesters!
@@ -58,6 +61,8 @@ OC Food Access & The Harvest Club
 EOD;
 }
 
+
+/* Purpose of code is to create an email with harvest details to the user*/
 function harvestDetailsEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
@@ -87,6 +92,7 @@ OC Food Access & The Harvest Club
 EOD;
 }
 
+/* Purpose of code is to create an email to remind users about a harvest event*/
 function reminderEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
@@ -105,6 +111,7 @@ OC Food Access & The Harvest Club
 EOD;
 }
 
+/* Purpose of code is to create a thank you email to the volunteers*/
 function thankYouVolunteerEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
@@ -120,6 +127,7 @@ chall@ocfoodaccess.org
 EOD;
 }
 
+/* Purpose of code is to create a thank you email to the growers*/
 function thankYouGrowerEmail($p) {
 return<<<EOD
 Dear $p[grower_first] $p[grower_last],
