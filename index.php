@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 require_once('include/auth.inc.php');
 require_once('include/Database.inc.php');
