@@ -11,7 +11,14 @@
 <script type="text/javascript" src="js/addingGuests.js"></script>
 <script type="text/javascript" src="js/validate.js"></script>
 <link href="css/rsvpForm.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$().ready(function() {
+	// validate the comment form when it is submitted
+	$(".form").validate();
+})
 
+</script>
+</head>
 <div class="form-container">
 
 <div class="form-heading"><h1 class="form-title" dir="ltr">Harvest Event RSVP Form</h1>
@@ -20,8 +27,7 @@
 
 <div class="">* Required</div>
 </div>
-<div class="form">
-	<form  class="cmxform" action="thankyou.php" method="POST" id="ss-form">
+	<form  class="cmxform" action="thankyou.php" method="POST" id="form">
 		<div class="errorbox-good">
 			<div>
 				<div class="form-entry">
@@ -30,7 +36,7 @@
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="name" class="ss-q-short" id="fname"> 
+						<input type="text" name="name" class="ss-q-short" id="fname" required> 
 				</div>
 			</div>
 		</div> 
@@ -43,7 +49,7 @@
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="lname" class="ss-q-short" id="lname" dir="auto"> 
+						<input type="text" name="lname" class="ss-q-short" id="lname" required> 
 				</div>
 			</div>
 		</div> 
@@ -56,7 +62,7 @@
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="email" class="ss-q-short" id="email" dir="auto"> 
+						<input type="text" name="email" class="ss-q-short" id="email" required> 
 				</div>
 			</div>
 		</div> 
@@ -69,7 +75,7 @@
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="phone" class="ss-q-short" id="phone" dir="auto"> 
+						<input type="text" name="phone" class="ss-q-short" id="phone" required> 
 				</div>
 			</div>
 		</div> 
@@ -230,7 +236,7 @@ if(isset( $all[0])){
 
 							<div>Sign electronically with your full name. </div>
 						</label>
-					<input type="text" name="signature" value="" class="ss-q-short" id="signature">
+					<input type="text" name="signature" value="" class="ss-q-short" id="signature" >
 					</div>
 				</div>
 			</div>
@@ -245,7 +251,7 @@ if(isset( $all[0])){
 <input type="submit" name="submit" value="Submit" id="ss-submit">
 
 </div></form></div>
-</div></div></div>
+</div></div>
 
 
 
