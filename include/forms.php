@@ -708,7 +708,12 @@ $avgHeight = $r->buildArray();
 				<td >	
 					<INPUT type="button" value="Add" onclick="addVolunteerRow('eventVolunteer')" />
 					<INPUT type="button" value="Remove" onclick="deleteVolunteerRow('eventVolunteer')" />
+					
+					<!--INF117 Start-->
+					<!--Inserts button to go to new volunteer form-->
 					<INPUT type="button" value="Add New Volunteer" onclick="addNewVolunteer()" /> 
+					 <!--INF117 End-->
+					
 				</td>
 			</tr>
 			
