@@ -611,17 +611,18 @@ $avgHeight = $r->buildArray();
 						</tr>
 						-->
 						<tr>		
-							<td>
-							<!--INF117 Start-->
-							<!--Inserts button to go to new form-->
-							 <INPUT type="button" value="Add New Grower" onclick="addNewGrower()" /> 
-							 <!--INF117 End-->
-							</td>
+							
 						</tr>
 						
 						<tr>		
 
-							<td colspan="4" ><label for="event-grower-name"><b>Grower</b></label></td>								
+							<td colspan="4" ><label for="event-grower-name"><b>Grower</b></label>
+							<!--INF117 Start-->
+							<!--Inserts button to go to new form-->
+							 <INPUT type="button" value="Add New Grower" onclick="addNewGrower()" /> 
+							 <!--INF117 End-->
+							</td>	
+														
 						</tr>
 						<tr>
 							<td colspan="4" id ="event-grower"></td>										

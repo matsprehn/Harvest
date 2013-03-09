@@ -1959,6 +1959,13 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
+	/*The purpose of this function is to add a new distribution site
+	*/
+	function addNewDistributionCenter(){
+	switchNClearForm('distribution');
+	}
+	
+	
 	/* The purpose of this function is that it provides functionality to Add tree type in the tree form.
 	*/ 
 	function addNewTreeType(){ //For Trees Form (Not Events)

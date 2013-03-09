@@ -229,13 +229,11 @@ function addVolunteerRow(tableID) {
 										var c4 = r.insertCell(3);									
 										var e4 = document.createElement("label");
 										var txt=document.createTextNode('sent to');
-										e4.style.textAlign="center";
-										e4.appendChild(txt);		
+										e4.style.textAlign="center";										e4.appendChild(txt);		
 										c4.appendChild(e4);
 										
 										var c5 = r.insertCell(4);
-										var e5 = document.createElement("select");
-										e5.innerHTML = (options(distributionNames));
+										var e5 = document.createElement("select");										var buttonnode5 = document.createElement('input');										buttonnode5.setAttribute('type','button');										buttonnode5.setAttribute('name','Add Distribution');										buttonnode5.setAttribute('value','Add New Distribution Center');										c5.appendChild(buttonnode5);										buttonnode5.onClick = document.write('hello');																																							e5.innerHTML = (options(distributionNames));
 										c5.appendChild(e5);
 											
 										
@@ -281,11 +279,7 @@ function addVolunteerRow(tableID) {
 				deleteTreeTypeRow(tbl);
 			  }
 			};
-
-
-			
- 
-        }
+        }		
  
         function deleteVolunteerRow(tableID) {
             try {
