@@ -233,7 +233,7 @@ function addVolunteerRow(tableID) {
 										c4.appendChild(e4);
 										
 										var c5 = r.insertCell(4);
-										var e5 = document.createElement("select");										var buttonnode5 = document.createElement('input');										buttonnode5.setAttribute('type','button');										buttonnode5.setAttribute('name','Add Distribution');										buttonnode5.setAttribute('value','Add New Distribution Center');										c5.appendChild(buttonnode5);										buttonnode5.onClick = document.write('hello');																																							e5.innerHTML = (options(distributionNames));
+										var e5 = document.createElement("select");										var buttonnode5 = document.createElement('input');										buttonnode5.setAttribute('type','button');										buttonnode5.setAttribute('name','Add Distribution');										buttonnode5.setAttribute('value','Add New Distribution Center');										c5.appendChild(buttonnode5);										//buttonnode5.attachEvent('onclick', addNewDistributionCenter());																																							e5.innerHTML = (options(distributionNames));
 										c5.appendChild(e5);
 											
 										

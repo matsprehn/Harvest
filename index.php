@@ -1962,7 +1962,10 @@ if (!$PRIV)
 	/*The purpose of this function is to add a new distribution site
 	*/
 	function addNewDistributionCenter(){
-	switchNClearForm('distribution');
+		switchNClearForm('distribution');
+		$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
+		$('#edit-dialog').dialog({ title: 'Add New Distribution Type' });
+		$('#edit-dialog').dialog('open') // show dialog
 	}
 	
 	
