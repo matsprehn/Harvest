@@ -1959,6 +1959,74 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
+	/* The purpose of this function is that it provides functionality to Add tree type in the tree form.
+	*/ 
+	function addNewTreeType(){ //For Trees Form (Not Events)
+	//Sets appropriate add button
+	switchNClearForm('treeType');
+			// Change Add button to addTreeTypeButton in the frame
+			$('#edit-dialog').dialog("option", "buttons", [addTreeTypeButtons, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add New Tree Type' });
+			$('#edit-dialog').dialog('open') // show dialog
+						
+	}
+	
+	//INF 117 Start
+	// Add button for treeType adding form.
+	var addTreeTypeButtons = {
+		text: 'Add New Tree Type',
+		click: function() {
+			// Check to make sure that field is filled in, other wise alerts user
+			var required = $('#treeType input[required="required"]');
+						if (required[0].value == '')
+							return alert(required[0].name + ' is required!');
+					
+					//Update DB
+					var para = $('#treeType').serialize();
+					$.ajax({							
+						'type': 'GET',
+						// Call add_tree_type from ajax.php where the paremeters are inserted into the database
+						'url': 'ajax.php?cmd=add_tree_type&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+						// Show confirmation dialog that the information was added
+							//setInfo('Information Added');
+						
+						// Reload drop down menus in forms so that added entities are viewable
+							event_id = 0;	
+							grower_id = 0;	
+							captain_id = 0;	
+							$('#event-id').text('');
+							$('#event4').val('');					
+							$('#event5').val('');					
+							$('#event6').val('');					
+							loadAllEventForm(0,0,0);
+							loadTreeType = 0;
+							getTreeType(0, 0);
+							
+							//Provide confirmation that information was added
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							// Reset table to events
+							reloadTable("get_trees");
+							//Switch back to event form
+							switchNClearForm('tree');
+							//Update Table
+							// Reset appropriate add button
+							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
+							//getTreeType(grower_id, event_id);
+							$('#edit-dialog').dialog('open');
+						
+						
+						},
+						'error': ajaxError
+					});
+		}
+	};
+	//INF 117 End
+	
+	
 	/* The purpose of this function is that it provides functionality to Add New Volunteer buttons in the Events form. 
 	When this function is called it sets the appropriate add button first. Then it opens the Volunteer form calling
 	it from switchNClearForm which opens the volunteer form since the parameter 'grower'is passed in and it recognizes that
@@ -2053,7 +2121,7 @@ if (!$PRIV)
 							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
 							loadGrowerDropList(growerID);
 							$('#edit-dialog').dialog('open');
-							//dt.fnUpdate(row, aPos, 0);
+							
 											
 						},
 						'error': ajaxError

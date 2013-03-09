@@ -414,7 +414,9 @@ $avgHeight = $r->buildArray();
 		<?php echo $empty_cell ?>
 
 		<tr>
-			<td><label for="tree4"><b>Tree Type</b></label></td>	
+			<td><label for="tree4"><b>Tree Type</b></label>
+			<INPUT type="button" value="Add New Tree Type" onclick="addNewTreeType()" /> 
+			</td>	
 			<td><label for="tree6"><b>Varietal</b></label></td>			
 			<td><label for="tree7"><b>Number</b></label></td>
 		</tr>
