@@ -231,12 +231,10 @@ function addVolunteerRow(tableID) {
 										var txt=document.createTextNode('sent to');
 										e4.style.textAlign="center";										e4.appendChild(txt);		
 										c4.appendChild(e4);
-										
+																				
 										var c5 = r.insertCell(4);
-										var e5 = document.createElement("select");										var buttonnode5 = document.createElement('input');										buttonnode5.setAttribute('type','button');										buttonnode5.setAttribute('name','Add Distribution');										buttonnode5.setAttribute('value','Add New Distribution Center');										c5.appendChild(buttonnode5);										//buttonnode5.attachEvent('onclick', addNewDistributionCenter());																																							e5.innerHTML = (options(distributionNames));
-										c5.appendChild(e5);
-											
-										
+										var e5 = document.createElement("select");										e5.innerHTML = (options(distributionNames));
+										c5.appendChild(e5);
 									};
 				cell7.appendChild(buttonnode);				
 				buttonnode.click();
@@ -267,9 +265,6 @@ function addVolunteerRow(tableID) {
 			  }
 			  else
 			  {
-
-
-
 			    var rowCount = tbl.rows.length;
 				for(var i=2; i<rowCount; i++) {
 					var row = tbl.rows[i];
@@ -277,10 +272,8 @@ function addVolunteerRow(tableID) {
 					chkbox.checked = true;
 				}
 				deleteTreeTypeRow(tbl);
-			  }
-			};
-        }		
- 
+			  }				var ro = tbl.insertRow(rowCount);				var bo = ro.insertCell(0);				var buttonnode5 = document.createElement('input');				buttonnode5.setAttribute('type','button');				buttonnode5.setAttribute('name','Add Distribution');				buttonnode5.setAttribute('value','Add New Distribution Center');				bo.appendChild(buttonnode5);				buttonnode5.onclick = function addNewDistributionCenter(){					switchNClearForm('distribution');					$('#edit-dialog').dialog("option", "buttons", [addDistributionButton, cancelButton]);					$('#edit-dialog').dialog({ title: 'Add New Distribution Type' });					$('#edit-dialog').dialog('open') // show dialog				}												};
+        }				var addDistributionButton = {			text: 'Add Distribution Center',			click: function() {				var para = $('#distribution').serialize();				$.ajax({												'type': 'GET',					'url': 'ajax.php?cmd=add_distribution&'+para,					'success': function (data) {						if (!validResponse(data))							return false;						setInfo('Information Added');						$('#edit-dialog').dialog('close');						reloadTable("get_distribs");												// Reload drop down menus in forms so that added entities are viewable						event_id = 0;							grower_id = 0;							captain_id = 0;							$('#event-id').text('');						$('#event4').val('');											$('#event5').val('');											$('#event6').val('');											loadAllEventForm(0,0,0);							//Provide confirmation that information was added						setInfo('Information Added');						loadDistributionName();						$('#edit-dialog').dialog('close');						// Reset table to events						reloadTable("get_distribs");						//Switch back to event form						switchNClearForm('event');						// Reset appropriate add button						$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);						//loadDistributionName();						$('#edit-dialog').dialog('open');				},				'error': ajaxError			});		}	}	
         function deleteVolunteerRow(tableID) {
             try {
             var table = document.getElementById(tableID);
