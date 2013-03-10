@@ -129,8 +129,8 @@ if (!$PRIV)
 		?>
 	</footer>
 	
-	
-	
+
+
 	
 	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
@@ -146,8 +146,9 @@ if (!$PRIV)
 		priv[o] = (priv[o] === '1'); // convert to bools for quick checks
 
 	// GLOBAL FUNCTIONS (probably move to separate file)
-	
+		
 	function reloadTable(cmd) {
+	
 		$.ajax({
 			'dataType': 'json', 
 			'type': 'GET', 
@@ -260,6 +261,7 @@ if (!$PRIV)
 			},
 			'error': ajaxError
 		}); // end ajax
+	
 	}
 
 	function contains(str, i) {
@@ -1282,10 +1284,27 @@ if (!$PRIV)
 			.each(function() { // IE only
 				this.onselectstart = function() { return false; };
 			});
-
+//INF 117 Start
 		$('#nav input').click(function() {
-			reloadTable(this.id); // button id is the ajax command
+			if(this.id == "get_totals")
+			{
+					$("#totals").dialog({title: "Choose Date Range", buttons: {OK: chooseOption}, autoOpen: false, modal: true, draggable: false});
+					$("#totals").dialog("open");
+					$('.hasDatepicker').datepicker(); // doesn't work
+					$('#endDate').not('.hasDatePicker').datepicker({dateFormat: 'yyyy-mm-dd', option: 'both'});//doesn't work
+					function chooseOption() {
+						$("#totals").dialog("close");
+						//var selectedOption=$("#diagDropdown option:selected").val().toLowerCase();
+						$beginDate = 	$('#beginDate').val();
+						$endDate = 		$('#endDate').val();
+						reloadTable("get_totals&beginDate=" + $beginDate + "&endDate=" + $endDate);
+					}			
+			}
+			else{
+				reloadTable(this.id); // button id is the ajax command
+			}
 		});
+//INF 117 End
 				
 		$('#edit-dialog').dialog({
 			autoOpen: false,

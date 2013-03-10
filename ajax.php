@@ -52,7 +52,20 @@ $PRIV = array_key_exists(0, $PRIV) ? $PRIV[0] : null;
 
 if ($PRIV == null)
 	die($priv_error);
-
+	
+//INF 117 Start
+if (isset($_REQUEST['beginDate']) && !empty($_REQUEST['beginDate']))
+{
+	$beginDate = "'".$_REQUEST['beginDate']."'";
+	
+}
+else $beginDate = "'0000/00/00'";
+if (isset($_REQUEST['endDate']) && !empty($_REQUEST['endDate']) && $_REQUEST['endDate'] !='undefined')
+{
+	$endDate = $_REQUEST['endDate'];
+}
+else $endDate = "curdate()";
+//INF 117 End
 function forbidden() {
 	global $data;
 	$data['status'] = 403; // forbidden
@@ -456,6 +469,8 @@ function dateToStr($dateStr) {
 
 switch ($cmd)
 {
+	
+
 //INF 117 Start
 /* 
 This is the part of the system that affects the totals view. It first gathers global total results (total events and pounds harvested/delivered ever)
@@ -464,7 +479,7 @@ This code is triggered when the user clicks on the "totals" tab, recieving the c
 back to index.php
 */
 	case 'get_totals':
-		$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events, d.delivered as Delivered
+		/*$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events, d.delivered as Delivered
 				from
 				(
 					select sum(pound) as pounds
@@ -504,6 +519,7 @@ back to index.php
 					order by city) as dummy2
 					order by city
 					) as cities
+					
 				left join
 					(	select y.city, z.count
 						from
@@ -554,8 +570,111 @@ back to index.php
 					GROUP BY distributions.city
 				)as d
 				on cities.city = d.city
-				)';
+				)';*/
+				$sql = 'select "All" as City, a.pounds as Pounds, b.hours as Hours, c.count as Events, d.delivered as Delivered
+				from
+				(
+					select sum(pound) as pounds
+					from harvests join events on harvests.event_id = events.id
+					WHERE events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+				)as a
+				join
+				(
+					select sum(hour)as hours
+					from volunteer_events join events on volunteer_events.event_id = events.id
+					WHERE events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+				) as b
+				join
+				(
+					select count(*) as count
+					from harvests join events on harvests.event_id = events.id
+					WHERE events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+					AND harvests.number is not null
+				)as c
+				join
+				(
+					select sum(pound) as delivered
+					from drivings join events on drivings.event_id = events.id
+					WHERE events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+				)as d
+
+				UNION
+
+				(select cities.city, h.totalpounds, g.totalhours, i.count, d.pounds_delivered as Pounds_Delivered from
+					(
+					select * from
+						(SELECT city
+						from distributions
+						order by city) as dummy1
+						
+					union
+					
+					select * from
+					(select city
+					from growers
+					order by city) as dummy2
+					order by city
+					) as cities
+					
+				left join
+					(	select y.city, z.count
+						from
+						(select growers.city
+						from growers
+						group by growers.city)as y
+						left join
+						(
+						select growers.city, count(growers.id) as count
+						from growers left join events on growers.id = events.grower_id
+						left join harvests on events.id = harvests.event_id
+						where harvests.pound is not null
+						AND events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+						GROUP BY growers.city
+						) as z
+						on y.city = z.city 
+					)as i 
+					
+				on cities.city = i.city
+				left join
+					(select growers.city, sum(pounds) as totalpounds
+					from 
+					(
+						SELECT harvests.event_id, events.grower_id, SUM(harvests.pound) as pounds 
+						FROM harvests
+						JOIN events 
+						WHERE harvests.event_id = events.id
+						AND events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+						GROUP BY harvests.event_id
+						) as t join growers 
+					where growers.id = t.grower_id
+					group by growers.city
+					)as h
+				on cities.city = h.city
 				
+				left join
+					(
+					select growers.city, sum(t.hours) as totalhours
+					from
+					(select events.grower_id, sum(volunteer_events.hour) as hours
+					from volunteer_events join events
+					where events.id = volunteer_events.event_id
+					AND events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+					group by events.id) as t join growers
+					where growers.id = t.grower_id
+					
+					group by growers.city
+					)as g
+				on cities.city = g.city
+				left join
+				(
+					SELECT distributions.city, sum(drivings.pound) as pounds_delivered
+					FROM `events` join `drivings` on drivings.event_id = events.id join `distributions` on drivings.distribution_id = distributions.id
+					AND events.date >= '.$beginDate.' and events.date <= '.$endDate.'
+					GROUP BY distributions.city
+				)as d
+				on cities.city = d.city
+				)';
+		//echo ($sql."<br/><br/>");
 		getTable($sql);
 		break;
 //INF 117 End
