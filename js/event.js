@@ -348,7 +348,7 @@ function loadGrowerDropList(grower_id){
 							alert('Ajax Error!\n' + e.responseText);
 						}
 					});
-}
+}function loadTreeTypes(tree_type_id){	$('#treee').empty();				$.ajax( {						'dataType': 'json', 						'type': 'GET', 						'url': 'ajax.php?cmd=get_tree_type', 						'success': function (data) {														var str = '<select id="tree4" name="tree_type_id">';							if( data.datatable != null) 															for ( var i=0, len = data.datatable.aaData.length; i< len; ++i )								{									str += '<option value="'+data.datatable.aaData[i][0]+'">'+data.datatable.aaData[i][1]+'</option>';								}								str += '</select>';									$('#treee').append(str);								$('#tree4').val(tree_type_id).attr('selected',true);						},						'error': function (e) {							alert('Ajax Error!\n' + e.responseText);						}					});}
 function loadGrowerToForm(grower_id)
 	{
 		$('#event-grower').empty();

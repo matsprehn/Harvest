@@ -2023,17 +2023,6 @@ if (!$PRIV)
 							//setInfo('Information Added');
 						
 						// Reload drop down menus in forms so that added entities are viewable
-							event_id = 0;	
-							grower_id = 0;	
-							captain_id = 0;	
-							$('#event-id').text('');
-							$('#event4').val('');					
-							$('#event5').val('');					
-							$('#event6').val('');					
-							loadAllEventForm(0,0,0);
-							loadTreeType = 0;
-							getTreeType(0, 0);
-							
 							//Provide confirmation that information was added
 							setInfo('Information Added');
 							$('#edit-dialog').dialog('close');
@@ -2041,6 +2030,7 @@ if (!$PRIV)
 							reloadTable("get_trees");
 							//Switch back to event form
 							switchNClearForm('tree');
+							loadTreeTypes(1);
 							//Update Table
 							// Reset appropriate add button
 							$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);

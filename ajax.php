@@ -698,11 +698,8 @@ back to index.php
 				WHERE e1.grower_id=$grower_id AND h1.event_id = e1.id";
 		getTable($sql,false);
 		break;	
-	case 'get_growers':
-		if (!$PRIV['view_grower']) {
-			forbidden();
-			break;
-		}
+		
+		case 'get_growers':
 		$data['id'] = 2;
 		$data['title'] = 'Growers';
 		$sql = "SELECT g.id, g.first_name AS 'First Name', g.middle_name, g.last_name AS 'Last Name', g.phone AS 'Phone', g.email AS 'Email', g.preferred AS 'Preferred', g.street, g.city AS 'City', g.state, g.zip, g.tools AS tools_id, g.source_id, g.notes AS Notes, g.pending AS pending_id, IF((g.pending=1),'Pending','Approved') AS Pending, g.property_type_id, g.property_relationship_id, pt.name AS property_type, pr.name AS property_relationship
@@ -710,6 +707,7 @@ back to index.php
 								LEFT JOIN property_relationships pr ON g.property_relationship_id = pr.id;";
 		getTable($sql);
 		break;
+		
 	case 'get_grower':
 		if (!$PRIV['view_grower']) {
 			forbidden();
@@ -1374,6 +1372,14 @@ back to index.php
 		$sql = "SELECT id, Concat(first_name,' ',middle_name,' ',last_name), phone, street, city 
 				FROM growers
 				ORDER BY first_name ASC";
+		getName($sql);
+		break;	
+		
+		case 'get_tree_type':
+		$data['id'] = 10;
+		$data['title'] = 'Treee';
+		$sql = "SELECT id, name
+				FROM  tree_types";
 		getName($sql);
 		break;	
 		

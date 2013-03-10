@@ -432,8 +432,8 @@ $avgHeight = $r->buildArray();
 			<td><label for="tree6"><b>Varietal</b></label></td>			
 			<td><label for="tree7"><b>Number</b></label></td>
 		</tr>
-		<tr>			
-			<td><?php echo options('tree4', 'tree_type_id', $tree_type_id); ?></td>			
+		<tr>				
+			<td id ="treee"><?php echo options('tree4', 'tree_type_id', $tree_type_id); ?></td>			
 			<td><input type="text" name="varietal" id="tree6" /></td>
 			<td><input type="number" name="number" id="tree7" required="required" style="width:50px" /></td>
 		</tr>
