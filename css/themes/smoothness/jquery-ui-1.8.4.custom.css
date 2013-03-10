@@ -95,12 +95,13 @@
 .ui-state-default .ui-icon { background-image: url(images/ui-icons_888888_256x240.png); }
 
 
-//INF 117 Start
-/*Purpose of this code is to make sure that the icons turn green when hovered over as requested by the client.
+/*INF 117 Start
+Purpose of this code is to make sure that the icons turn green when hovered over as requested by the client.
 This code links the icons for the hover feature to ui-greencolor.png file which we designed. The file is called
 and the icon turns green according to the position of the right icon in the file.
+*/
 .ui-state-hover .ui-icon, .ui-icon {background-image: url(images/ui-greencolor.png); }
-*/INF 117 End
+/*INF 117 End*/
 
 
 .ui-state-active .ui-icon {background-image: url(images/ui-icons_454545_256x240.png); }

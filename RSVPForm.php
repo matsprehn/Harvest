@@ -37,7 +37,7 @@ $().ready(function() {
 
 <div class="">* Required</div>
 </div>
-	<form  class="cmxform" action="thankyou.php" method="POST" id="form">
+	<form  class="cmxform" action="thankyou.php" method="post" id="form">
 		<div class="errorbox-good">
 			<div>
 				<div class="form-entry">
@@ -46,7 +46,7 @@ $().ready(function() {
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="name" class="ss-q-short" id="fname" required> 
+						<input type="text" name="fname" class="ss-q-short" id="fname" required> 
 				</div>
 			</div>
 		</div> 
@@ -174,7 +174,7 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<form> <input type=\"checkbox\" name=\"sex\" value=\"male\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
 	echo "</br>";
   $harvest  = $type." Harvest in ".$city." [ ".$date." , ".$time; // Going to use to create a drop down menu
   array_push($future_events, $harvest);
@@ -187,7 +187,7 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<form> <input type=\"checkbox\" name=\"sex\" value=\"male\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br> </form>"; // Haven'st added the full info yet
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
 	echo "</br>";
   $harvest  = $type." Harvest in ".$city." [ ".$date." , ".$time; // Going to use to create a drop down menu
   array_push($future_events, $harvest);
@@ -224,7 +224,7 @@ if(isset( $all[0])){
            <button type="button"> <p id="add_field"><span>&raquo; I'd like to bring a guests</span></p> </button>
 </div>
 <br>
-<input type="checkbox" id="waiver_box"> This is my first harvest! </br>
+<input type="checkbox" name="waiver_box" id="waiver_box" value="yes"> This is my first harvest! </br>
 <div class ="waiver">
 	<div>
 		<div class="form-entry"><h2 class="section-title">Waiver Form</h2>
@@ -239,7 +239,7 @@ if(isset( $all[0])){
 
 <div class ="waiver">
 	<div class="errorbox-good">
-		<input type="checkbox" id="waiver_box"> I allow my picture to be taken</br>
+		<input type="checkbox" name= "picture_box" id="picture_box" value="yes"> I allow my picture to be taken</br>
 			</br>
 				<div>
 					<div class="form-entry">

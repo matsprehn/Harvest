@@ -426,7 +426,9 @@ $avgHeight = $r->buildArray();
 		<?php echo $empty_cell ?>
 
 		<tr>
-			<td><label for="tree4"><b>Tree Type</b></label></td>	
+			<td><label for="tree4"><b>Tree Type</b></label>
+			<INPUT type="button" value="Add New Tree Type" onclick="addNewTreeType()" /> 
+			</td>	
 			<td><label for="tree6"><b>Varietal</b></label></td>			
 			<td><label for="tree7"><b>Number</b></label></td>
 		</tr>
@@ -621,17 +623,18 @@ $avgHeight = $r->buildArray();
 						</tr>
 						-->
 						<tr>		
-							<td>
-							<!--INF117 Start-->
-							<!--Inserts button to go to new form-->
-							 <INPUT type="button" value="Add New Grower" onclick="addNewGrower()" /> 
-							 <!--INF117 End-->
-							</td>
+							
 						</tr>
 						
 						<tr>		
 
-							<td colspan="4" ><label for="event-grower-name"><b>Grower</b></label></td>								
+							<td colspan="4" ><label for="event-grower-name"><b>Grower</b></label>
+							<!--INF117 Start-->
+							<!--Inserts button to go to new form-->
+							 <INPUT type="button" value="Add New Grower" onclick="addNewGrower()" /> 
+							 <!--INF117 End-->
+							</td>	
+														
 						</tr>
 						<tr>
 							<td colspan="4" id ="event-grower"></td>										
