@@ -315,6 +315,7 @@ if (!$PRIV)
 		$('#event').addClass('hidden');
 		$('#donation').addClass('hidden');
 		$('#treeType').addClass('hidden');
+		$('#totals').addClass('hidden');
 		
 		$('#'+id).removeClass('hidden'); // show form
 	}
@@ -329,6 +330,7 @@ if (!$PRIV)
 		$('#event').addClass('hidden');
 		$('#donation').addClass('hidden');
 		$('#treeType').addClass('hidden');
+		$('#totals').addClass('hidden');
 
 		clearForm(id);
 		$('#'+id).removeClass('hidden'); // show formf
@@ -1288,6 +1290,7 @@ if (!$PRIV)
 		$('#nav input').click(function() {
 			if(this.id == "get_totals")
 			{
+					$('#totals').removeClass('hidden');
 					totalDialog();		
 			}
 			else{
