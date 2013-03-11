@@ -2086,6 +2086,7 @@ if (!$PRIV)
 			
 			$('#edit-dialog').dialog('open');
 		switchNClearForm('distribution');
+		initHours();
 					
 				
 					//Update DB\
@@ -2111,11 +2112,33 @@ if (!$PRIV)
 							if (!validResponse(data))
 								return false;
 							setInfo('Information Added');
-							$('#edit-dialog').dialog('close');
 							reloadTable("get_distribs");
 						},
 						'error': ajaxError
 					});
+					
+					
+					// Reload drop down menus in forms so that added entities are viewable
+						event_id = 0;	
+						grower_id = 0;	
+						captain_id = 0;	
+						$('#event-id').text('');
+						$('#event4').val('');					
+						$('#event5').val('');					
+						$('#event6').val('');					
+						loadAllEventForm(0,0,0);	
+						//Provide confirmation that information was added
+						setInfo('Information Added');
+						$('#edit-dialog').dialog('close');
+						//loadDistributionName();
+						// Reset table to distributions
+						reloadTable("get_events");
+						//Switch back to event form
+						switchNClearForm('event');
+						$('#edit-dialog').dialog('open');
+						// Reset appropriate add button
+						$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
+									
 		}
 	} 
 
