@@ -88,6 +88,57 @@ class Database {
 		return mysql_error($this->_con);
 	}
 	
+	
+	public function getV_id($f, $l, $e)
+	{
+		$fname = $f;
+		$lname = $l;
+		$email = $e;
+		$sql = "SELECT v.id 
+				FROM volunteers v
+				WHERE v.first_name = '$fname'
+				AND v.last_name = '$lname'
+				AND v.email = '$email'";
+		echo $sql;
+		return mysql_query($sql);
+	}
+	
+	public function getE_id($d, $t)
+	{
+		$date = $d;
+		$time = $t;
+		//$city= $c;
+		$sql = "SELECT distinct e.id
+				FROM events e 
+				WHERE e.date = '$date'
+				and e.time =  '$time' ";
+		echo $sql;
+		return mysql_query($sql);
+	}
+	
+	public function addUser($f, $l, $p, $e, $s, $c, $sta, $zipcode)
+	{
+		$fname = $f;
+		$lname = $l;
+		$phone= $p;
+		$email = $e;
+		$street = $s;
+		$city = $c;
+		$state = $sta;
+		$zip = $zipcode;
+		$sql = "INSERT INTO volunteers (first_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
+		$sql;
+		return mysql_query($sql);
+	}
+	
+	public function addUserToEvent($event,$volunteer)
+	{
+		$event_id = $event;
+		$volunteer_id = $volunteer;
+		$sql = "INSERT INTO volunteer_events (event_id, volunteer_id) VALUES ('$event_id', '$volunteer_id')";
+		echo $sql;
+		return mysql_query($sql);
+	}
 } // class Database
 
 class Result {

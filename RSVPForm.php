@@ -15,7 +15,7 @@ This form then will post onto another page called "thankyou.php" when submit is 
 <meta http-equiv="X-UA-Compatible" content="IE=10; chrome=1;">
 <meta name="fragment" content="!">
 <!--<base target="_blank">--><base href="." target="_blank">
-<title>Harvest Event RSVP Form</title>
+<title>Harvest Event RSVP Form – The Harvest Club </title>
 
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/addingGuests.js"></script>
@@ -31,9 +31,12 @@ $().ready(function() {
 </head>
 <div class="form-container">
 
-<div class="form-heading"><h1 class="form-title" dir="ltr">Harvest Event RSVP Form</h1>
+<div class="form-heading"><h1 class="form-title" dir="ltr">Harvest Event RSVP Form &ndash; The Harvest Club</h1>
 <p></p>
-<div class="ss-form-desc ss-no-ignore-whitespace">Please RSVP for the Harvest Club upcoming events by filling out the form. If you have any questions please contact us at <a href="mailto:volunteer@theharvestclub.org">volunteer@theharvestclub.org</a>.</div>
+<div class="ss-form-desc ss-no-ignore-whitespace">To register for upcoming events, please submit a completed RSVP no later than the Friday, prior to the harvest event. </br> If you have any questions, you can contact us at info@theharvestclub.com or by phone at 714-564-9525. </br></br>
+
+Please provide a phone number below where you can be reached the day of the event, should we need to contact you </br> with updated event details. 
+</a>.</div>
 
 <div class="">* Required</div>
 </div>
@@ -68,19 +71,6 @@ $().ready(function() {
 			<div>
 				<div class="form-entry">
 					<label>
-						<div> E-mail
-							<span class="ss-required-asterisk">*</span>
-						</div>
-					</label>
-						<input type="text" name="email" class="ss-q-short" id="email" required> 
-				</div>
-			</div>
-		</div> 
-
-<div class="errorbox-good">
-			<div>
-				<div class="form-entry">
-					<label>
 						<div> Phone Number
 							<span class="ss-required-asterisk">*</span>
 						</div>
@@ -89,13 +79,37 @@ $().ready(function() {
 				</div>
 			</div>
 		</div> 
+		
+<div class="errorbox-good">
+			<div>
+				<div class="form-entry">
+					<label>
+						<div> E-mail
+							<span class="ss-required-asterisk">*</span>
+						</div>
+					</label>
+						<input type="text" name="email" class="ss-q-short" id="email" required> 
+				</div>
+			</div>
+		</div> 
+	
+My Guest&#39;s Information:
+	
+<div id="container">
+     </br>
+     To register additional guests, please click here <button type="button"> <p id="add_field"><span>&raquo; I'd like to bring a guests</span></p> </button>
+</div>
+<br>
 
-<br/>
 <div class="errorbox-good">
 	<div>
 		<div class="form-entry">
 			<label>
-				<div>Choose any Event that you want to participate in.</br> <p>Events typically last 1-2.5 hours.</p>
+				<div><strong>Current Harvest Events</strong> </br></br> To reserve your volunteer spot on a team, select from the dates below.  
+Event details will be emailed to the team prior</br> to the harvest.  We will reschedule in the event of rain, and will send an email notification.  
+
+</br></br>Events last 1-2.5 hours, depending on the size of the trees and amount of fruit.
+</p>
 					<span class="ss-required-asterisk"></span>
 				</div>
 			</label>
@@ -174,8 +188,11 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$date $time </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
 	echo "</br>";
+	
+	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
+	
   $harvest  = $type." Harvest in ".$city." [ ".$date." , ".$time; // Going to use to create a drop down menu
   array_push($future_events, $harvest);
 	$type=null;
@@ -187,8 +204,11 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$date $time </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
 	echo "</br>";
+	
+	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>";
+	
   $harvest  = $type." Harvest in ".$city." [ ".$date." , ".$time; // Going to use to create a drop down menu
   array_push($future_events, $harvest);
 	$type=null;
@@ -219,11 +239,6 @@ if(isset( $all[0])){
 ?>
 </br>
 
-<div id="container">
-          </br>
-           <button type="button"> <p id="add_field"><span>&raquo; I'd like to bring a guests</span></p> </button>
-</div>
-<br>
 <input type="checkbox" name="waiver_box" id="waiver_box" value="yes"> This is my first harvest! </br>
 <div class ="waiver">
 	<div>

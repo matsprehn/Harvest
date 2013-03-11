@@ -12,13 +12,14 @@ $(function(){
   $('p#add_field').click(function(){
     count += 1;
     $('#container').append(
-        '<br /><strong>First Name of Guest #' + count + '</strong><br />' 
+        '<br /><br /><strong>First Name of Guest #' + count + '</strong><br />' 
         + '<input id="field_' + count + '"name="fields[]' + '" type="text" /><br />' 
         + '<br /><strong>Last Name of Guest #' + count + '</strong><br />' 
         + '<input id="field_' + count + '" name="fields[]' + '" type="text" /><br />' 
-        + '<br /><strong>Email of Guest #' + count + '</strong><br />' 
-        + '<input id="field_' + count + '" name="fields[]' + '" type="text" /><br />' );
-  
+        + '<br /><strong>Cell Phone of Guest #' + count + '</strong><br />' 
+        + '<input id="field_' + count + '" name="fields[]' + '" type="text" /><br />' 
+		+ '<br /><strong>Email of Guest #' + count + '</strong><br />' 
+        + '<input id="field_' + count + '" name="fields[]' + '" type="text" /><br />');
   });
 });
 
