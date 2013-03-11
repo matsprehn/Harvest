@@ -1971,16 +1971,6 @@ if (!$PRIV)
 					//Update DB\
 	}
 	
-	/*The purpose of this function is to add a new distribution site
-	
-	function addNewDistributionCenter(){
-		switchNClearForm('distribution');
-		$('#edit-dialog').dialog("option", "buttons", [addButton, cancelButton]);
-		$('#edit-dialog').dialog({ title: 'Add New Distribution Type' });
-		$('#edit-dialog').dialog('open') // show dialog
-	}
-	*/
-	
 	/* The purpose of this function is that it provides functionality to Add tree type in the tree form.
 	*/ 
 	function addNewTreeType(){ //For Trees Form (Not Events)
@@ -2089,7 +2079,47 @@ if (!$PRIV)
 	
 	}
 	
-		
+	function addDistribution(){
+	//Sets appropriate add button
+	$('#edit-dialog').dialog("option", "buttons", [addDistributionButton, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add Distribution' });
+			
+			$('#edit-dialog').dialog('open');
+		switchNClearForm('distribution');
+					
+				
+					//Update DB\
+	}
+	
+	
+	
+	var addDistributionButton = {
+		text: 'Add Distribution Center',
+		click: function() {
+			var required = $('#distribution input[required="required"]');
+					for(var i=0; i<required.length; i++)
+					{
+						if (required[i].value == '')
+							return alert(required[i].name + ' is required!');
+					}
+					
+					var para = $('#distribution').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=add_distribution&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Added');
+							$('#edit-dialog').dialog('close');
+							reloadTable("get_distribs");
+						},
+						'error': ajaxError
+					});
+		}
+	} 
+
+	
 	/* Purpose of this code is the Add button for Add New Volunteer Form (when it is opened from the Events form).
 	It creates a new button on the volunteer form called Add Volunteer Button and when clicked adds the data entered into the
 	database. It also shows the confirmation of adding and reloads the data. It is called and used by the function AddNewVolunteer

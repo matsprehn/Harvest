@@ -728,6 +728,7 @@ $avgHeight = $r->buildArray();
 					<!--INF117 Start-->
 					<!--Inserts button to go to new volunteer form-->
 					<INPUT type="button" value="Add New Volunteer" onclick="addNewVolunteer()" /> 
+					<INPUT type="button" value="Add New Distribution" onclick="addDistribution()" /> 
 					 <!--INF117 End-->
 					
 				</td>
