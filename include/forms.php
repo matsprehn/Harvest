@@ -46,11 +46,11 @@ $avgHeight = $r->buildArray();
 		<table>
 		<tr>
 			<td>Begin Date:</td>
-			<td><input id="beginDate" class="hasDatepicker" type = "text" placeholder = "yyyy-mm-dd"></td>
+			<td><input id="beginDate" type = "text" placeholder = "yyyy-mm-dd"></td>
 		</tr>
 		<tr>
 			<td>End Date:</td>
-			<td><input id="endDate"   class="hasDatepicker" type = "text" placeholder = "yyyy-mm-dd"></td>
+			<td><input id="endDate" type = "text" placeholder = "yyyy-mm-dd"></td>
 		</tr>
 		</table>
 	</form>

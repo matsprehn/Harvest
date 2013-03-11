@@ -1035,7 +1035,7 @@ function pad2(n) {
 	while (n.length < 2)
 		n = '0' + n;
 	return n;
-}
+}function totalDialog() {						$("#totals").dialog({title: "Choose Date Range", buttons: {OK: chooseOption}, autoOpen: false, modal: true, draggable: false});		$("#totals").dialog("open");		$("#beginDate").datepicker({dateFormat: 'yy-mm-dd'});		$("#endDate").datepicker({dateFormat: 'yy-mm-dd'});		function chooseOption() {			$("#totals").dialog("close");			//var selectedOption=$("#diagDropdown option:selected").val().toLowerCase();			$beginDate = 	$('#beginDate').val();			$endDate = 		$('#endDate').val();			reloadTable("get_totals&beginDate=" + $beginDate + "&endDate=" + $endDate);		}	}
 	
 function initHours() {	
 	var t = [];

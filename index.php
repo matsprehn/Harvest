@@ -1288,17 +1288,7 @@ if (!$PRIV)
 		$('#nav input').click(function() {
 			if(this.id == "get_totals")
 			{
-					$("#totals").dialog({title: "Choose Date Range", buttons: {OK: chooseOption}, autoOpen: false, modal: true, draggable: false});
-					$("#totals").dialog("open");
-					$('.hasDatepicker').datepicker(); // doesn't work
-					$('#endDate').not('.hasDatePicker').datepicker({dateFormat: 'yyyy-mm-dd', option: 'both'});//doesn't work
-					function chooseOption() {
-						$("#totals").dialog("close");
-						//var selectedOption=$("#diagDropdown option:selected").val().toLowerCase();
-						$beginDate = 	$('#beginDate').val();
-						$endDate = 		$('#endDate').val();
-						reloadTable("get_totals&beginDate=" + $beginDate + "&endDate=" + $endDate);
-					}			
+					totalDialog();		
 			}
 			else{
 				reloadTable(this.id); // button id is the ajax command
