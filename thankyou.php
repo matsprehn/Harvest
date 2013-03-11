@@ -13,35 +13,35 @@ require_once('include/Database.inc.php');
 	$waiver_value = "no"; // Assume its not entered
 	$picture_value = "no";
 	$signature;
+	$hasevent = false;
 	
 	$street = ""; 
 	$city = "";
 	$state = "";
 	$zipcode = "";
 	
+	$eventsString = "";
+	
 	if(isset($_POST["events"])){
-		$events = $_POST["events"];
-		$N = count($events);
+		$eventIds = $_POST["events"];
+		$N = count($eventIds);
 		for($i=0; $i < $N; $i++) {
-		  echo "</br>";
-		  echo "The events are";
-		  echo "</br>";
-		  echo($sEvents = $events[$i]);
-		  $pieces = explode(" ", $sEvents);
-		  $date = $pieces[0]; // gets the date
-		   echo "</br>";
-		  echo "date is ". $date;
-		  echo "</br>";
-		  $time = $pieces[1]." ".$pieces[2]; // gets the time
-		  echo "</br>";
-		  echo "time is ". $time;
-		  echo "</br>";
-		  echo "vid is ".$vid1 = $db->getV_id($fname, $lname, $email);
-		  $vid = mysql_fetch_array($vid1);
-		  echo "</br>";
-		  echo "eid is ".$eid = $db->getE_id($date, $time);
-		  echo "</br>";
-		  echo $db->addUserToEvent($eid, $vid);
+		  $hasEvent = true;
+		  $eid = $eventIds[$i];
+		 
+		 $sql = "SELECT distinct v.id 
+				FROM volunteers v
+				WHERE v.first_name = '$fname'
+				AND v.last_name = '$lname'
+				AND v.email = '$email'";
+				
+		 $results = $db->q($sql);
+		 if($row = $results->getAssoc()) 
+		  {
+				$vID = $row['id'];
+				//echo "the vid is ". $vID;
+		  }
+		  $db->addUserToEvent($eid, $vID);
 		}
 		
 		
@@ -92,33 +92,60 @@ require_once('include/Database.inc.php');
 	} 
 
 	if($waiver_value == "yes"){
-	echo "</br>";
-	echo "</br>";
-	echo "ITS ABOUT TO BE INSERTED!";
-	echo "</br>";
 	$db->addUser($fname, $lname, $phone, $email, $street, $city, $state, $zipcode);
-	echo "</br>";
-	echo "ITS INSIDE!";
-	}
 	
-	
-	
-$to = $email;
-$subject = 'New User has signed the waiver form';
-$message = "$fname $lname has signed the waiver form. 
+	$to = $email;
+	$subject = 'New User has signed the waiver form';
+	$message = "$fname $lname has signed the waiver form. 
 His/Her phone number is $phone and signed the form at $date.
 The generated link for printing out their waiver is here http://localhost/Harvest/generatewaiver.php?picallowed=$waiver_value&signature=$signature&date_signed=$date";
-$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
+	$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
 
 	'Reply-To: $email' . "\r\n" .
 	'X-Mailer: PHP/' . phpversion();
 	
 	if(mail($to, $subject, $message, $headers)) {
-	echo('Email sent successfully!');
+	//echo('Email sent successfully!');
 	}else {
-	die('Failure: Email was not sent!');
+	//die('Failure: Email was not sent!');
 	}
 	
-echo "thank you for signing up with The Harvest Club";
+	}
+	
+	if($hasEvent == true){
+	
+	$to = $email;
+	$subject = 'Conformation email for The Harvest Club';
+	$message = "Hi $fname $lname, 
+Thanks for signing up for some event";
+	$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
+
+	'Reply-To: $email' . "\r\n" .
+	'X-Mailer: PHP/' . phpversion();
+	
+	if(mail($to, $subject, $message, $headers)) {
+	//echo('Email sent successfully!');
+	}else {
+	//die('Failure: Email was not sent!');
+	}
+}	
+		
+//echo "Thank you for signing up with The Harvest Club. A confirmation email will be sent to you soon";
 	
 ?>
+
+<html>
+<head>
+<link href="css/rsvpForm.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="form-container">
+	<div class="form-heading"><h1 class="form-title" dir="ltr">Harvest Event RSVP Form &ndash; The Harvest Club</h1>
+	<center>  Thank you for signing up with The Harvest Club. A confirmation email will be sent to you soon</center>
+	</div>
+</div>
+</div>
+</body>
+</html>
+

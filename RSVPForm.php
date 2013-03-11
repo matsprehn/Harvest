@@ -117,7 +117,7 @@ Event details will be emailed to the team prior</br> to the harvest.  We will re
 require_once('include/auth.inc.php');
 require_once('include/Database.inc.php');
 
-$sql = "SELECT Distinct growers.city, tree_types.name, events.date, events.time
+$sql = "SELECT Distinct growers.city, tree_types.name, events.date, events.time, events.id
 FROM `events` 
 	join growers on events.grower_id = growers.id 
         join grower_trees on grower_trees.grower_id = growers.id 
@@ -146,9 +146,9 @@ while ($row = $results->getAssoc()) {
   $name = $row['name'];
   $date = $row['date'];
   $time = $row['time'];
-  
+  $eID = $row['id'];
 
-  array_push($event, $city, $name, $date, $time);
+  array_push($event, $city, $name, $date, $time, $eID);
   array_push($all_Events, $event);
 }
 //echo "count is ". $count1;
@@ -171,6 +171,8 @@ $date = $all[$x];
 $x++;
 $time = $all[$x];
 $x++;
+$eID = $all[$x];
+$x++;
   
 $x = 0;
   
@@ -178,6 +180,7 @@ $temp1 = array_shift($all);  // Deleting the entries in the array because that v
 $temp2 = array_shift($all);
 $temp3 = array_shift($all);
 $temp4 = array_shift($all);
+$temp5 = array_shift($all);
 
 
 if(isset($all[0])){
@@ -188,7 +191,7 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$date $time </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
 	echo "</br>";
 	
 	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
@@ -204,7 +207,7 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$date $time </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
 	echo "</br>";
 	
 	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>";

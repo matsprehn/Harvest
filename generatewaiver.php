@@ -1,4 +1,8 @@
 <?php
+$pic;
+$waiver;
+$sign;
+$date = ''; // NEed to fix this lulz
 if(isset($_GET["picallowed"])){
 	$pic = $_GET["picallowed"];
 }

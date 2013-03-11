@@ -99,20 +99,7 @@ class Database {
 				WHERE v.first_name = '$fname'
 				AND v.last_name = '$lname'
 				AND v.email = '$email'";
-		echo $sql;
-		return mysql_query($sql);
-	}
-	
-	public function getE_id($d, $t)
-	{
-		$date = $d;
-		$time = $t;
-		//$city= $c;
-		$sql = "SELECT distinct e.id
-				FROM events e 
-				WHERE e.date = '$date'
-				and e.time =  '$time' ";
-		echo $sql;
+		//echo $sql;
 		return mysql_query($sql);
 	}
 	
@@ -127,16 +114,18 @@ class Database {
 		$state = $sta;
 		$zip = $zipcode;
 		$sql = "INSERT INTO volunteers (first_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
-		$sql;
+		//echo $sql;
 		return mysql_query($sql);
 	}
 	
 	public function addUserToEvent($event,$volunteer)
 	{
-		$event_id = $event;
-		$volunteer_id = $volunteer;
+		$event_id = (int) $event;
+		//echo "the event id is ". $event_id;
+		$volunteer_id = (int) $volunteer;
+		//echo "the volunteer id is ". $volunteer_id;
 		$sql = "INSERT INTO volunteer_events (event_id, volunteer_id) VALUES ('$event_id', '$volunteer_id')";
-		echo $sql;
+		//echo $sql;
 		return mysql_query($sql);
 	}
 } // class Database
