@@ -42,6 +42,7 @@ $avgHeight = $r->buildArray();
 ?>
 <!-- all hidden forms go here -->
 <div id="edit-dialog" class="hidden">
+<!-- INF117 Start-->
 	<form id="totals" id="full_width hidden">
 		<table>
 		<tr>
@@ -54,6 +55,7 @@ $avgHeight = $r->buildArray();
 		</tr>
 		</table>
 	</form>
+<!-- INF117 End-->
 	<!-- INF117 Start-->
 	<!-- The purpose of this code is to create a new form so that database users can enter new tree types 
 	they would like added to "Tree Type". It populates the form with the labels and buttons and text.-->
