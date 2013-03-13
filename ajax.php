@@ -586,8 +586,8 @@ back to index.php
 		getTable($sql);
 		break;
 //INF 117 End
-		
-		
+	
+	
 	case 'get_notifications':
 		// no privs needed, just check user type
 		$data['id'] = 0;
