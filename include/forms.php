@@ -55,6 +55,45 @@ $avgHeight = $r->buildArray();
 		</tr>
 		</table>
 	</form>
+	
+	<!-- INF117 Start-->
+	<!-- The purpose of this code is to create a new form so that database users can enter new tree types 
+	they would like added to "Tree Type". It populates the form with the labels and buttons and text.-->
+	<!-- New Tree Type form -->	
+	<form id="groupType" class="full_width hidden">
+		<h3>Group Information</h3>
+		<table>	
+
+		<tr>
+			<td><label for="orgname"><b>Name</b></label></td>
+		</tr>
+		<tr>
+			<td><input id="orgname" name="organizationName" type="text" size="21" required="required"/></td>
+		</tr>
+		<tr>
+			<td><input type="tel" name="phone" id="phone" required="required" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="(949) 555-1234" /></td>
+			<td colspan="2"><input type="email" name="email" id="email" size="28" required="required"/></td>
+		</tr>
+		<tr>
+			<td><label for="groupsize"><b>Size of Group</b></label></td>
+		</tr>
+		<tr>
+			<td><input id="groupsize" name="groupSize" type="text" size="21" required="required"/></td>
+		</tr>
+		<tr>
+			<td colspan="3"><label for="notes"><b>Notes</b></label></tr>
+		</tr>
+		<tr>
+			<td colspan="3"><textarea name="notes" id="notes" rows="4" cols="30"></textarea></td>
+		</tr>
+		
+		</table>	
+	</form>	
+	<!-- New Tree Type end -->
+	<!-- INF117 End -->
+	
+	
+
 <!-- INF117 End-->
 	<!-- INF117 Start-->
 	<!-- The purpose of this code is to create a new form so that database users can enter new tree types 
