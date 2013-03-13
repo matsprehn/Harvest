@@ -1212,7 +1212,7 @@ back to index.php
 		//Sets variables from the query to a local variable 
 		while($row = $r->getAssoc()) {
 			//Prints all fruits in the harvest event
-			$fruitList .= $row['fruit']."s, ";
+			$fruitList .= $row['fruit']."s,";
 			(float)$totalPounds += $row['lbs'];
 			$fruitListAndPounds .= $row['lbs']." pounds of".$row['fruit']."s, ";
 			$growerFirstName = $row['grower_f'];
@@ -1237,7 +1237,7 @@ back to index.php
 		$params['me_f'] = $_SESSION['first_name'];
 		$params['me_l'] = $_SESSION['last_name'];
  		$params['date'] = dateToStr($params['date']);
- 		$params['fruit_list'] = $fruitList;
+ 		$params['fruit_list'] = trim($fruitList, ",");
  		$params['fruit_list_lbs'] = $fruitListAndPounds;
  		$params['grower_first'] = $growerFirstName;
  		$params['grower_last'] = $growerLastName;

@@ -46,7 +46,7 @@ Hello Harvesters!
 Here are the upcoming Harvest Events with THC: 
 
 $p[harvest_date] | $p[harvest_time] in $p[harvest_city]
-Harvesting$p[fruit_list] We need [# of volunteers] volunteers.
+Harvesting$p[fruit_list]. We need [# of volunteers] volunteers.
 
 Events last 1-2.5 hours. To RSVP, please reply to this email or send a note to volunteer@theharvestclub.org by Friday at 5pm, prior to the harvest event.
 
@@ -75,9 +75,9 @@ Grower: $p[grower_first] $p[grower_last]
 Address:  $p[harvest_street], $p[harvest_city] $p[harvest_zip]
 Harvesting: $p[fruit_list]
 
-$p[captain_first] $p[captain_last] is your Harvest Captain.  If you are unable to make the harvest for any reason, or get lost on the way, please contact your captain directly at $p[captain_phone].  
+$p[captain_first] $p[captain_last] is your Harvest Captain. If you are unable to make the harvest for any reason, or get lost on the way, please contact your captain directly at $p[captain_phone].  
 
-Please bring harvesting tools such as clippers and picker poles and if you have them.  We recommend wearing long sleeves, long pants, eye protection such as sunglasses, and sunscreen.  Closed-toed shoes are a must!
+Please bring harvesting tools such as clippers and picker poles and if you have them. We recommend wearing long sleeves, long pants, eye protection such as sunglasses, and sunscreen. Closed-toed shoes are a must!
 
 Please let me know if you have any questions.  
 
@@ -92,9 +92,10 @@ EOD;
 function reminderEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
-You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club!  This is a reminder that the Harvest will take place at $p[harvest_time] on $p[harvest_date] in the City of $p[harvest_city]. 
 
-Your Harvest Captain is $p[captain_f] $p[captain_l].  You can reach him/her at $p[captain_phone] if you run into any problems on the day of the event.  
+You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club! This is a reminder that the Harvest will take place at $p[harvest_time] on $p[harvest_date] in the City of $p[harvest_city]. 
+
+Your Harvest Captain is $p[captain_first] $p[captain_last]. You can reach him/her at $p[captain_phone] if you run into any problems on the day of the event.  
 
 Please bring harvesting tools such as clippers and picker poles and if you have them.  We recommend wearing long sleeves, long pants, eye protection such as sunglasses, and sunscreen.  Closed-toed shoes are a must!
 
@@ -111,7 +112,7 @@ function thankYouVolunteerEmail($p) {
 return<<<EOD
 Dear $p[me_f] $p[me_l],
 
-On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach.  With your help The Harvest Club picked $p[total_lbs] pounds of fruit, providing nutritious food to $p[total_lbs_people] people in need in our community.  
+On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach. With your help The Harvest Club picked $p[total_lbs] pounds of fruit, providing nutritious food to $p[total_lbs_people] people in need in our community.  
 
 We hope you’ll join us again soon!
 
@@ -129,13 +130,12 @@ Dear $p[grower_first] $p[grower_last],
 On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of $p[fruit_list] your contribution is providing much needed nutrition to the underserved in Orange County.  
 
 On $p[harvest_date] February 9, 2013, The Harvest Club picked $p[fruit_list_lbs] from your property and delivered it to: 
+
 •	$p[distribution]
-
-
 
 Your donation will provide nutritious food to approximately $p[total_lbs_people] people in our community!
 
-If you are happy with our services and know of another backyard grower that could benefit from The Harvest Club, please refer them to us!  They can register their trees at www.theharvestclub.org. 
+If you are happy with our services and know of another backyard grower that could benefit from The Harvest Club, please refer them to us! They can register their trees at www.theharvestclub.org. 
 
 Once again, we thank you for your generosity and hope you will call us next harvest season!
 
@@ -146,7 +146,7 @@ Program Coordinator
 OC Food Access Coalition
 chall@ocfoodaccess.org
 
-The Harvest Club is a program of the OC Food Access Coalition, a fiscally sponsored project of OneOC.     Tax ID 95-2021700  **Please speak with your tax advisor about the tax deductibility of your donation.
+The Harvest Club is a program of the OC Food Access Coalition, a fiscally sponsored project of OneOC. Tax ID 95-2021700 **Please speak with your tax advisor about the tax deductibility of your donation.
 
 EOD;
 }
