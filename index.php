@@ -108,8 +108,9 @@ if (!$PRIV)
 				<?php } if ($PRIV['view_donor']) { ?>
 				<input type="radio" id="get_donors" name="radio" /><label for="get_donors">Donors</label>
 				<?php } ?>
-				<input type="radio" id="get_totals" name="radio"/><label for="get_totals">Totals</label>
 				<input type="radio" id="get_groups" name="radio"/><label for="get_groups">Groups</label>
+				<input type="radio" id="get_totals" name="radio"/><label for="get_totals">Totals</label>
+				
 			</div>
 		</form>
 	</header>

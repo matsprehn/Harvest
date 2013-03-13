@@ -587,6 +587,12 @@ back to index.php
 		break;
 //INF 117 End
 	
+	case 'get_groups':
+		$sql = "select name, `phone number`, email, groupsize, availability, notes from
+				`groups`";
+				getTable($sql);
+				break;	
+	
 	
 	case 'get_notifications':
 		// no privs needed, just check user type
