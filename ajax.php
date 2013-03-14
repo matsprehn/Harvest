@@ -260,19 +260,22 @@ function updateGroupType(){
 	global $db;
 	global $data;
 	$id = $_REQUEST['id'];						
-	$name = $_REQUEST['name'];
-	$phone = $_REQUEST['phone number'];
+	$name = $_REQUEST['organizationName'];
+	$phone = $_REQUEST['phone'];
 	$email = $_REQUEST['email'];
-	$groupsize = $_REQUEST['groupsize'];
+	$groupsize = $_REQUEST['groupSize'];
 	$availability = $_REQUEST['availability'];
 	$notes = $_REQUEST['notes'];
-	$newGroupType = $_REQUEST['newGroupType'];
+	
+	//$newGroupType = $_REQUEST['newGroupType'];
 				// SQL Insert "name" into Tree Types table
-				$sql = "INSERT INTO groups(name)
-				VALUES ('$newGroupType')";				
+				$sql = "INSERT INTO groups(name, `phone number`, email, groupsize, availability, notes)
+				VALUES ('$name', '$phone', '$email', '$groupsize', '$availability', '$notes')";	
+				//echo($sql);
 		$r = $db->q($sql);		
 		getError($r);
-		$sql = "Update groups Set name='$name', phone number='$phone number', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
+		
+		$sql = "Update groups Set name='$name', phone number='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
 		$r = $db->q($sql);
 		getError($r);
 		/*$sql = "INSERT INTO groups (name, phone number, email, groupsize, availability, notes) VALUES
