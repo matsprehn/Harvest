@@ -275,7 +275,7 @@ function updateGroupType(){
 		$r = $db->q($sql);		
 		getError($r);
 		
-		$sql = "Update groups Set name='$name', phone number='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
+		$sql = "Update groups Set name='$name', `phone number`='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
 		$r = $db->q($sql);
 		getError($r);
 		/*$sql = "INSERT INTO groups (name, phone number, email, groupsize, availability, notes) VALUES
