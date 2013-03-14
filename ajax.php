@@ -272,6 +272,16 @@ function updateGroupType(){
 				VALUES ('$newGroupType')";				
 		$r = $db->q($sql);		
 		getError($r);
+		$sql = "Update groups Set name='$name', phone number='$phone number', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
+		$r = $db->q($sql);
+		getError($r);
+		/*$sql = "INSERT INTO groups (name, phone number, email, groupsize, availability, notes) VALUES
+		('$name', '$phone number', '$email', '$groupsize', '$availability', '$notes', CURDATE())";
+		$r = $db->q($sql);
+		getError($r);
+
+		$id = mysql_insert_id();	
+*/
 }
 //INF 117 End
 
