@@ -71,15 +71,37 @@ $avgHeight = $r->buildArray();
 			<td><input id="orgname" name="organizationName" type="text" size="21" required="required"/></td>
 		</tr>
 		<tr>
+			<td><label for="phone"><b>Phone</b></label></td>
+		</tr>	
+		<tr>
 			<td><input type="tel" name="phone" id="phone" required="required" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="(949) 555-1234" /></td>
-			<td colspan="2"><input type="email" name="email" id="email" size="28" required="required"/></td>
 		</tr>
+		<tr>
+			<td><input id="email" name="email" type="text" size="21" required="required"/></td>
+		</tr>
+		
+
+		<tr>
+			<td><label for="email"><b>Email</b></label></td>
+		</tr>
+		<tr>
+			<td><input id="email" name="email" type="text" size="21" required="required"/></td>
+		</tr>
+		
+		
 		<tr>
 			<td><label for="groupsize"><b>Size of Group</b></label></td>
 		</tr>
 		<tr>
 			<td><input id="groupsize" name="groupSize" type="text" size="21" required="required"/></td>
 		</tr>
+		<tr>
+			<td colspan="3"><label for="availability"><b>Availability</b></label></tr>
+		</tr>
+		<tr>
+			<td colspan="3"><textarea name="availability" id="availability" rows="4" cols="30"></textarea></td>
+		</tr>
+
 		<tr>
 			<td colspan="3"><label for="notes"><b>Notes</b></label></tr>
 		</tr>
