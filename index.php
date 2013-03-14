@@ -188,11 +188,11 @@ if (!$PRIV)
 				switch (currentTable)
 				{
 					case 0:
-						showAddDelEmailExport(0,0,0,0,0);
+						showAddDelEmailExport(0,0,0,0,0,0);
 					break;
 
 					case 1: // volunteers
-						showAddDelEmailExport(priv.edit_volunteer, priv.del_volunteer, priv.send_email, priv.exp_volunteer, 0);
+						showAddDelEmailExport(priv.edit_volunteer, priv.del_volunteer, priv.send_email, priv.exp_volunteer, 0,0);
 						if(privilegeID == 1) {							
 							cmd = "get_pending_volunteers";
 							reloadTable(cmd);
@@ -207,7 +207,7 @@ if (!$PRIV)
 					break;
 
 					case 2: // growers
-						showAddDelEmailExport(priv.edit_grower, priv.del_grower, priv.send_email, priv.exp_grower, 0);
+						showAddDelEmailExport(priv.edit_grower, priv.del_grower, priv.send_email, priv.exp_grower, 0,0);
 						if(saveGrowerDialog==1 && $('#grower1').val()==growerID){
 							switchForm("grower");
 							$('#edit-dialog').dialog('open');
@@ -225,7 +225,7 @@ if (!$PRIV)
 					break;
 
 					case 3: // Trees
-						showAddDelEmailExport(priv.edit_grower, priv.del_grower, 0, 0, 1); // tree has no email, no export						
+						showAddDelEmailExport(priv.edit_grower, priv.del_grower, 0, 0, 1,0); // tree has no email, no export						
 						if(viewTreeClicked == 1 && $('#grower1').val()>=0){
 							viewTreeClicked = 0;
 							saveGrowerDialog = 1;
@@ -236,11 +236,11 @@ if (!$PRIV)
 					break;
 
 					case 4: // distribution sites
-						showAddDelEmailExport(priv.edit_distrib, priv.del_distrib, priv.send_email, priv.exp_distrib, 0);
+						showAddDelEmailExport(priv.edit_distrib, priv.del_distrib, priv.send_email, priv.exp_distrib, 0,0);
 					break;
 
 					case 5: // events
-						showAddDelEmailExport(priv.edit_event, priv.del_event, 0, 0, 0); // no email, no export
+						showAddDelEmailExport(priv.edit_event, priv.del_event, 0, 0, 0,0); // no email, no export
 						if(viewEventClicked == 1 && eventID > 0){
 							viewEventClicked = 0;
 							cmd = "get_an_event&eventID="+eventID;
@@ -254,7 +254,12 @@ if (!$PRIV)
 					break;
 
 					case 6: // donations
-						showAddDelEmailExport(priv.edit_donor, priv.del_donor, 0, priv.exp_donor, 0); // no email
+						showAddDelEmailExport(priv.edit_donor, priv.del_donor, 0, priv.exp_donor, 0,0); // no email
+					break;
+					
+					case 7: // donations
+						showAddDelEmailExport(0,0,0,0,0,1); // no email
+						reloadTable(cmd);
 					break;
 
 				}
@@ -389,7 +394,7 @@ if (!$PRIV)
 	// show or hide 4 buttons at the top right
 	//INF 117 Start
 	// Edited Function showAddDelEmailExport with "add2" button so that it will properly show the Add New Tree Type button when the Tree table is loaded
-	function showAddDelEmailExport(add, del, eml, exp, add2) {
+	function showAddDelEmailExport(add, del, eml, exp, add2, addGroup) {
 		if(add)	$('#add-button').removeClass('hidden');
 		else	$('#add-button').addClass('hidden');
 
@@ -404,6 +409,9 @@ if (!$PRIV)
 		
 		if(add2)$('#add2-button').removeClass('hidden');
 		else	$('#add2-button').addClass('hidden');
+		
+		if(addGroup)$('#addGroup-button').removeClass('hidden');
+		else	$('#addGroup-button').addClass('hidden');
 	}
 	//INF 117 End
 
@@ -731,6 +739,49 @@ if (!$PRIV)
 	// Add button for treeType form.
 	var addTreeTypeButton = {
 		text: 'Add New Tree Type',
+		click: function() {
+			// Check to make sure that field is filled in, other wise alerts user
+			var required = $('#treeType input[required="required"]');
+						if (required[0].value == '')
+							return alert(required[0].name + ' is required!');
+					
+					//Update DB
+					var para = $('#treeType').serialize();
+					$.ajax({							
+						'type': 'GET',
+						// Call add_tree_type from ajax.php where the paremeters are inserted into the database
+						'url': 'ajax.php?cmd=add_tree_type&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+						// Show confirmation dialog that the information was added
+							setInfo('Information Added');
+						// Close the form
+							$('#edit-dialog').dialog('close');
+						// Refresh the page
+							parent.window.location.reload();
+							reloadTable("get_trees");		
+						},
+						'error': ajaxError
+					});
+		}
+	};
+	
+	$('#addGroup-button').button({
+			label: 'Add New Group',
+			icons: { primary: 'ui-icon-circle-plus' },
+			text: false
+		}).click(function() {
+			// Switch form to treeType form
+			switchNClearForm('groupType');
+			// Change Add button to addTreeTypeButton in the frame
+			$('#edit-dialog').dialog("option", "buttons", [addGroupButton, cancelButton]);
+			$('#edit-dialog').dialog({ title: 'Add Group' });
+			$('#edit-dialog').dialog('open') // show dialog
+		}); // .click() end
+		
+		var addGroupButton = {
+		text: 'Add Group',
 		click: function() {
 			// Check to make sure that field is filled in, other wise alerts user
 			var required = $('#treeType input[required="required"]');
