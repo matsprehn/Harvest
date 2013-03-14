@@ -89,6 +89,7 @@ if (!$PRIV)
 				<button id="email-button">Email</button>
 				<button id="export-button" >Export</button>
 				<button id="add2-button" >Add2</button>
+				<button id="addGroup-button" >AddGroup</button>
 			</span>
 		</div><!-- End toolbar -->
 
@@ -323,6 +324,7 @@ if (!$PRIV)
 		$('#donation').addClass('hidden');
 		$('#treeType').addClass('hidden');
 		$('#totals').addClass('hidden');
+		$('#groupType').addClass('hidden');
 		
 		$('#'+id).removeClass('hidden'); // show form
 	}
@@ -338,6 +340,7 @@ if (!$PRIV)
 		$('#donation').addClass('hidden');
 		$('#treeType').addClass('hidden');
 		$('#totals').addClass('hidden');
+		$('#groupType').addClass('hidden');
 
 		clearForm(id);
 		$('#'+id).removeClass('hidden'); // show formf
@@ -769,7 +772,7 @@ if (!$PRIV)
 	
 	$('#addGroup-button').button({
 			label: 'Add New Group',
-			icons: { primary: 'ui-icon-circle-plus' },
+			icons: { primary: 'ui-icon-plusthick' },
 			text: false
 		}).click(function() {
 			// Switch form to treeType form
@@ -780,20 +783,20 @@ if (!$PRIV)
 			$('#edit-dialog').dialog('open') // show dialog
 		}); // .click() end
 		
-		var addGroupButton = {
+	var addGroupButton = {
 		text: 'Add Group',
 		click: function() {
 			// Check to make sure that field is filled in, other wise alerts user
-			var required = $('#treeType input[required="required"]');
+			var required = $('#groupType input[required="required"]');
 						if (required[0].value == '')
 							return alert(required[0].name + ' is required!');
 					
 					//Update DB
-					var para = $('#treeType').serialize();
+					var para = $('#groupType').serialize();
 					$.ajax({							
 						'type': 'GET',
 						// Call add_tree_type from ajax.php where the paremeters are inserted into the database
-						'url': 'ajax.php?cmd=add_tree_type&'+para,
+						'url': 'ajax.php?cmd=add_group_type&'+para,
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
@@ -801,9 +804,7 @@ if (!$PRIV)
 							setInfo('Information Added');
 						// Close the form
 							$('#edit-dialog').dialog('close');
-						// Refresh the page
-							parent.window.location.reload();
-							reloadTable("get_trees");		
+						reloadTable("get_groups");		
 						},
 						'error': ajaxError
 					});

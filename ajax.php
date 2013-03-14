@@ -237,6 +237,9 @@ function updateVolunteer($exists) {
 	}
 }
 
+
+
+
 //INF 117 Start
 // Function to insert tree type into database
 function updateTreeType(){
@@ -250,6 +253,28 @@ function updateTreeType(){
 		getError($r);
 }
 //INF 117 End
+
+//INF 117 Start
+// Function to insert group type into database
+function updateGroupType(){
+	global $db;
+	global $data;
+	$id = $_REQUEST['id'];						
+	$name = $_REQUEST['name'];
+	$phone = $_REQUEST['phone number'];
+	$email = $_REQUEST['email'];
+	$groupsize = $_REQUEST['groupsize'];
+	$availability = $_REQUEST['availability'];
+	$notes = $_REQUEST['notes'];
+	$newGroupType = $_REQUEST['newGroupType'];
+				// SQL Insert "name" into Tree Types table
+				$sql = "INSERT INTO groups(name)
+				VALUES ('$newGroupType')";				
+		$r = $db->q($sql);		
+		getError($r);
+}
+//INF 117 End
+
 
 function updateTree($exist){
 	global $db;	
@@ -1126,6 +1151,12 @@ back to index.php
 		updateTreeType(true);
 		break;
 	//INF 117 End
+	
+	case 'add_group_type':
+		updateGroupType(true);
+		break;
+		
+		
 	case 'remove_volunteer':
 		if (!$PRIV['del_volunteer']) {
 			forbidden();
