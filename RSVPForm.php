@@ -147,7 +147,7 @@ while ($row = $results->getAssoc()) {
   $date = $row['date'];
   $time = $row['time'];
   $eID = $row['id'];
-
+  
   array_push($event, $city, $name, $date, $time, $eID);
   array_push($all_Events, $event);
 }
@@ -261,7 +261,23 @@ if(isset( $all[0])){
 			</br>
 				<div>
 					<div class="form-entry">
-						<label class=>
+							<label class=>
+									<div>Address</div>
+							</label>
+							<input type="text" name="address" value="" class="ss-q-short" id="signature" >
+							
+							<label class=>
+									<div>City</div>
+							</label>
+							<input type="text" name="city" value="" class="ss-q-short" id="signature" >
+							
+							<label class=>
+									<div>Zipcode</div>
+							</label>
+							<input type="text" name="zipcode" value="" class="ss-q-short" id="signature" >
+							</br>
+							</br>
+							<label class=>
 							<div>I agree to the terms and conditions
 								<span class="ss-required-asterisk">*</span>
 							</div>

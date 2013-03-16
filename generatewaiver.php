@@ -2,12 +2,16 @@
 $pic;
 $waiver;
 $sign;
-$date = ''; // NEed to fix this lulz
+$date = ''; 
+$address;
+$city;
+$zipcode;
+
 if(isset($_GET["picallowed"])){
 	$pic = $_GET["picallowed"];
 }
 if(isset($_GET["waiver_value"])){
-	$waiver = $_GET["waive_value"];
+	$waiver = $_GET["waiver_value"];
 }
 if(isset($_GET["signature"])){
 	$sign = $_GET["signature"];
@@ -15,13 +19,48 @@ if(isset($_GET["signature"])){
 if(isset($_GET["date_signed"])){
 	$date = $_GET["date_signed"];
 }
- 
-if($waiver = "yes"){
+if(isset($_GET["address"])){
+	$address = $_GET["address"];
+}
+if(isset($_GET["city"])){
+	$city = $_GET["city"];
+}
+if(isset($_GET["zipcode"])){
+	$zipCode = $_GET["zipcode"];
+}
+if(isset($_GET["phone"])){
+	$phone = $_GET["phone"];
+}
+if(isset($_GET["email"])){
+	$email = $_GET["email"];
+}
+ /*
+echo "</br>";
+echo "the pic value is ".$pic;
+echo "</br>";
+echo "the waiver is ".$waiver;
+echo "</br>";
+echo "the sign is ".$sign;
+echo "</br>";
+echo "the date is ".$date;
+echo "</br>";
+echo "the address is ".$address;
+echo "</br>";
+echo "the city is ".$city;
+echo "</br>";
+echo "the zipcode is ".$zipCode;
+echo "</br>";
+echo "the phone is ".$phone;
+echo "</br>";
+echo "the email is ".$email;
+echo "</br>";
+ */
+if($pic == "yes"){
 	$w_value = "&#x2713; Yes, I give my permission </br></br>";
 }else {
 	$w_value = "&#x2713; No, I do not want to appear in a photograph or videotape </br></br>";
 } 
- 
+  
 $message =  "<center>The Harvest Club Volunteer Form and Photo Release </br> </br>
 
 VOLUNTEER ASSUMPTION OF RISK, </br>
@@ -31,9 +70,9 @@ of Orange County </br>
 Orange County, CA </br>
 www.theharvestclub.org </br> </br> </center>
 Adult Volunteer(s): $sign </br>
-Address______________City____________Zip_________    </br>
-Telephone_____________________________________       </br>
-Email_________________________________________       </br>
+Address: $address &nbsp;&nbsp;&nbsp;&nbsp; City:  $city &nbsp;&nbsp;&nbsp;&nbsp; Zip: $zipCode    </br>
+Telephone: $phone      </br>
+Email: $email  </br>
 Group Affiliation _______________________________     </br> </br>
 Please indicate if you give permission to appear in videos, 
 photos, or audio recordings without compensation (e.g., as 

@@ -7,13 +7,24 @@ require_once('include/Database.inc.php');
 	$lname = $_POST["lname"];
 	$email = $_POST["email"];
 	$phone = $_POST["phone"];
+	$rsvpAddress = $_POST["address"];
+	$rsvpCity = $_POST["city"];
+	$rsvpZipCode = $_POST["zipcode"];
+	
+	//echo $rsvpAddress;
+	echo "</br>";
+	//echo $rsvpCity;
+	echo "</br>";
+	//echo $rsvpZipCode;
+	echo "</br>";
+	
 	$date = date("m/d/Y");
 	$events; // is an array of events
 	$guest; // is an array of guets
 	$waiver_value = "no"; // Assume its not entered
 	$picture_value = "no";
 	$signature;
-	$hasevent = false;
+	$hasEvent = false;
 	
 	$street = ""; 
 	$city = "";
@@ -21,31 +32,6 @@ require_once('include/Database.inc.php');
 	$zipcode = "";
 	
 	$eventsString = "";
-	
-	if(isset($_POST["events"])){
-		$eventIds = $_POST["events"];
-		$N = count($eventIds);
-		for($i=0; $i < $N; $i++) {
-		  $hasEvent = true;
-		  $eid = $eventIds[$i];
-		 
-		 $sql = "SELECT distinct v.id 
-				FROM volunteers v
-				WHERE v.first_name = '$fname'
-				AND v.last_name = '$lname'
-				AND v.email = '$email'";
-				
-		 $results = $db->q($sql);
-		 if($row = $results->getAssoc()) 
-		  {
-				$vID = $row['id'];
-				//echo "the vid is ". $vID;
-		  }
-		  $db->addUserToEvent($eid, $vID);
-		}
-		
-		
-	}
 	
 	if(isset($_POST["fields"])){
 		$guest = $_POST["fields"];
@@ -98,7 +84,7 @@ require_once('include/Database.inc.php');
 	$subject = 'New User has signed the waiver form';
 	$message = "$fname $lname has signed the waiver form. 
 His/Her phone number is $phone and signed the form at $date.
-The generated link for printing out their waiver is here http://localhost/Harvest/generatewaiver.php?picallowed=$waiver_value&signature=$signature&date_signed=$date";
+The generated link for printing out their waiver is here http://localhost/Harvest/generatewaiver.php?picallowed=$picture_value&waiver_value=$waiver_value&signature=$signature&date_signed=$date&address=$rsvpAddress&city=$rsvpCity&zipcode=$rsvpZipCode&email=$email&phone=$phone";
 	$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
 
 	'Reply-To: $email' . "\r\n" .
@@ -109,15 +95,39 @@ The generated link for printing out their waiver is here http://localhost/Harves
 	}else {
 	//die('Failure: Email was not sent!');
 	}
+	}
 	
+	if(isset($_POST["events"])){
+		$eventIds = $_POST["events"];
+		$N = count($eventIds);
+		for($i=0; $i < $N; $i++) {
+		  $hasEvent = true;
+		  $eid = $eventIds[$i];
+		 
+		 $sql = "SELECT distinct v.id 
+				FROM volunteers v
+				WHERE v.first_name = '$fname'
+				AND v.last_name = '$lname'
+				AND v.email = '$email'";
+				
+		 $results = $db->q($sql);
+		 if($row = $results->getAssoc()) 
+		  {
+				$vID = $row['id'];
+				//echo "the vid is ". $vID;
+		  }
+		  $db->addUserToEvent($eid, $vID);
+		}
+		
+		
 	}
 	
 	if($hasEvent == true){
 	
 	$to = $email;
 	$subject = 'Conformation email for The Harvest Club';
-	$message = "Hi $fname $lname, 
-Thanks for signing up for some event";
+	$message = "Hi Jaskaran Singh, 
+Thanks for signing up for some event Grapefruit Harvest in Santa Ana [ 2013-03-13 , 04:00 am ] ";
 	$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
 
 	'Reply-To: $email' . "\r\n" .
