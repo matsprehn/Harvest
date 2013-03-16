@@ -185,6 +185,7 @@ if (!$PRIV)
 				});
 
 				currentTable = data.id; // set current table after it is populated
+				
 				$('#page_title').text(data.title); // set page title
 				switch (currentTable)
 				{
@@ -258,11 +259,12 @@ if (!$PRIV)
 						showAddDelEmailExport(priv.edit_donor, priv.del_donor, 0, priv.exp_donor, 0,0); // no email
 					break;
 					
-					case 7: // donations
-						showAddDelEmailExport(0,0,0,0,0,1); // no email
-						reloadTable(cmd);
-					break;
-
+					//case 7: // donations
+						//showAddDelEmailExport(0,0,0,0,0,1); // no email
+						//reloadTable(cmd);
+					//break;
+					default:
+						break;
 				}
 
 
@@ -1348,6 +1350,7 @@ if (!$PRIV)
 					totalDialog();		
 			}
 			else{
+				
 				reloadTable(this.id); // button id is the ajax command
 			}
 		});
