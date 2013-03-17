@@ -626,7 +626,7 @@ back to index.php
 //INF 117 End
 	
 	case 'get_groups':
-	$data['id'] = 7;
+	$data['id'] = 8;
 	$data['title'] = 'Groups';
 		$sql = "select name, `phone number`, email, groupsize, availability, notes from
 				`groups`";
