@@ -259,10 +259,13 @@ if (!$PRIV)
 						showAddDelEmailExport(priv.edit_donor, priv.del_donor, 0, priv.exp_donor, 0,0); // no email
 					break;
 					
-					case 7: // donations
+					case 7:
 						showAddDelEmailExport(0,0,0,0,0,1); // no email
-						//reloadTable(cmd);
-					break;
+						reloadTable(cmd);
+						break;
+					case 8: // donations
+						showAddDelEmailExport(0,1,0,0,0,1); // no email
+						break;
 					default:
 						break;
 				}
