@@ -259,7 +259,7 @@ function updateTreeType(){
 function updateGroupType(){
 	global $db;
 	global $data;
-	$id = $_REQUEST['groupID'];						
+	$id = $_REQUEST['id'];						
 	$name = $_REQUEST['organizationName'];
 	$phone = $_REQUEST['phone'];
 	$email = $_REQUEST['email'];

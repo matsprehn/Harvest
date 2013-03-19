@@ -65,10 +65,6 @@ $avgHeight = $r->buildArray();
 		<table>	
 		
 		<tr>
-			<td colspan="3" class="hidden"><input id="groupID" name="id" type="text" size="2"/></td>
-		</tr>
-		
-		<tr>
 			<td><label for="orgname"><b>Name</b></label></td>
 		</tr>
 		<tr>
