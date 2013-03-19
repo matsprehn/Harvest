@@ -1890,7 +1890,6 @@ if (!$PRIV)
 
 			if (!event_id)
 			{
-				alert ("what the fuck");
 				return clearTemplate(t);
 			}
 			$.ajax({
