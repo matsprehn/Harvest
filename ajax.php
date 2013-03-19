@@ -269,11 +269,12 @@ function updateGroupType(){
 	
 	//$newGroupType = $_REQUEST['newGroupType'];
 				// SQL Insert "name" into Tree Types table
-		if (!isset($_REQUEST['id']))
+	
+		if (!isset($_REQUEST['id']) || $_REQUEST['id'] == "")
 		{
 				$sql = "INSERT INTO groups(name, `phone number`, email, groupsize, availability, notes)
 				VALUES ('$name', '$phone', '$email', '$groupsize', '$availability', '$notes')";	
-				//echo($sql);
+				echo($sql);
 		$r = $db->q($sql);		
 		getError($r);
 		}
@@ -283,6 +284,7 @@ function updateGroupType(){
 			$r = $db->q($sql);
 			getError($r);
 		}
+		//echo "\n".$id;
 		/*$sql = "INSERT INTO groups (name, phone number, email, groupsize, availability, notes) VALUES
 		('$name', '$phone number', '$email', '$groupsize', '$availability', '$notes', CURDATE())";
 		$r = $db->q($sql);

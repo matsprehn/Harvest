@@ -125,8 +125,7 @@ EOD;
 /* Purpose of code is to create a thank you email to the growers*/
 function thankYouGrowerEmail($p) {
 $stuff ="";
-$stuff.="
-Dear $p[grower_first] $p[grower_last],
+$stuff.="Dear $p[grower_first] $p[grower_last],
 
 On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of $p[fruit_list] your contribution is providing much needed nutrition to the underserved in Orange County.  
 

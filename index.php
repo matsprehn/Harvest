@@ -816,6 +816,7 @@ if (!$PRIV)
 					
 					//Update DB
 					var para = $('#groupType').serialize();
+					//alert('ajax.php?cmd=add_group_type&'+para);
 					$.ajax({							
 						'type': 'GET',
 						// Call add_tree_type from ajax.php where the paremeters are inserted into the database
@@ -831,7 +832,7 @@ if (!$PRIV)
 					// Show confirmation dialog that the information was added
 							setInfo('Information Added');
 						// Close the form
-							parent.window.location.reload();	
+							//parent.window.location.reload();	
 							$('#edit-dialog').dialog('close');
 							reloadTable('get_groups');
 		}
