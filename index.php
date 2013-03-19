@@ -1880,6 +1880,7 @@ if (!$PRIV)
 		document.getElementById('get_events').click();	//switch to Event Tab	
 	}
 
+	//I'm working here asdf555
 	function changeTemplate(t) {
 		var event_id = 0;
 		if (!t.value) {
@@ -1888,16 +1889,20 @@ if (!$PRIV)
 			event_id = prompt('Please enter the event number:', 0);
 
 			if (!event_id)
+			{
+				alert ("what the fuck");
 				return clearTemplate(t);
-
+			}
 			$.ajax({
 				'dataType': 'json', 
 				'type': 'GET', 
 				'url': 'ajax.php?cmd=get_template&name='+t.value+'&event_id='+event_id, 
 				'success': function (data) {
 					if (!validResponse(data))
+					{
 						return clearTemplate(t);
-
+					}
+					
 					$('#email textarea[name=message]').val(data.message);
 				}
 			});

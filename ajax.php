@@ -1220,13 +1220,13 @@ back to index.php
 	case 'get_template':
 		if (!$PRIV['view_event']) {
 			forbidden(); // must be able to view event to create template
+			
 			break;
 		}
 		global $db;
 		global $data;
 		$name = $_REQUEST['name'];
 		$event_id = $_REQUEST['event_id'];
-
 		// INF 117 Start
 		/*Purpose of this query is to get back data about the Havest to be used in the email template
 		This query consists of the distribution_name, the growers first and last name, the street, city, 
@@ -1260,33 +1260,44 @@ back to index.php
 
 
 		$r = $db->q($sql);
+		getError($r);
 		if (!$r->isValid() || !$r->hasRows()) {
 			$data['status'] = 432;
 			$data['message'] = "Could not create template. There is no event #$event_id!";
 			exit();
 			break;
 		}
-
+		$fruitList ="";
+		$totalPounds = 0;
+		$fruitListAndPounds = "";
+		$distributionName = "";
 		/*Purpose of this while loop is to loop through the rows in the data retrived by the SQL
 		query and store them as variables local to this file.*/
 		//Sets variables from the query to a local variable 
 		while($row = $r->getAssoc()) {
+			//var_dump($row);
 			//Prints all fruits in the harvest event
-			$fruitList .= $row['fruit']."s,";
-			(float)$totalPounds += $row['lbs'];
-			$fruitListAndPounds .= $row['lbs']." pounds of".$row['fruit']."s, ";
-			$growerFirstName = $row['grower_f'];
-			$growerLastName = $row['grower_l'];
-			$captainFirstName = $row['captain_f'];
-			$captainLastName = $row['captain_l'];
-			$captainPhone = $row['captain_phone'];
-			$harvestDate = strtotime($row['date']);
-			$harvestTime = $row['time'];
-			$harvestStreet = $row['street'];
-			$harvestCity = $row['city'];
-			$harvestZip = $row['zip'];
-			$harvestState = $row['state'];
-			$distributionName = $row['distribution_name'];
+			if (!strstr($fruitList, $row['fruit']))
+			{
+				$fruitList .= $row['fruit']."s,";
+				(float)$totalPounds += $row['lbs'];
+				$fruitListAndPounds .= $row['lbs']." pounds of".$row['fruit']."s, ";
+				$growerFirstName = $row['grower_f'];
+				$growerLastName = $row['grower_l'];
+				$captainFirstName = $row['captain_f'];
+				$captainLastName = $row['captain_l'];
+				$captainPhone = $row['captain_phone'];
+				$harvestDate = strtotime($row['date']);
+				$harvestTime = $row['time'];
+				$harvestStreet = $row['street'];
+				$harvestCity = $row['city'];
+				$harvestZip = $row['zip'];
+				$harvestState = $row['state'];
+			}
+			if (!strstr($distributionName, $row['distribution_name']))
+			{
+				$distributionName.= $row['distribution_name'];
+			}
 		}
 		
 		/*Purpose of these statements are setting the parameters to passed through to the email templates
@@ -1296,7 +1307,8 @@ back to index.php
 		$params = $r->getAssoc();
 		$params['me_f'] = $_SESSION['first_name'];
 		$params['me_l'] = $_SESSION['last_name'];
- 		$params['date'] = dateToStr($params['date']);
+ 		//$params['date'] = dateToStr($params['date']);
+		$params['date'] = $harvestDate;
  		$params['fruit_list'] = trim($fruitList, ",");
  		$params['fruit_list_lbs'] = $fruitListAndPounds;
  		$params['grower_first'] = $growerFirstName;
@@ -1316,6 +1328,7 @@ back to index.php
  		
 		/*Purpose of this code is to return the template selected by the user */
  		//Case statement - Pulls template after user makes selection
+
 		switch ($name) {
 			case 'invitation':
 				$data['message'] = invitationEmail($params);
@@ -1333,8 +1346,10 @@ back to index.php
 				$data['message'] = thankYouGrowerEmail($params);
 				break;
  			default:
+				$data['message'] = "you dun goofed";
 				break;
 		}
+		//debug
 		break;
 		// INF 117 End
 	case 'send_email':
