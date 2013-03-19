@@ -1123,7 +1123,7 @@ back to index.php
 		updateTree(true);
 		break;	
 	case 'update_group':		
-		updateGroup(true);
+		updateGroupType(true);
 		break;	
 	case 'add_tree':
 		if (!$PRIV['edit_grower']) {

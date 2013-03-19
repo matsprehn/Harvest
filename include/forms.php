@@ -63,7 +63,9 @@ $avgHeight = $r->buildArray();
 	<form id="groupType" class="full_width hidden">
 		<h3>Group Information</h3>
 		<table>	
-		
+		<tr>
+			<td colspan="3" class="hidden"><input id="id" name="id" type="text" size="2"/></td>
+		</tr>
 		<tr>
 			<td><label for="orgname"><b>Name</b></label></td>
 		</tr>

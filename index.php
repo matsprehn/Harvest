@@ -270,7 +270,6 @@ if (!$PRIV)
 						break;
 				}
 
-
 			},
 			'error': ajaxError
 		}); // end ajax
@@ -618,7 +617,7 @@ if (!$PRIV)
 					});
 					break;
 					
-					/* WORK NI PROGRESS case 8:
+					case 8:
 					var para = $('#groupType').serialize();
 					$.ajax({							
 						'type': 'GET',
@@ -628,17 +627,14 @@ if (!$PRIV)
 								return false;
 							setInfo('Information Updated');
 							$('#edit-dialog').dialog('close');
-							for(var i = 1; i < row.length; i++){					//Update Other fields
-								if($('#tree'+i).val() == undefined)							
-									row[i]='';
-								else
-									row[i]=$('#tree'+i).val();
-							}
 							dt.fnUpdate(row, aPos, 0);								//Update Table							
 						},
 						'error': ajaxError
 					});
-					break; */
+					$('#edit-dialog').dialog('close');
+					parent.window.location.reload();
+							reloadTable("get_trees");		
+					break; 
 			}		
 		}
 	};
@@ -1670,14 +1666,13 @@ if (!$PRIV)
 					switchNClearForm('groupType');
 					if (priv.edit_grower)
 						buttonList.unshift(saveButton);
-						
-						$('#orgname').val(row[1]);
-						$('#phone').val(row[2]);
-						setInfo(row[3]);
-						$('#email2').val(row[3]);
-						$('#groupsize').val(row[4]);
-						$('#availability').val(row[5]);
-						$('#notes').val(row[6]);
+						$('#id').val(row[1]);
+						$('#orgname').val(row[2]);
+						$('#phone').val(row[3]);
+						$('#email2').val(row[4]);
+						$('#groupsize').val(row[5]);
+						$('#availability').val(row[6]);
+						$('#notes').val(row[7]);
 						
 				break;
 
