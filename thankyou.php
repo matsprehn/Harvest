@@ -7,9 +7,20 @@ require_once('include/Database.inc.php');
 	$lname = $_POST["lname"];
 	$email = $_POST["email"];
 	$phone = $_POST["phone"];
+	
+	$rsvpAddress;
+	$rsvpCity;
+	$rsvpZipCode;
+	
+	if(isset($_POST["address"])){
 	$rsvpAddress = $_POST["address"];
+	}
+	if(isset($_POST["city"])){
 	$rsvpCity = $_POST["city"];
+	}
+	if(isset($_POST["zipcode"])){
 	$rsvpZipCode = $_POST["zipcode"];
+	}
 	
 	//echo $rsvpAddress;
 	echo "</br>";
@@ -27,6 +38,10 @@ require_once('include/Database.inc.php');
 	$hasEvent = false;
 	$fullString = "";
 	$eventArray = array();
+	$guestBoolean = false;
+	$guestString = "";
+	$fullGuestString = "";
+	$guestArray = array();
 	
 	$street = ""; 
 	$city = "";
@@ -37,17 +52,26 @@ require_once('include/Database.inc.php');
 	
 	if(isset($_POST["fields"])){
 		$guest = $_POST["fields"];
+		$guestBoolean= true;
 		$N = count($guest);
 		//echo("You selected $N door(s): ");
 		for($i=0; $i < $N; $i++)
 		{
-		  echo($guest[$i] . " ");
+			$gfname = $guest[$i];
+			$i++;
+			$glname = $guest[$i];
+			$i++;
+			$gphone = $guest[$i];
+			$i++;
+			$gemail = $guest[$i];
+			$guestString = $gfname." ".$glname. "   ". $gphone ."   " . $gemail;
+			array_push($guestArray,$guestString);
 		}
 	} 
     
 	if(isset($_POST["waiver_box"])){
 			$waiver_value = $_POST["waiver_box"];
-				
+			//echo "the waiver value is ". $waiver_value;	
 			if($waiver_value == "yes"){
 			
 			$waiver_value = "yes";
@@ -81,6 +105,33 @@ require_once('include/Database.inc.php');
 		
 	} 
 
+	
+	if($waiver_value == "yes"){
+	$db->addUser($fname, $lname, $phone, $email, $rsvpAddress, $rsvpCity, $state, $rsvpZipCode);
+	
+	$to = $email;
+	$subject = 'New User has signed the waiver form';
+	$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
+
+	'Reply-To: $email' . "\r\n" .
+	'X-Mailer: PHP/' . phpversion();
+	
+	
+	$messageStart =" $fname $lname has filled out their waiver form. 
+	
+He/She has checked $picture_value on giving their permission to appear in photos/videos.
+	
+To print this form for the OCFAC files, click http://localhost/Harvest/generation.php?fname=$fname&lname=$lname&picallowed=$picture_value&waiver_value=$waiver_value&signature=$signature&date_signed=$date&address=$rsvpAddress&city=$rsvpCity&zipcode=$rsvpZipCode&email=$email&phone=$phone 
+	
+For any questions, his/her email address is $email  and his/her phone number is $phone.";
+	
+	if(mail($to, $subject, $messageStart, $headers)) {
+	//echo('Email sent successfully!');
+	}else {
+	//die('Failure: Email was not sent!');
+	}
+	}
+	
 	if(isset($_POST["events"])){
 		$eventIds = $_POST["events"];
 		$N = count($eventIds);
@@ -120,37 +171,6 @@ require_once('include/Database.inc.php');
 		  
 		  $db->addUserToEvent($eid, $vID);
 		}
-		
-		
-	}
-	
-	if($waiver_value == "yes"){
-	$db->addUser($fname, $lname, $phone, $email, $street, $city, $state, $zipcode);
-	
-	$to = $email;
-	$subject = 'New User has signed the waiver form';
-	$message = "$fname $lname has signed the waiver form. 
-His/Her phone number is $phone and signed the form at $date.
-The generated link for printing out their waiver is here http://localhost/Harvest/generatewaiver.php?picallowed=$picture_value&waiver_value=$waiver_value&signature=$signature&date_signed=$date&address=$rsvpAddress&city=$rsvpCity&zipcode=$rsvpZipCode&email=$email&phone=$phone";
-	$headers = 'From: jaskaransingh3001@gmail.com' . "\r\n" .
-
-	'Reply-To: $email' . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
-	
-	
-	$messageStart =" $fname $lname has filled out their waiver form. 
-	
-He/She has checked $picture_value on giving their permission to appear in photos/videos.
-	
-To print this form for the OCFAC files, click http://localhost/Harvest/generation.php?fname=$fname&lname=$lname&picallowed=$picture_value&waiver_value=$waiver_value&signature=$signature&date_signed=$date&address=$rsvpAddress&city=$rsvpCity&zipcode=$rsvpZipCode&email=$email&phone=$phone 
-	
-For any questions, their email address is $email  and his/her phone number is $phone.";
-	
-	if(mail($to, $subject, $messageStart, $headers)) {
-	//echo('Email sent successfully!');
-	}else {
-	//die('Failure: Email was not sent!');
-	}
 	}
 	
 	if($hasEvent == true){
@@ -166,6 +186,13 @@ foreach($eventArray as $eve) {
 		  $fullString = $fullString . $stringe;
 	}
 
+if($guestBoolean){
+	foreach($guestArray as $gue) {
+		$stringg = $gue."\r\n\r\n";
+		$fullGuestString = $fullGuestString . $stringg;
+	}
+}	
+	
 $messageEnd = "\r\nYou will receive an email from our coordinator shortly to confirm your spot on a harvest team. Details regarding this harvest will be sent to you a day or two prior to the harvest date. If you have any questions, you can email us at info@theharvestclub.org or call us at 714-564-9525. 
 
 Happy Harvesting!
@@ -183,15 +210,18 @@ www.ocfoodaccess.org";
 	'Reply-To: $email' . "\r\n" .
 	'X-Mailer: PHP/' . phpversion();
 	
+	if($guestBoolean){
+	 $message = $messageStart . $fullString . "\r\n\r" . 'You have signed up the following guests'. "\r\n\r\n".$fullGuestString.$messageEnd;
+	}else{
 	$message = $messageStart . $fullString . $messageEnd;
+	}
 	
 	if(mail($to, $subject, $message, $headers)) {
 	//echo('Email sent successfully!');
 	}else {
 	//die('Failure: Email was not sent!');
 	}
-}	
-		
+}			
 //echo "Thank you for signing up with The Harvest Club. A confirmation email will be sent to you soon";
 	
 ?>

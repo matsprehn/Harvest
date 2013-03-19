@@ -114,7 +114,6 @@ class Database {
 		$state = $sta;
 		$zip = $zipcode;
 		$sql = "INSERT INTO volunteers (first_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
-		//echo $sql;
 		return mysql_query($sql);
 	}
 	

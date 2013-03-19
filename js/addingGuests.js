@@ -26,10 +26,18 @@ $(function(){
 /*
 This method just shows the hidden element with the button is clicked. The button will be 
 clicked from the rsvp form
-*/
+
 $(document).ready(function() {
    $('#waiver_box').click(function(){
      $('.waiver').show();
+   });
+ });
+ */
+ 
+ $(document).ready(function() {
+   $('#waiver_box').click(function(){
+     $('.waiver').toggle('slow', function() {;
+	 });
    });
  });
 

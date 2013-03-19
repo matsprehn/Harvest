@@ -34,7 +34,7 @@ $().ready(function() {
 <p></p>
 <div class="ss-form-desc ss-no-ignore-whitespace">To register for upcoming events, please submit a completed RSVP no later than the Friday, prior to the harvest event. </br> If you have any questions, you can contact us at info@theharvestclub.com or by phone at 714-564-9525. </br></br>
 
-Please provide a phone number below where you can be reached the day of the event, should we need to contact you </br> with updated event details. 
+Please provide a phone number below where you can be reached the day of the event, should we need to contact you </br> with updated event details 
 </a>.</div>
 
 <div class="">* Required</div>
@@ -90,7 +90,7 @@ Please provide a phone number below where you can be reached the day of the even
 				</div>
 			</div>
 		</div> 
-	
+</br>	
 My Guest&#39;s Information:
 	
 <div id="container">
@@ -143,6 +143,8 @@ while ($row = $results->getAssoc()) {
   $city = $row['city'];
   $name = $row['name'];
   $date = $row['date'];
+  $ts = strtotime($date);
+  $date = Date('M-d-Y', $ts);
   $time = $row['time'];
   $eID = $row['id'];
   
@@ -293,8 +295,13 @@ if(isset( $all[0])){
 <input type="hidden" name="pageHistory" value="0">
 
 <script type="text/javascript">
+
+
+
+
 $(document).ready( function() {
     $('#form').submit(function() {
+	if($('#waiver_box').is(':checked')) {
 		txt = $('#fname').val()+' '+$('#lname').val();
         if ($('#signature').val() != txt) {
 			event.preventDefault();
@@ -303,6 +310,7 @@ $(document).ready( function() {
         } else {
             return true;
         }
+	 }
     });
 });
 </script>
