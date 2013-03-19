@@ -785,7 +785,7 @@ if (!$PRIV)
 						// Close the form
 							$('#edit-dialog').dialog('close');
 						// Refresh the page
-							parent.window.location.reload();
+							//parent.window.location.reload();
 							reloadTable("get_trees");		
 						},
 						'error': ajaxError
@@ -824,7 +824,7 @@ if (!$PRIV)
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
-						parent.window.location.reload();	
+						//parent.window.location.reload();	
 						reloadTable("get_groups");		
 						},
 						'error': ajaxError
