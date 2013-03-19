@@ -277,7 +277,6 @@ function updateGroupType(){
 		$r = $db->q($sql);		
 		getError($r);
 		}
-		
 		else
 		{
 			$sql = "Update groups Set name='$name', `phone number`='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";

@@ -632,8 +632,8 @@ if (!$PRIV)
 						'error': ajaxError
 					});
 					$('#edit-dialog').dialog('close');
-					parent.window.location.reload();
-							reloadTable("get_trees");		
+					//parent.window.location.reload();
+							reloadTable("get_groups");		
 					break; 
 			}		
 		}
@@ -1665,6 +1665,7 @@ if (!$PRIV)
 				case 8: // group
 					switchNClearForm('groupType');
 					if (priv.edit_grower)
+					{
 						buttonList.unshift(saveButton);
 						$('#id').val(row[1]);
 						$('#orgname').val(row[2]);
@@ -1673,6 +1674,7 @@ if (!$PRIV)
 						$('#groupsize').val(row[5]);
 						$('#availability').val(row[6]);
 						$('#notes').val(row[7]);
+					}
 						
 				break;
 

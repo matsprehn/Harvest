@@ -57,9 +57,6 @@ $avgHeight = $r->buildArray();
 	</form>
 	
 	<!-- INF117 Start-->
-	<!-- The purpose of this code is to create a new form so that database users can enter new tree types 
-	they would like added to "Tree Type". It populates the form with the labels and buttons and text.-->
-	<!-- New Tree Type form -->	
 	<form id="groupType" class="full_width hidden">
 		<h3>Group Information</h3>
 		<table>	
