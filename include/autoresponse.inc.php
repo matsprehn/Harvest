@@ -124,15 +124,26 @@ EOD;
 }
 /* Purpose of code is to create a thank you email to the growers*/
 function thankYouGrowerEmail($p) {
-return<<<EOD
+$stuff ="";
+$stuff.="
 Dear $p[grower_first] $p[grower_last],
 
 On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of $p[fruit_list] your contribution is providing much needed nutrition to the underserved in Orange County.  
 
 On $p[harvest_date] February 9, 2013, The Harvest Club picked $p[fruit_list_lbs] from your property and delivered it to: 
 
-•	$p[distribution]
-
+";
+//echo $p['distribution'];
+$distributions = explode(";" ,$p['distribution']);
+foreach($distributions as $distribution)
+{
+	if ($distribution != "")
+	{
+		$stuff.="•	$distribution
+";
+	}
+}
+$stuff.="
 Your donation will provide nutritious food to approximately $p[total_lbs_people] people in our community!
 
 If you are happy with our services and know of another backyard grower that could benefit from The Harvest Club, please refer them to us! They can register their trees at www.theharvestclub.org. 
@@ -148,6 +159,9 @@ chall@ocfoodaccess.org
 
 The Harvest Club is a program of the OC Food Access Coalition, a fiscally sponsored project of OneOC. Tax ID 95-2021700 **Please speak with your tax advisor about the tax deductibility of your donation.
 
+";
+return<<<EOD
+$stuff
 EOD;
 }
 // INF 117 End

@@ -1899,9 +1899,10 @@ if (!$PRIV)
 				'success': function (data) {
 					if (!validResponse(data))
 					{
+						//alert(data);
 						return clearTemplate(t);
 					}
-					
+					//alert(data);
 					$('#email textarea[name=message]').val(data.message);
 				}
 			});

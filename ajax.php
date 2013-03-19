@@ -1281,7 +1281,7 @@ back to index.php
 			{
 				$fruitList .= $row['fruit']."s,";
 				(float)$totalPounds += $row['lbs'];
-				$fruitListAndPounds .= $row['lbs']." pounds of".$row['fruit']."s, ";
+				$fruitListAndPounds .= $row['lbs']." pounds of ".$row['fruit']."s, ";
 				$growerFirstName = $row['grower_f'];
 				$growerLastName = $row['grower_l'];
 				$captainFirstName = $row['captain_f'];
@@ -1296,7 +1296,7 @@ back to index.php
 			}
 			if (!strstr($distributionName, $row['distribution_name']))
 			{
-				$distributionName.= $row['distribution_name'];
+				$distributionName.= $row['distribution_name'].';';
 			}
 		}
 		
@@ -1346,7 +1346,7 @@ back to index.php
 				$data['message'] = thankYouGrowerEmail($params);
 				break;
  			default:
-				$data['message'] = "you dun goofed";
+				$data['message'] = "Something went wrong!";
 				break;
 		}
 		//debug
