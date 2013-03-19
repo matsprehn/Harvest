@@ -634,7 +634,7 @@ back to index.php
 	case 'get_groups':
 	$data['id'] = 8;
 	$data['title'] = 'Groups';
-		$sql = "select name, `phone number`, email, groupsize, availability, notes from
+		$sql = "select id, name, `phone number`, email, groupsize, availability, notes from
 				`groups`";
 				getTable($sql);
 				break;	
@@ -1832,7 +1832,16 @@ back to index.php
 		$r = $db->q($sql);
 		getError($r);
 		break;
-
+		
+	case 'remove_group':
+		global $db;
+		global $data;
+		$id = $_REQUEST['id'];
+		$sql = "DELETE FROM donations where id =$id";
+		$r = $db->q($sql);
+		getError($r);
+		break;
+		
 	default:
 		$data['status'] = 404; // Not found
 		$data['message'] = "Unknown ajax command: $cmd";

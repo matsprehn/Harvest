@@ -185,7 +185,7 @@ if (!$PRIV)
 				});
 
 				currentTable = data.id; // set current table after it is populated
-				
+				//alert(currentTable);
 				$('#page_title').text(data.title); // set page title
 				switch (currentTable)
 				{
@@ -1152,6 +1152,40 @@ if (!$PRIV)
 								$.ajax({							
 									'type': 'GET',
 									'url': 'ajax.php?cmd=remove_donation&id='+id,
+									'success': function (data) {								
+										if (!validResponse(data))
+											return false;									
+										deleted++;
+										dt.fnDeleteRow(row[0]);
+										setInfo('Deleted ' + deleted + ' items');
+									},
+									'error': ajaxError
+								});
+							});					
+						}
+					}
+				break;
+				case 8:
+				$('input[name=select-row]:checked').each(function(){
+						deleteList.push($(this).parent().parent());
+					});
+					if(deleteList.length > 0)
+					{
+						//pop up confirmation window
+						var x = window.confirm("Are you sure you want to delete "+deleteList.length+" items?");
+						if(x)
+						{
+							var deleted = 0;
+							$('input[name=select-row]:checked').each(function(){
+								var row = $(this).parent().parent();
+								var data = dt.fnGetData(row[0]);
+								var id = data[1];
+								//alert(id);
+								deleteList.push(id);
+							//	TODO Ajax needs to be sent at the end
+								$.ajax({							
+									'type': 'GET',
+									'url': 'ajax.php?cmd=remove_group&id='+id,
 									'success': function (data) {								
 										if (!validResponse(data))
 											return false;									
