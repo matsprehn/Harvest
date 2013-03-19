@@ -63,7 +63,11 @@ $avgHeight = $r->buildArray();
 	<form id="groupType" class="full_width hidden">
 		<h3>Group Information</h3>
 		<table>	
-
+		
+		<tr>
+			<td colspan="3" class="hidden"><input id="groupID" name="id" type="text" size="2"/></td>
+		</tr>
+		
 		<tr>
 			<td><label for="orgname"><b>Name</b></label></td>
 		</tr>
@@ -76,16 +80,13 @@ $avgHeight = $r->buildArray();
 		<tr>
 			<td><input type="tel" name="phone" id="phone" required="required" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="(949) 555-1234" /></td>
 		</tr>
-		<tr>
-			<td><input id="email" name="email" type="text" size="21" required="required"/></td>
-		</tr>
 		
 
 		<tr>
-			<td><label for="email"><b>Email</b></label></td>
+			<td><label for="email2"><b>Email</b></label></td>
 		</tr>
 		<tr>
-			<td><input id="email" name="email" type="text" size="21" required="required"/></td>
+			<td><input id="email2" name="email" type="text" size="21" required="required"/></td>
 		</tr>
 		
 		

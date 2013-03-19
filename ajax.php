@@ -259,7 +259,7 @@ function updateTreeType(){
 function updateGroupType(){
 	global $db;
 	global $data;
-	$id = $_REQUEST['id'];						
+	$id = $_REQUEST['groupID'];						
 	$name = $_REQUEST['organizationName'];
 	$phone = $_REQUEST['phone'];
 	$email = $_REQUEST['email'];
@@ -1121,6 +1121,9 @@ back to index.php
 			break;
 		}
 		updateTree(true);
+		break;	
+	case 'update_group':		
+		updateGroup(true);
 		break;	
 	case 'add_tree':
 		if (!$PRIV['edit_grower']) {

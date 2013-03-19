@@ -617,6 +617,28 @@ if (!$PRIV)
 						'error': ajaxError
 					});
 					break;
+					
+					/* WORK NI PROGRESS case 8:
+					var para = $('#groupType').serialize();
+					$.ajax({							
+						'type': 'GET',
+						'url': 'ajax.php?cmd=update_group&'+para,
+						'success': function (data) {
+							if (!validResponse(data))
+								return false;
+							setInfo('Information Updated');
+							$('#edit-dialog').dialog('close');
+							for(var i = 1; i < row.length; i++){					//Update Other fields
+								if($('#tree'+i).val() == undefined)							
+									row[i]='';
+								else
+									row[i]=$('#tree'+i).val();
+							}
+							dt.fnUpdate(row, aPos, 0);								//Update Table							
+						},
+						'error': ajaxError
+					});
+					break; */
 			}		
 		}
 	};
@@ -805,14 +827,17 @@ if (!$PRIV)
 						'success': function (data) {
 							if (!validResponse(data))
 								return false;
-						// Show confirmation dialog that the information was added
-							setInfo('Information Added');
-						// Close the form
-							$('#edit-dialog').dialog('close');
+						parent.window.location.reload();	
 						reloadTable("get_groups");		
 						},
 						'error': ajaxError
 					});
+					// Show confirmation dialog that the information was added
+							setInfo('Information Added');
+						// Close the form
+							parent.window.location.reload();	
+							$('#edit-dialog').dialog('close');
+							reloadTable('get_groups');
 		}
 	};
 	//INF 117 End
@@ -1607,6 +1632,20 @@ if (!$PRIV)
 					$('#donation5').not('.hasDatePicker').datepicker({dateFormat: 'yy-mm-dd'});
 				break;	
 
+				case 8: // group
+					switchNClearForm('groupType');
+					if (priv.edit_grower)
+						buttonList.unshift(saveButton);
+						
+						$('#orgname').val(row[1]);
+						$('#phone').val(row[2]);
+						setInfo(row[3]);
+						$('#email2').val(row[3]);
+						$('#groupsize').val(row[4]);
+						$('#availability').val(row[5]);
+						$('#notes').val(row[6]);
+						
+				break;
 
 			}
 			
