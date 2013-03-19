@@ -1,0 +1,79 @@
+<html>
+<head> 
+<link href="css/generation.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class = "header"><center>
+<strong><u><div id="title">The Harvest Club Volunteer Form and Photo Release</div></u></br>
+<div class = "title1">VOLUNTEER ASSUMPTION OF RISK, </br>
+RELEASE OF LIABILITY, AND INDEMNITY AGREEMENT FOR </br>
+THE HARVEST CLUB</div> </br>
+<div class="title2">of Orange County </br>
+Orange County, CA </br>
+www.theharvestclub.org</div> </strong> </br></center>
+</div>
+
+<div class ="form">
+Adult Volunteer(s)________________________________ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Please indicate if you give permission to appear in videos, <br></br>
+Address_______________________________________   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   photos, or audio recordings without compensation (e.g., as<br></br>
+City____________Zip_________  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      part of brochures, slide shows or program websites).<br></br>
+Telephone_____________________________________</br></br>
+Email_________________________________________</br></br></br>
+
+
+<div class="paragraphs">I, the undersigned, an adult 18 years or over, and any minor(s) listed below, hereby request to participate in THE HARVEST 
+CLUB Harvesting Project (THC). I am aware that participation in THC involves physical harvesting, which includes, among other 
+things, exposure to the elements, gardening tools, plant contact, risks in climbing, lifting and agricultural chemicals. I understand that 
+such participation presents a risk of injury, and I agree to assume any and all risk for injuries arising out of, or related to, participation 
+in the THC project and understand that the Released Parties (as such term is defined below) shall NOT be responsible or liable for any 
+injury, damage, loss or expense to me and/or my property incurred as a result of my participation in the THC Project.
+</div>
+
+<div class="paragaphs">
+
+</div>
+
+<?php  
+
+$pic;
+$waiver;
+$sign;
+$date = ''; 
+$address;
+$city;
+$zipcode;
+
+if(isset($_GET["picallowed"])){
+	$pic = $_GET["picallowed"];
+}
+if(isset($_GET["waiver_value"])){
+	$waiver = $_GET["waiver_value"];
+}
+if(isset($_GET["signature"])){
+	$sign = $_GET["signature"];
+}
+if(isset($_GET["date_signed"])){
+	$date = $_GET["date_signed"];
+}
+if(isset($_GET["address"])){
+	$address = $_GET["address"];
+}
+if(isset($_GET["city"])){
+	$city = $_GET["city"];
+}
+if(isset($_GET["zipcode"])){
+	$zipCode = $_GET["zipcode"];
+}
+if(isset($_GET["phone"])){
+	$phone = $_GET["phone"];
+}
+if(isset($_GET["email"])){
+	$email = $_GET["email"];
+}
+
+echo "hello";
+?>
+
+</body>
+</html>

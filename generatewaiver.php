@@ -6,7 +6,15 @@ $date = '';
 $address;
 $city;
 $zipcode;
+$fname;
+$lname;
 
+if(isset($_GET["fname"])){
+	$fname = $_GET["fname"];
+}
+if(isset($_GET["lname"])){
+	$lname = $_GET["lname"];
+}
 if(isset($_GET["picallowed"])){
 	$pic = $_GET["picallowed"];
 }

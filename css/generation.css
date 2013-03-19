@@ -1,0 +1,36 @@
+
+.header {
+margin-top:50px;
+
+}
+
+#title {
+font-size:18px;
+}
+
+#title1 {
+font-size:14px;
+}
+
+#title2 {
+font-size:14px;
+}
+
+.form {
+margin-right:300px;
+margin-left:300px;
+}
+
+.paragraphs {
+text-indent:50px;
+}
+
+#itaparagraph {
+text-indent:50px;
+font-style:italic;
+}
+
+#permission{
+text-indent:100px;
+}
+

@@ -26,7 +26,6 @@ $().ready(function() {
 	// validate the comment form when it is submitted
 	$(".form").validate();
 })
-
 </script>
 </head>
 <div class="form-container">
@@ -49,7 +48,7 @@ Please provide a phone number below where you can be reached the day of the even
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="fname" class="ss-q-short" id="fname" required> 
+						<input type="text" id="fname" name="fname" required> 
 				</div>
 			</div>
 		</div> 
@@ -62,11 +61,10 @@ Please provide a phone number below where you can be reached the day of the even
 							<span class="ss-required-asterisk">*</span>
 						</div>
 					</label>
-						<input type="text" name="lname" class="ss-q-short" id="lname" required> 
+						<input type="text" name="lname" id="lname" required> 
 				</div>
 			</div>
-		</div> 
-
+		</div> 		
 <div class="errorbox-good">
 			<div>
 				<div class="form-entry">
@@ -264,17 +262,17 @@ if(isset( $all[0])){
 							<label class=>
 									<div>Address</div>
 							</label>
-							<input type="text" name="address" value="" class="ss-q-short" id="signature" >
+							<input type="text" name="address" value="" class="ss-q-short" id="address" >
 							
 							<label class=>
 									<div>City</div>
 							</label>
-							<input type="text" name="city" value="" class="ss-q-short" id="signature" >
+							<input type="text" name="city" value="" class="ss-q-short" id="city" >
 							
 							<label class=>
 									<div>Zipcode</div>
 							</label>
-							<input type="text" name="zipcode" value="" class="ss-q-short" id="signature" >
+							<input type="text" name="zipcode" value="" class="ss-q-short" id="zipcode" >
 							</br>
 							</br>
 							<label class=>
@@ -284,7 +282,7 @@ if(isset( $all[0])){
 
 							<div>Sign electronically with your full name. </div>
 						</label>
-					<input type="text" name="signature" value="" class="ss-q-short" id="signature" >
+					<input type="text" id="signature" name="signature" value="" class="ss-q-short"  >
 					</div>
 				</div>
 			</div>
@@ -294,9 +292,24 @@ if(isset( $all[0])){
 <input type="hidden" name="draftResponse" value="[]">
 <input type="hidden" name="pageHistory" value="0">
 
+<script type="text/javascript">
+$(document).ready( function() {
+    $('#form').submit(function() {
+		txt = $('#fname').val()+' '+$('#lname').val();
+        if ($('#signature').val() != txt) {
+			event.preventDefault();
+            alert('The name entered does not match the signature! Please change it');
+            return false;
+        } else {
+            return true;
+        }
+    });
+});
+</script>
 
 <div class="form-entry">
 <input type="submit" name="submit" value="Submit" id="ss-submit">
+
 
 </div></form></div>
 </div></div>

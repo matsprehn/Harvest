@@ -6,7 +6,7 @@ This css file is for the rsvp form. It contains all the style for the form
 */
 
 body {
-  background: #fffbef url('//themes.googleusercontent.com/image?id=1a0AeDLTHbl0veIcjLG7wyMEOtSe8L5jsDMsuV_d1_xFhDH5Ki5qyGKxBPm30vy7v3vIh');
+  background: #fffbef url('../images/wooden.jpg');
   color: #28642e;
   font-family: Molengo,'Trebuchet MS',Tahoma,Verdana,Arial,sans-serif;
   padding: 0;
