@@ -1837,7 +1837,7 @@ back to index.php
 		global $db;
 		global $data;
 		$id = $_REQUEST['id'];
-		$sql = "DELETE FROM donations where id =$id";
+		$sql = "DELETE FROM groups where id =$id";
 		$r = $db->q($sql);
 		getError($r);
 		break;
