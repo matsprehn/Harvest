@@ -62,7 +62,7 @@ EOD;
 /* Purpose of code is to create an email with harvest details to the user*/
 function harvestDetailsEmail($p) {
 return<<<EOD
-Dear $p[me_f] $p[me_l],
+Dear Harvesters,
 
 Thank you for volunteering for the harvest at $p[harvest_time] this $p[harvest_date] in $p[harvest_city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_first] $p[captain_last], your Harvest Captain, on $p[harvest_date].   
 
@@ -91,7 +91,7 @@ EOD;
 /* Purpose of code is to create an email to remind users about a harvest event*/
 function reminderEmail($p) {
 return<<<EOD
-Dear $p[me_f] $p[me_l],
+Dear Harvesters,
 
 You are receiving this email because you have registered to volunteer at a Harvest Event with The Harvest Club! This is a reminder that the Harvest will take place at $p[harvest_time] on $p[harvest_date] in the City of $p[harvest_city]. 
 
@@ -110,7 +110,7 @@ EOD;
 /* Purpose of code is to create a thank you email to the volunteers*/
 function thankYouVolunteerEmail($p) {
 return<<<EOD
-Dear $p[me_f] $p[me_l],
+Dear Harvesters,
 
 On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach. With your help The Harvest Club picked $p[total_lbs] pounds of fruit, providing nutritious food to $p[total_lbs_people] people in need in our community.  
 
