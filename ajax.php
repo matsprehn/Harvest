@@ -1279,11 +1279,11 @@ back to index.php
 		while($row = $r->getAssoc()) {
 			//var_dump($row);
 			//Prints all fruits in the harvest event
-			if (!strstr($fruitList, $row['fruit']))
+			if (!strstr($fruitList, trim($row['fruit'])))
 			{
 				$fruitList .= $row['fruit']."s,";
 				(float)$totalPounds += $row['lbs'];
-				$fruitListAndPounds .= $row['lbs']." pounds of ".$row['fruit']."s, ";
+				$fruitListAndPounds .= $row['lbs']." pounds of ".trim($row['fruit'])."s, ";
 				$growerFirstName = $row['grower_f'];
 				$growerLastName = $row['grower_l'];
 				$captainFirstName = $row['captain_f'];
@@ -1318,7 +1318,8 @@ back to index.php
  		$params['captain_first'] = $captainFirstName;
  		$params['captain_last'] = $captainLastName;
  		$params['captain_phone'] = $captainPhone;
- 		$params['harvest_date'] = date('l F jS Y', $harvestDate);
+ 		$params['harvest_date'] = date('l, F j, Y', $harvestDate);
+		$params['harvest_details_date'] = date('l', $harvestDate);
  		$params['harvest_time'] = $harvestTime;
  		$params['harvest_street'] = $harvestStreet;
  		$params['harvest_city'] = $harvestCity;

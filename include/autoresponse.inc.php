@@ -46,7 +46,7 @@ Hello Harvesters!
 Here are the upcoming Harvest Events with THC: 
 
 $p[harvest_date] | $p[harvest_time] in $p[harvest_city]
-Harvesting$p[fruit_list]. We need [# of volunteers] volunteers.
+Harvesting $p[fruit_list]. We need [# of volunteers] volunteers.
 
 Events last 1-2.5 hours. To RSVP, please reply to this email or send a note to volunteer@theharvestclub.org by Friday at 5pm, prior to the harvest event.
 
@@ -64,7 +64,7 @@ function harvestDetailsEmail($p) {
 return<<<EOD
 Dear Harvesters,
 
-Thank you for volunteering for the harvest at $p[harvest_time] this $p[harvest_date] in $p[harvest_city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_first] $p[captain_last], your Harvest Captain, on $p[harvest_date].   
+Thank you for volunteering for the harvest at $p[harvest_time] this $p[harvest_date] in $p[harvest_city]. If this is your first time harvesting with us, please complete the attached Volunteer Liability Waiver, and bring it to $p[captain_first] $p[captain_last], your Harvest Captain on $p[harvest_details_date].   
 
 If you cannot make the harvest for any reason, kindly let us know in advance so we can fill your spot! 
 
@@ -112,9 +112,9 @@ function thankYouVolunteerEmail($p) {
 return<<<EOD
 Dear Harvesters,
 
-On behalf of The Harvest Club, and OC Food Access, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city] Huntington Beach. With your help The Harvest Club picked $p[total_lbs] pounds of fruit, providing nutritious food to $p[total_lbs_people] people in need in our community.  
+On behalf of The Harvest Club, thank you for harvesting with us on $p[harvest_date] in $p[harvest_city]. With your help The Harvest Club picked $p[total_lbs] pounds of fruit, providing nutritious food to $p[total_lbs_people] people in need in our community.  
 
-We hope you’ll join us again soon!
+Thank you, and we hope you’ll join us again soon!
 
 Christina Hall
 Program Coordinator
@@ -127,12 +127,21 @@ function thankYouGrowerEmail($p) {
 $stuff ="";
 $stuff.="Dear $p[grower_first] $p[grower_last],
 
-On behalf of The Harvest Club, a program of OC Food Access, I would like to personally thank you for your recent donation of $p[fruit_list] your contribution is providing much needed nutrition to the underserved in Orange County.  
+On behalf of The Harvest Club, I would like to personally thank you for your recent donation of "; 
+//grammatical formatting of fruits. I.e. Apples and oranges rather than apples, oranges.
+$fruitList = $p['fruit_list'];
+$fruitList = substr_replace($fruitList, " and", strrpos($fruitList, ","), strlen(","));
+$stuff.=strtolower($fruitList);
+$stuff.=". Your contribution is providing much needed nutrition to the underserved in Orange County.  
 
-On $p[harvest_date] February 9, 2013, The Harvest Club picked $p[fruit_list_lbs] from your property and delivered it to: 
+On $p[harvest_date], The Harvest Club picked and donated ";
+$fruitListPounds = rtrim($p['fruit_list_lbs'], ", ");
+$fruitListPounds = substr_replace($fruitListPounds, " and", strrpos($fruitListPounds, ","), strlen(","));
+$stuff.=strtolower($fruitListPounds);
+$stuff.=" from your property and delivered it to: 
 
 ";
-//echo $p['distribution'];
+//splits on every distribution site
 $distributions = explode(";" ,$p['distribution']);
 foreach($distributions as $distribution)
 {
@@ -159,6 +168,7 @@ chall@ocfoodaccess.org
 The Harvest Club is a program of the OC Food Access Coalition, a fiscally sponsored project of OneOC. Tax ID 95-2021700 **Please speak with your tax advisor about the tax deductibility of your donation.
 
 ";
+//echo $stuff;
 return<<<EOD
 $stuff
 EOD;
