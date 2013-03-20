@@ -40,13 +40,15 @@ EOD;
 }
 /* Purpose of code is to create a email form with an invitation email response template to the user */
 function invitationEmail($p) {
+$fruitList = $p['fruit_list'];
+$fruitList = substr_replace($fruitList, " and ", strrpos($fruitList, ","), strlen(","));
 return<<<EOD
 Hello Harvesters!
 
 Here are the upcoming Harvest Events with THC: 
 
 $p[harvest_date] | $p[harvest_time] in $p[harvest_city]
-Harvesting $p[fruit_list]. We need [# of volunteers] volunteers.
+Harvesting $fruitList. We need [# of volunteers] volunteers.
 
 Events last 1-2.5 hours. To RSVP, please reply to this email or send a note to volunteer@theharvestclub.org by Friday at 5pm, prior to the harvest event.
 
@@ -61,6 +63,8 @@ EOD;
 }
 /* Purpose of code is to create an email with harvest details to the user*/
 function harvestDetailsEmail($p) {
+$fruitList = $p['fruit_list'];
+$fruitList = substr_replace($fruitList, " and", strrpos($fruitList, ","), strlen(","));
 return<<<EOD
 Dear Harvesters,
 
@@ -73,7 +77,7 @@ Date: $p[harvest_date]
 Time: $p[harvest_time]
 Grower: $p[grower_first] $p[grower_last] 
 Address:  $p[harvest_street], $p[harvest_city] $p[harvest_zip]
-Harvesting: $p[fruit_list]
+Harvesting: $fruitList
 
 $p[captain_first] $p[captain_last] is your Harvest Captain. If you are unable to make the harvest for any reason, or get lost on the way, please contact your captain directly at $p[captain_phone].  
 
