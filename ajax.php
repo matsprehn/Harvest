@@ -274,14 +274,14 @@ function updateGroupType(){
 		if (!isset($_REQUEST['id']) || $_REQUEST['id'] == "")
 		{
 				$sql = "INSERT INTO groups(name, contactName, `phone number`, email, groupsize, availability, notes)
-				VALUES ('$name',$contactName, '$phone', '$email', '$groupsize', '$availability', '$notes')";	
+				VALUES ('$name','$contactName', '$phone', '$email', '$groupsize', '$availability', '$notes')";	
 				echo($sql);
 		$r = $db->q($sql);		
 		getError($r);
 		}
 		else
 		{
-			$sql = "Update groups Set name='$name', contactName = $contactName, `phone number`='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
+			$sql = "Update groups Set name='$name', contactName = '$contactName', `phone number`='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
 			$r = $db->q($sql);
 			getError($r);
 		}
@@ -636,7 +636,7 @@ back to index.php
 	case 'get_groups':
 	$data['id'] = 8;
 	$data['title'] = 'Groups';
-		$sql = "select id, name, `phone number`, email, groupsize, availability, notes from
+		$sql = "select id, name as Affiliation, contactName as Contact, `phone number`, email, groupsize, availability, notes from
 				`groups`";
 				getTable($sql);
 				break;	

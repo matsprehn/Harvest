@@ -1670,7 +1670,7 @@ if (!$PRIV)
 						buttonList.unshift(saveButton);
 						$('#id').val(row[1]);
 						$('#orgname').val(row[2]);
-						$('$contactName').val(row[3]);
+						$('#contactName').val(row[3]);
 						$('#phone').val(row[4]);
 						$('#email2').val(row[5]);
 						$('#groupsize').val(row[6]);
