@@ -41,7 +41,7 @@ EOD;
 /* Purpose of code is to create a email form with an invitation email response template to the user */
 function invitationEmail($p) {
 $fruitList = $p['fruit_list'];
-$fruitList = substr_replace($fruitList, " and ", strrpos($fruitList, ","), strlen(","));
+$fruitList = substr_replace($fruitList, " and", strrpos($fruitList, ","), strlen(","));
 return<<<EOD
 Hello Harvesters!
 

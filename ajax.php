@@ -1282,7 +1282,7 @@ back to index.php
 			//Prints all fruits in the harvest event
 			if (!strstr($fruitList, trim($row['fruit'])))
 			{
-				$fruitList .= $row['fruit']."s,";
+				$fruitList .= $row['fruit']."s, ";
 				(float)$totalPounds += $row['lbs'];
 				$fruitListAndPounds .= $row['lbs']." pounds of ".trim($row['fruit'])."s, ";
 				$growerFirstName = $row['grower_f'];
@@ -1312,7 +1312,7 @@ back to index.php
 		$params['me_l'] = $_SESSION['last_name'];
  		//$params['date'] = dateToStr($params['date']);
 		$params['date'] = $harvestDate;
- 		$params['fruit_list'] = trim(strtolower($fruitList), ",");
+ 		$params['fruit_list'] = trim(strtolower($fruitList), ", ");
  		$params['fruit_list_lbs'] = $fruitListAndPounds;
  		$params['grower_first'] = $growerFirstName;
  		$params['grower_last'] = $growerLastName;
