@@ -64,7 +64,7 @@ EOD;
 /* Purpose of code is to create an email with harvest details to the user*/
 function harvestDetailsEmail($p) {
 $fruitList = $p['fruit_list'];
-$fruitList = substr_replace($fruitList, " and", strrpos($fruitList, ","), strlen(","));
+$fruitList = substr_replace($fruitList, " and ", strrpos($fruitList, ","), strlen(","));
 return<<<EOD
 Dear Harvesters,
 
@@ -134,7 +134,7 @@ $stuff.="Dear $p[grower_first] $p[grower_last],
 On behalf of The Harvest Club, I would like to personally thank you for your recent donation of "; 
 //grammatical formatting of fruits. I.e. Apples and oranges rather than apples, oranges.
 $fruitList = $p['fruit_list'];
-$fruitList = substr_replace($fruitList, " and", strrpos($fruitList, ","), strlen(","));
+$fruitList = substr_replace($fruitList, " and ", strrpos($fruitList, ","), strlen(","));
 $stuff.=strtolower($fruitList);
 $stuff.=". Your contribution is providing much needed nutrition to the underserved in Orange County.  
 

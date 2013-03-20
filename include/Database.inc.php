@@ -103,17 +103,18 @@ class Database {
 		return mysql_query($sql);
 	}
 	
-	public function addUser($f, $l, $p, $e, $s, $c, $sta, $zipcode)
+	public function addUser($f, $l, $p, $m , $e, $s, $c, $sta, $zipcode)
 	{
 		$fname = $f;
 		$lname = $l;
 		$phone= $p;
 		$email = $e;
+		$middle = $m;
 		$street = $s;
 		$city = $c;
 		$state = $sta;
 		$zip = $zipcode;
-		$sql = "INSERT INTO volunteers (first_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
+		echo $sql = "INSERT INTO volunteers (first_name, middle_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$middle' , '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
 		return mysql_query($sql);
 	}
 	

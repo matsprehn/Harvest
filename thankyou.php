@@ -42,6 +42,7 @@ require_once('include/Database.inc.php');
 	$guestString = "";
 	$fullGuestString = "";
 	$guestArray = array();
+	$middleName = "";
 	
 	$street = ""; 
 	$city = "";
@@ -107,7 +108,7 @@ require_once('include/Database.inc.php');
 
 	
 	if($waiver_value == "yes"){
-	$db->addUser($fname, $lname, $phone, $email, $rsvpAddress, $rsvpCity, $state, $rsvpZipCode);
+	$db->addUser($fname, $lname, $phone, $middleName , $email, $rsvpAddress, $rsvpCity, $state, $rsvpZipCode);
 	
 	$to = $email;
 	$subject = 'New User has signed the waiver form';
@@ -153,7 +154,8 @@ For any questions, his/her email address is $email  and his/her phone number is 
 		 $results1 = $db->q($sql1);
 		 if($row = $results->getAssoc()) 
 		  {
-				$vID = $row['id'];
+			 	$vID = $row['id'];
+				echo "THE VID VALUE IS ".$vID;
 				//echo "the vid is ". $vID;
 		  }
 		  if($row = $results1->getAssoc()) 
