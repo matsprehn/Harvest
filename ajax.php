@@ -1312,14 +1312,15 @@ back to index.php
 		$params['me_l'] = $_SESSION['last_name'];
  		//$params['date'] = dateToStr($params['date']);
 		$params['date'] = $harvestDate;
- 		$params['fruit_list'] = trim($fruitList, ",");
+ 		$params['fruit_list'] = trim(strtolower($fruitList), ",");
  		$params['fruit_list_lbs'] = $fruitListAndPounds;
  		$params['grower_first'] = $growerFirstName;
  		$params['grower_last'] = $growerLastName;
  		$params['captain_first'] = $captainFirstName;
  		$params['captain_last'] = $captainLastName;
  		$params['captain_phone'] = $captainPhone;
- 		$params['harvest_date'] = date('l F jS Y', $harvestDate);
+ 		$params['harvest_date'] = date('l, F j, Y', $harvestDate);
+ 		$params['harvest_details_date'] = date('l', $harvestDate);
  		$params['harvest_time'] = $harvestTime;
  		$params['harvest_street'] = $harvestStreet;
  		$params['harvest_city'] = $harvestCity;
