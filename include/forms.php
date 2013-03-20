@@ -70,6 +70,12 @@ $avgHeight = $r->buildArray();
 			<td><input id="orgname" name="organizationName" type="text" size="21" required="required"/></td>
 		</tr>
 		<tr>
+			<td><label for="contactName"><b>ContactName</b></label></td>
+		</tr>
+		<tr>
+			<td><input id="contactName" name="contactName" type="text" size="21" required="required"/></td>
+		</tr>
+		<tr>
 			<td><label for="phone"><b>Phone</b></label></td>
 		</tr>	
 		<tr>

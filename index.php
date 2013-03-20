@@ -1670,11 +1670,12 @@ if (!$PRIV)
 						buttonList.unshift(saveButton);
 						$('#id').val(row[1]);
 						$('#orgname').val(row[2]);
-						$('#phone').val(row[3]);
-						$('#email2').val(row[4]);
-						$('#groupsize').val(row[5]);
-						$('#availability').val(row[6]);
-						$('#notes').val(row[7]);
+						$('$contactName').val(row[3]);
+						$('#phone').val(row[4]);
+						$('#email2').val(row[5]);
+						$('#groupsize').val(row[6]);
+						$('#availability').val(row[7]);
+						$('#notes').val(row[8]);
 					}
 						
 				break;
