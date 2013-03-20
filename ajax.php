@@ -261,6 +261,7 @@ function updateGroupType(){
 	global $data;
 	$id = $_REQUEST['id'];						
 	$name = $_REQUEST['organizationName'];
+	$contactName = $_REQUEST['contactName'];
 	$phone = $_REQUEST['phone'];
 	$email = $_REQUEST['email'];
 	$groupsize = $_REQUEST['groupSize'];
@@ -272,15 +273,15 @@ function updateGroupType(){
 	
 		if (!isset($_REQUEST['id']) || $_REQUEST['id'] == "")
 		{
-				$sql = "INSERT INTO groups(name, `phone number`, email, groupsize, availability, notes)
-				VALUES ('$name', '$phone', '$email', '$groupsize', '$availability', '$notes')";	
+				$sql = "INSERT INTO groups(name, contactName, `phone number`, email, groupsize, availability, notes)
+				VALUES ('$name',$contactName, '$phone', '$email', '$groupsize', '$availability', '$notes')";	
 				echo($sql);
 		$r = $db->q($sql);		
 		getError($r);
 		}
 		else
 		{
-			$sql = "Update groups Set name='$name', `phone number`='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
+			$sql = "Update groups Set name='$name', contactName = $contactName, `phone number`='$phone', email='$email',  groupsize='$groupsize',  availability='$availability', notes='$notes' where id=$id";
 			$r = $db->q($sql);
 			getError($r);
 		}
@@ -1311,7 +1312,7 @@ back to index.php
 		$params['me_l'] = $_SESSION['last_name'];
  		//$params['date'] = dateToStr($params['date']);
 		$params['date'] = $harvestDate;
- 		$params['fruit_list'] = trim($fruitList, ",");
+ 		$params['fruit_list'] = trim(strtolower($fruitList), ",");
  		$params['fruit_list_lbs'] = $fruitListAndPounds;
  		$params['grower_first'] = $growerFirstName;
  		$params['grower_last'] = $growerLastName;

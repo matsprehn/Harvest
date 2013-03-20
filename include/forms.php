@@ -64,10 +64,16 @@ $avgHeight = $r->buildArray();
 			<td colspan="3" class="hidden"><input id="id" name="id" type="text" size="2"/></td>
 		</tr>
 		<tr>
-			<td><label for="orgname"><b>Name</b></label></td>
+			<td><label for="orgname"><b>Organization Name</b></label></td>
 		</tr>
 		<tr>
 			<td><input id="orgname" name="organizationName" type="text" size="21" required="required"/></td>
+		</tr>
+		<tr>
+			<td><label for="contactName"><b>Contact Name</b></label></td>
+		</tr>
+		<tr>
+			<td><input id="contactName" name="contactName" type="text" size="21" required="required"/></td>
 		</tr>
 		<tr>
 			<td><label for="phone"><b>Phone</b></label></td>
