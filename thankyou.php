@@ -2,6 +2,7 @@
 //include 'sendmail/sendmail.ini';
 require_once('include/auth.inc.php');
 require_once('include/Database.inc.php');
+require_once('include/Mailer.php');
 
 	$fname=$_POST["fname"];
 	$lname = $_POST["lname"];
@@ -126,12 +127,17 @@ To print this form for the OCFAC files, click http://localhost/Harvest/generatio
 	
 For any questions, his/her email address is $email  and his/her phone number is $phone.";
 	
-	if(mail($to, $subject, $messageStart, $headers)) {
+	
+	$mail = new Mailer($fname , $to, $headers , $message);
+	
+	//local host email
+	/*if(mail($to, $subject, $messageStart, $headers)) {
 	//echo('Email sent successfully!');
 	}else {
 	//die('Failure: Email was not sent!');
 	}
 	}
+	*/
 	
 	if(isset($_POST["events"])){
 		$eventIds = $_POST["events"];
@@ -217,14 +223,18 @@ www.ocfoodaccess.org";
 	$message = $messageStart . $fullString . $messageEnd;
 	}
 	
+	
+	/* Mail from localhost 
+	
 	if(mail($to, $subject, $message, $headers)) {
 	//echo('Email sent successfully!');
 	}else {
 	//die('Failure: Email was not sent!');
 	}
-}			
-//echo "Thank you for signing up with The Harvest Club. A confirmation email will be sent to you soon";
-	
+	*/
+
+	$mail = new Mailer($fname , $to, $headers , $message);
+}				
 ?>
 
 <html>
