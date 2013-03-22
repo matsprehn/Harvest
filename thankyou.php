@@ -128,7 +128,7 @@ To print this form for the OCFAC files, click http://localhost/Harvest/generatio
 For any questions, his/her email address is $email  and his/her phone number is $phone.";
 	
 	
-	$mail = new Mailer($fname , $to, $headers , $message);
+	$mail = new Mailer($fname , $to, $headers , $messageStart);
 	
 	//local host email
 	/*if(mail($to, $subject, $messageStart, $headers)) {
