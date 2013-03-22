@@ -155,7 +155,6 @@ For any questions, his/her email address is $email  and his/her phone number is 
 		 if($row = $results->getAssoc()) 
 		  {
 			 	$vID = $row['id'];
-				echo "THE VID VALUE IS ".$vID;
 				//echo "the vid is ". $vID;
 		  }
 		  if($row = $results1->getAssoc()) 

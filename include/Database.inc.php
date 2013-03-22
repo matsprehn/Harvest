@@ -114,8 +114,25 @@ class Database {
 		$city = $c;
 		$state = $sta;
 		$zip = $zipcode;
-		echo $sql = "INSERT INTO volunteers (first_name, middle_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$middle' , '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
+		$sql = "INSERT INTO volunteers (first_name, middle_name, last_name, phone, email, street, city, state, zip) VALUES ('$fname', '$middle' , '$lname', '$phone', '$email', '$street' , '$city', '$state', '$zip')";
+		
+		$selectSql = "SELECT *
+		FROM volunteers v
+		WHERE v.first_name = '$fname'
+		AND v.last_name = '$lname'
+		AND v.email = '$email'";
+		
+		//$query = mysql_query($sql);
+		$query = mysql_query($selectSql);
+		
+		//$resultObject = new Result();
+		
+		if (mysql_num_rows($query) > 0) {
+			// nothing happens because there is a duplicate and we don't want to do anything :/
+		}
+		else{
 		return mysql_query($sql);
+		}
 	}
 	
 	public function addUserToEvent($event,$volunteer)

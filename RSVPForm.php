@@ -191,7 +191,8 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
+	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">"." [ ".$date." , ".$time." ] "." in the city: ".$city.", harvesting ".$type."<br>"; 
 	echo "</br>";
 	
 	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; 
@@ -207,7 +208,8 @@ if(isset($all[0])){
 	
 		}
 		$visted = false;
-	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
+	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>"; // Haven'st added the full info yet
+	echo "<input type=\"checkbox\" name=\"events[]\" value=\"$eID</br>\">"." [ ".$date." , ".$time." ] "." in the city: ".$city.", harvesting ".$type."<br>"; 
 	echo "</br>";
 	
 	//echo "<input type=\"checkbox\" name=\"events[]\" value=\"$type Harvest in $city [$date , $time] </br>\">".$type." Harvest in ".$city." [ ".$date." , ".$time." ] "."<br>";
@@ -242,7 +244,7 @@ if(isset( $all[0])){
 ?>
 </br>
 
-<input type="checkbox" name="waiver_box" id="waiver_box" value="yes"> This is my first harvest! </br>
+<div id="firstHarvest"><input type="checkbox" name="waiver_box" id="waiver_box" value="yes"> This is my first harvest! </div></br></br>
 <div class ="waiver">
 	<div>
 		<div class="form-entry"><h2 class="section-title">Waiver Form</h2>
@@ -319,7 +321,9 @@ $(document).ready( function() {
 <input type="submit" name="submit" value="Submit" id="ss-submit">
 
 
-</div></form></div>
+</div></form>
+<center><img src="images/footlogo.jpg"> <img src="images/thc_logo.png" height="171" width="171"><center>
+</div>
 </div></div>
 
 

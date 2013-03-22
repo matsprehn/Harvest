@@ -38,7 +38,7 @@ h1, h2 {
 h1.form-title {
   font-size: 36px;
   line-height: 40px;
-  text-align: center;
+  text-align: center; 
 }
 .required-asterisk {
   color: #bc3611;
@@ -87,6 +87,11 @@ td.ss-scalenumbers, td.ss-scalerow, td.ss-leftlabel, td.ss-rightlabel, label.ss-
 
 display:none;
 
+}
+
+#firstHarvest {
+font-size:20px;
+font-weight:bold;
 }
 
 /*
