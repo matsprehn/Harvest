@@ -112,7 +112,7 @@ Event details will be emailed to the team prior</br> to the harvest.  We will re
 				</div>
 			</label>
 <?php   
-ob_start();
+session_start();
 require_once('include/auth.inc.php');
 require_once('include/Database.inc.php');
 
@@ -241,7 +241,7 @@ if(isset( $all[0])){
 	  }   
   }
 }
-ob_end_flush();
+session_destroy(); 
 ?>
 </br>
 
