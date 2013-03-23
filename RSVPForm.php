@@ -10,6 +10,11 @@ This form then will post onto another page called "thankyou.php" when submit is 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <!-- saved from url=(0085)https://docs.google.com/forms/d/1zvS8beJH6EeSxzlPGBR8R0xLPFRkkaCfou0DCPqxQ-o/viewform -->
+<?php
+//session_start();
+//require_once('include/auth.inc.php');
+require_once('include/Database.inc.php');
+?>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="shortcut icon" href="https://ssl.gstatic.com/docs/spreadsheets/forms/favicon_jfk2.png" type="image/x-icon">
 
 <meta http-equiv="X-UA-Compatible" content="IE=10; chrome=1;">
@@ -112,9 +117,7 @@ Event details will be emailed to the team prior</br> to the harvest.  We will re
 				</div>
 			</label>
 <?php   
-session_start();
-require_once('include/auth.inc.php');
-require_once('include/Database.inc.php');
+
 
 $sql = "SELECT Distinct growers.city, tree_types.name, events.date, events.time, events.id
 FROM `events` 
@@ -241,7 +244,7 @@ if(isset( $all[0])){
 	  }   
   }
 }
-session_destroy(); 
+//session_destroy(); 
 ?>
 </br>
 
