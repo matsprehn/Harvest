@@ -112,6 +112,7 @@ Event details will be emailed to the team prior</br> to the harvest.  We will re
 				</div>
 			</label>
 <?php   
+ob_start();
 require_once('include/auth.inc.php');
 require_once('include/Database.inc.php');
 
@@ -125,7 +126,6 @@ order by events.date";
 //echo $sql;
 
 $results = $db->q($sql);
-echo "</br>";
 //echo "</br>";
 if($results === FALSE) {
     die(mysql_error()); // TODO: better error handling
@@ -241,6 +241,7 @@ if(isset( $all[0])){
 	  }   
   }
 }
+ob_end_flush();
 ?>
 </br>
 
