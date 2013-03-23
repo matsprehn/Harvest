@@ -1,4 +1,4 @@
-var optionSelect = '<option value="" disabled="disabled" selected="selected"></option>';
+var optionSelect = '<option value="" disabled="disabled" selected="selected"></option>';
 function options(data) {
 		var s = optionSelect; // first option is always select...
 		for (var i=0; i<data.length; i++) {
@@ -17,7 +17,7 @@ function addTreeRow(tableID) {
 	 var row = table.insertRow(0);
 	 var cell1 = row.insertCell(0);
 	 var label1 = document.createElement("label");
-	 label1.style.width = "2em"
+	 label1.style.width = "2em";
 	 var txt1=document.createTextNode('');
 	 label1.appendChild(txt1);
 	 cell1.appendChild(label1);
@@ -63,13 +63,13 @@ function addTreeRow(tableID) {
 	var cell3 = row.insertCell(2);
 	var element3 = document.createElement("input");
 	element3.type = "number";
-	element3.style.width = "4em"
+	element3.style.width = "4em";
 	cell3.appendChild(element3);
 	
 	var cell4 = row.insertCell(3);
 	var element4 = document.createElement("input");
 	element4.type = "number";
-	element4.style.width = "4em"
+	element4.style.width = "4em";
 	cell4.appendChild(element4);
 	
 
@@ -115,7 +115,7 @@ function addVolunteerRow(tableID) {
 			 var row = tbl.insertRow(0);
 			 var cell1 = row.insertCell(0);
 			 var label1 = document.createElement("label");
-			 label1.style.width = "2em"
+			 label1.style.width = "2em";
 			 var txt1=document.createTextNode('');
 			 label1.appendChild(txt1);
 			 cell1.appendChild(label1);
@@ -161,13 +161,13 @@ function addVolunteerRow(tableID) {
             var cell3 = row1.insertCell(2);
             var element3 = document.createElement("input");
             element3.type = "number";
-			element3.style.width = "4em"
+			element3.style.width = "4em";
             cell3.appendChild(element3);
 			
 			var cell4 = row1.insertCell(3);
             var element4 = document.createElement("input");
             element4.type = "checkbox";
-			element4.style.width = "4em"
+			element4.style.width = "4em";
             cell4.appendChild(element4);	
 
 			var cell5 = row1.insertCell(4);
@@ -455,57 +455,55 @@ function loadGrowerToForm(grower_id)
 		}
 		loadVolunteer = 0;		
 	}
-	
-	function loadTree(id, event_id)
+				
+	function loadTree(id, event_id)
 	{
-		$.ajax( {
-							'dataType': 'json', 
-							'type': 'GET', 
-							'url': 'ajax.php?cmd=get_tree_name&grower_id='+ id, 
-							'success': function (data) {
-								var str = '<select id="event-grower-name" name="event-grower-name">';
-								if( data.datatable != null) 	
-								{								
-									for ( var i=0, len = data.datatable.aaData.length; i< len; ++i )
-									{
-										var v = {
-											"id": data.datatable.aaData[i][0],
-											"name": data.datatable.aaData[i][1]
-										};
-										treeNames.push(v);								
-									}
-								
-									getTreeType(id,event_id);
-								}
-										
-							},
-							'error': function (e) {
-								alert('Ajax Error!\n' + e.responseText);
-							}
-						});
-		//console.log(treeNames);
+		$.ajax({
+							'dataType': 'json', 
+							'type': 'GET', 
+							'url': 'ajax.php?cmd=get_tree_name&grower_id='+ id, 
+							'success': function (data) {
+								var str = '<select id="event-grower-name" name="event-grower-name">';
+								if( data.datatable != null) 	
+								{								
+									for ( var i=0, len = data.datatable.aaData.length; i< len; ++i )
+									{
+										var v = {
+											"id": data.datatable.aaData[i][0],
+											"name": data.datatable.aaData[i][1]
+										};
+										treeNames.push(v);								
+									}
+									getTreeType(id,event_id);
+								}										
+							},
+							'error': function (e) {
+								alert('Ajax Error!\n' + e.responseText);
+							}
+						});
+		//console.log(treeNames);
 	}
 	
-	function getTreeType(grower_id, event_id){		
-		$.ajax( {
-						'dataType': 'json', 
-						'type': 'GET', 
-						'url': 'ajax.php?cmd=get_event_tree&id='+grower_id+'&event_id='+event_id, 
-						'success': function (data) {
-							var table = document.getElementById("eventTree");
-							if( data.datatable != null) 							
-								for ( var i=0, len = data.datatable.aaData.length; i< len; ++i )
-									{
-										addTreeRow('eventTree');
-										table.rows[i+1].cells[1].childNodes[0].value = data.datatable.aaData[i][0];
-										table.rows[i+1].cells[2].childNodes[0].value = data.datatable.aaData[i][1];	
-										table.rows[i+1].cells[3].childNodes[0].value = data.datatable.aaData[i][2];										
-									}
-						},
-						'error': function (e) {
-							alert('Ajax Error!\n' + e.responseText);
-						}
-					});	
+	function getTreeType(grower_id, event_id){		
+		$.ajax({
+						'dataType': 'json', 
+						'type': 'GET', 
+						'url': 'ajax.php?cmd=get_event_tree&id='+grower_id+'&event_id='+event_id, 
+						'success': function (data) {
+							var table = document.getElementById("eventTree");
+							if( data.datatable != null) 							
+								for (var i=0, len = data.datatable.aaData.length; i< len; ++i )
+									{
+										addTreeRow('eventTree');
+										table.rows[i+1].cells[1].childNodes[0].value = data.datatable.aaData[i][0];
+										table.rows[i+1].cells[2].childNodes[0].value = data.datatable.aaData[i][1];	
+										table.rows[i+1].cells[3].childNodes[0].value = data.datatable.aaData[i][2];										
+									}
+						},
+						'error': function (e) {
+							alert('Ajax Error!\n' + e.responseText);
+						}
+				});	
 	}
 	
 	function loadVolunteerName(event_id){
@@ -1067,7 +1065,7 @@ function initHours() {
 		selectTab = document.getElementById('distributionHour'+i+'-CloseMin');
 		selectTab.innerHTML = (mString);
 	}
-}
+}
 
 	
  
