@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once('config.inc.php');
 // start new session or get current session
 // basically looks for cookie or creates one
@@ -19,5 +20,5 @@ function isExpired() {
 function updateLastReq() {
 	$_SESSION['time'] = time();
 }
-
+ob_end_flush();
 ?>
